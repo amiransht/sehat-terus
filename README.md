@@ -9,7 +9,7 @@ Kelompok F03:
 
 ## Aplikasi
 
-[Sehat Terus] (https://sehat-terus.herokuapp.com/)
+[Sehat Terus](https://sehat-terus.herokuapp.com/)
 
 SehatTerus merupakan aplikasi yang dikembangkan untuk membantu warga dalam mengetahui perkembangan penyebaran virus COVID-19. Selain itu, aplikasi ini juga ditujukan untuk memungkinkan para tenaga kesehatan melakukan tracking secara digital terhadap pasien COVID-19 yang masih membutuhkan bantuan.
 
