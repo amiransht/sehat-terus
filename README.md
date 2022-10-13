@@ -2,7 +2,7 @@
 
 Kelompok F03:
 1. Dimitri Prima Nugraha - 2106750396
-2. Refiany Shadrina - Refiany Shadrina
+2. Refiany Shadrina - 2106650185
 3. Amira Nisrina Nashita - 2106703815
 4. Monica Shannon Clio Aurelie - 2106751732
 5. Raihan Kus Putranto - 2106703821
