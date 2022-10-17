@@ -12,6 +12,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    height: 100vh;
+    width: 100%;
+    background-color: #D2D0DD;
+  }
+  
+  section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    padding-bottom: 32px;
+    margin-top: 32px;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  table {
+    width: 100%;
+    border-spacing: 0;
+    background-color: #FFFFFF;
+    font-size: 14px;
+  }
+  
+  thead th {
+    color: #7A7A7A;
+    text-align: left;
+    background-color: #F9FAFC;
+  }
+  
+  thead th, tbody td {
+    padding: 14px;
+    border: 0;
+    border-bottom: 1px solid #E7E7E7;
+  }
+  
+  tbody td:first-child {
+    border-left: 4px solid transparent;
+    transition: all ease 0.3s;
+  }
+  
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  
+  tbody tr:hover {
+    background-color: #F7F9FC;
+  }
+  
+  tbody tr:hover td:first-child {
+    border-left-color: #0F6FDE;
+  }
+  
+  td.status {
+    text-align: center;
+  }
+  
+  td.status span {
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 4px 8px;
+  }
+  
+  td.status span.approved {
+    color: #FFFFFF;
+    background-color: #00C455;
+  }
+  
+  td.status span.decline {
+    color: #FFFFFF;
+    background-color: #F13426;
+  }
+  
+  td.status span.pending {
+    color: #132D4A;
+    background-color: #EBF0F5;
+  }
+  
+  #toggleView:checked ~ table thead {
+    display: none;
+  }
+  
+  #toggleView:checked ~ table tbody {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+  }
+  
+  #toggleView:checked ~ table tbody tr, #toggleView:checked ~ table tbody td {
+    display: block;
+    border: 0;
+  }
+  
+  #toggleView:checked ~ table tbody td {
+    padding: 4px;
+    font-weight: bold;
+  }
+  
+  #toggleView:checked ~ table tbody td:before {
+    content: attr(data-name);
+    width: 100px;
+    display: inline-block;
+    text-transform: capitalize;
+    font-weight: normal;
+  }
+  
+  #toggleView:checked ~ table tbody td.status {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+  
+  #toggleView:checked ~ table tbody tr {
+    position: relative;
+    width: calc(50% - 8px);
+    border: 1px solid #E7E7E7;
+    padding: 8px;
+    margin: 4px;
+  }
+</style>
+
 <body style="background-color: rgb(39, 140, 39);">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
