@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'example_app',
     'sehat_terus',
+    'lurah_page',
 ]
 
 MIDDLEWARE = [
