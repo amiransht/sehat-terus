@@ -19,6 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('sehat_terus.urls')),
+    path('lurah/', include('lurah_page.urls')),
 ]
 
 # TODO: Implement Routings Here
