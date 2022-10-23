@@ -1,5 +1,5 @@
 from django.urls import path
-from sehat_terus.views import show_homepage
+from homepage.views import show_homepage
 
 app_name = 'wishlist'
 
