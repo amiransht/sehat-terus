@@ -12,8 +12,8 @@
 <body style="background-color: rgb(241, 240, 219);">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Navbar</a>
+            <div class="navbar-header p-lg-3">
+                <a class="navbar-brand" href="#">Sehat Terus</a>
             </div>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,6 +135,7 @@
                 </div>
             </div>
         </section>
+        {% if data %}
         <section class="section-data-covid">
             <div class="d-flex flex-row justify-content-center m-xl-5" style="background-color: white;">
                 <div class="p-lg-4">
@@ -150,7 +151,11 @@
                             <div class="card-body text-center">
                                 <h5 class="card-text">Indonesia</h5>
                                 <p class="card-text">Jumlah Positif</p>
-                                <p class="card-text">Jumlah Negatif</p>
+                                <h6 class="card-text"> {{ data.positive }}</h6>
+                                <p class="card-text">Jumlah Sembuh</p>
+                                <h6 class="card-text"> {{ data.recovered }}</h6>
+                                <p class="card-text">Jumlah Meninggal</p>
+                                <h6 class="card-text"> {{ data.death }}</h6>
                             </div>
                         </div>
                         <div class="card p-2 m-3" style="width: 400px;" >
@@ -165,6 +170,7 @@
 
             </div>
         </section>
+        {% endif %}
         <section class="section-berita">
             <div class="container" style="background-color: white;">
                 <div class="row justify-content-start">
@@ -175,46 +181,49 @@
                         <div class="p-2">
                             <hr class="solid my-3">
                         </div>
+                        <div class="p-3">
+                            <p>Dalam Pamdemi ini, Ingatlah setiap kita memiliki peran penting. Bersama-sama kita bisa melindungi diri dan melindungi sesama.</p>
+                        </div>
                     </div>
                     <div class="col-sm-9">
                         <div class="d-flex justify-content-between">
-                            <div class="card p-2 m-3" style="height: 400px; width: 300px;" >
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body p-3 z-index-1" style="display: flex; flex-direction: column">
-                                    <time pubdate="" datetime="2022-10-07">07 Okt 2022</time>
+                            <div class="card m-3" style="height: 400px; width: 300px;" >
+                                <img class="card-img-top" style="height: 150px; width: 100%" src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Card image cap">
+                                <div class="card-body p-4 z-index-1" style="display: flex; flex-direction: column">
+                                    <time class="text-muted" pubdate="" datetime="2022-10-07">07 Okt 2022</time>
                                     <div class="card-body p-0 mb-3" style="flex-grow: 1">
                                         <h5>Aplikasi PeduliLindungi bisa untuk 6 Sertifikat Vaksin</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-9">
+                                        <div class="col p-0">
                                             <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card p-2 m-3" style="height: 400px; width: 300px;" >
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body p-3 z-index-1" style="display: flex; flex-direction: column">
-                                    <time pubdate="" datetime="2022-10-07">07 Okt 2022</time>
+                            <div class="card m-3" style="height: 400px; width: 300px;" >
+                                <img class="card-img-top" style="height: 150px; width: 100%" src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Card image cap">
+                                <div class="card-body p-4 z-index-1" style="display: flex; flex-direction: column">
+                                    <time class="text-muted" pubdate="" datetime="2022-10-07">07 Okt 2022</time>
                                     <div class="card-body p-0 mb-3" style="flex-grow: 1">
                                         <h5>Presiden Resmikan Pabrik Vaksin COVID-19 di Indonesia</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-9">
+                                        <div class="col p-0">
                                             <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card p-2 m-3" style="height: 400px; width: 300px;" >
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body p-3 z-index-1" style="display: flex; flex-direction: column">
-                                    <time pubdate="" datetime="2022-10-07">07 Okt 2022</time>
+                            <div class="card m-3" style="height: 400px; width: 300px;" >
+                                <img class="card-img-top" style="height: 150px; width: 100%" src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Card image cap">
+                                <div class="card-body p-4 z-index-1" style="display: flex; flex-direction: column">
+                                    <time class="text-muted" pubdate="" datetime="2022-10-07">07 Okt 2022</time>
                                     <div class="card-body p-0 mb-3" style="flex-grow: 1">
                                         <h5>WNA Bisa Vaksinasi COVID-19 di Indonesia</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-9">
+                                        <div class="col p-0">
                                             <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
                                         </div>
                                     </div>
