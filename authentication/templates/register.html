@@ -1,0 +1,72 @@
+<!doctype html>
+
+{% block meta %}
+<head>
+  <title>REGISTER</title>
+</head>
+{% endblock meta %}
+
+{% block content %}
+
+{% load static %}
+<html lang="en">
+
+  <body>
+  <div class="content">
+    <span class="mb-0 text-muted">
+        {% if msg %}
+            {{ msg | safe }}
+        {% else %}
+            Login page
+        {% endif %}
+      </span>
+        <form  method="post">
+            {% csrf_token %}
+          <div class="form-group first">
+            <label for="username">Username</label>
+              {{ form.username }}
+          </div>
+          <div class="form-group first">
+            <label for="email">Email</label>
+              {{ form.email}}
+          </div>
+          <div class="form-group last mb-4">
+            <label for="password">Password</label>
+              {{ form.password1 }}
+          </div>
+          <div class="form-group last mb-4">
+            <label for="password">confirm Password</label>
+              {{ form.password2 }}
+          </div>
+          <div class="d-flex mb-5 align-items-center">
+            <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
+                {{ form.is_admin }}
+              <div class="control__indicator"></div>
+            </label>
+          </div>
+          <div class="d-flex mb-5 align-items-center">
+            <label class="control control--checkbox mb-0"><span class="caption">lurah</span>
+                {{ form.is_lurah }}
+              <div class="control__indicator"></div>
+            </label>
+          </div>
+          <div class="d-flex mb-5 align-items-center">
+            <label class="control control--checkbox mb-0"><span class="caption">nakes</span>
+                {{ form.is_nakes }}
+              <div class="control__indicator"></div>
+            </label>
+          </div>
+            <span class="text-error">{{ form.errors }}</span>
+          <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
+        </form>
+  </div>
+
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+{% block meta %}
+<head>
+  <title>LURAH</title>
+</head>
+{% endblock meta %}
+
+{% block content %}
+<html lang="en">
+    <body>
+        <h1>  {{ user.username }} is lurah</h1>
+        <p><a href="{% url 'authentication:logout' %}">Logout...</a></p>
+    </body>
+</html>
+
+{% endblock content %}

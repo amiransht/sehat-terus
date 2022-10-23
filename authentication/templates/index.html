@@ -1,0 +1,37 @@
+<!doctype html>
+
+{% block meta %}
+<head>
+  <title>INDEX</title>
+</head>
+{% endblock meta %}
+
+{% block content %}
+{% load static %}
+
+<html lang="en">
+  
+  <body>
+  <div class="content">
+    <div class="mb-4">
+        <h1>Welcomeeee </h1>
+    </div>
+    <label>Log in if you already have registered!</label>
+    <div class="form-group last mb-4">
+        <div><button class="btn btn-pill text-white btn-block btn-primary"><a href="{% url 'authentication:login' %}">login</a></button></div>
+    </div>
+    <label>If not register here!</label>
+    <div class="form-group last mb-4">
+        <div><button class="btn btn-pill text-white btn-block btn-primary"><a href="{% url 'register' %}">register</a></button></div>
+    </div>
+  </div>
+
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+
+{% endblock content %}

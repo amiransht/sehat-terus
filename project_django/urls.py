@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('sehat_terus.urls')),
     path('lurah-page/', include('lurah_page.urls')),
+    path('authentication/', include('authentication.urls')),
 ]
 
 # TODO: Implement Routings Here

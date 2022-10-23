@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+{% block meta %}
+<head>
+  <title>HOME</title>
+</head>
+{% endblock meta %}
+
+{% block content %}
+<html lang="en">
+<body>
+ <h1> SEHAT TERUS NI BOS</h1>
+ <a href="{% url 'authentication:logout' %}"></a><button class="btn btn-outline-light">Logout</button></a>
+</body>
+</html>
+{% endblock content %}

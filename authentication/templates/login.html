@@ -1,0 +1,59 @@
+<!doctype html>
+
+{% block meta %}
+<head>
+  <title>LOGIN</title>
+</head>
+{% endblock meta %}
+
+{% block content %}
+
+{% load static %}
+<html lang="en">
+
+  <body>
+  <div class="content">
+        <form  method="post">
+            {% csrf_token %}
+            <!-- <label for="username">Username</label>
+              {{ form.username }}
+            <label for="username">Password</label>
+              {{ form.password }} -->
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+              <input type="checkbox" checked="checked"/>
+              <div class="control__indicator"></div>
+            </label>
+            <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+
+          <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
+        </form>
+
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}  
+
+        Belum mempunyai akun? <a href="{% url 'authentication:register' %}">Buat Akun</a>
+
+  </div>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+
+{% endblock content %}
