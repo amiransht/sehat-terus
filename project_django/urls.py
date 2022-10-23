@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('lurah-page/', include('lurah_page.urls')),
     path('authentication/', include('authentication.urls')),
+    path('faq-page/', include('faq_page.urls')),
 ]
 
 # TODO: Implement Routings Here

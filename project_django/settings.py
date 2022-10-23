@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'homepage',
     'lurah_page',
     'authentication',
+    'faq_page',
 ]
 
 MIDDLEWARE = [
