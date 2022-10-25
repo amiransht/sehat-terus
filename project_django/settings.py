@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
-import django_heroku
+
 
 import os
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -148,5 +148,3 @@ for directory in [*STATICFILES_DIRS, STATIC_ROOT]:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'authentication.User'
-
-django_heroku.settings(locals())
