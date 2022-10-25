@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import redirect, render
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
@@ -14,10 +15,12 @@ def index(request):
 
 def register(request):
     msg = None
+    form = SignUpForm()
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user= form.save()
+            form.save()
             msg = 'User created'
             return redirect('authentication:login')
         else:
