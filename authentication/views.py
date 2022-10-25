@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import redirect, render
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
@@ -14,10 +15,12 @@ def index(request):
 
 def register(request):
     msg = None
+    form = SignUpForm()
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user= form.save()
+            form.save()
             msg = 'User created'
             return redirect('authentication:login')
         else:
@@ -26,41 +29,7 @@ def register(request):
         form = SignUpForm()
     return render(request, 'register.html', {'form': form, 'msg': msg})
 
-# def login_view(request):
-#     msg = None
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('index')
-#             else:
-#                 msg = 'Invalid credentials'
-#         else:
-#             msg = 'Form not valid!'
-#     else:
-#         form = LoginForm()
-#     return render(request, 'login.html', {'form': form, 'msg': msg})
-
 def login(request):
-    # form = LoginForm(request.POST or None)
-    # msg = None
-    # if request.method == 'POST':
-    #     if form.is_valid():
-    #         username = form.cleaned_data.get('username')
-    #         password = form.cleaned_data.get('password')
-    #         user = authenticate(username=username, password=password)
-    #         if user is not None:
-    #             login(request, user)
-    #             return redirect('home')
-    #         else:
-    #             msg = 'Invalid credentials'
-    #     else:
-    #         msg = 'Form not valid!'
-    # return render(request, 'login.html', {'form': form, 'msg': msg})
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
