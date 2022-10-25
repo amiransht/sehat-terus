@@ -8,7 +8,7 @@ import datetime
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from .decorators import lurah_required, nakes_required, admin_required
+from .decorators import lurah_required, nakes_required
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -34,13 +34,7 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None and user.is_admin:
-            auth_login(request, user) # melakukan login terlebih dahulu
-            response = HttpResponseRedirect(reverse("authentication:admin")) # membuat response
-            response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
-            # return redirect('admin')
-            return response
-        elif user is not None and user.is_lurah:
+        if user is not None and user.is_lurah:
             auth_login(request,user)
             response = HttpResponseRedirect(reverse("authentication:lurah")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
@@ -67,11 +61,6 @@ def lurah(request):
 @nakes_required
 def nakes(request):
     return render(request, 'nakespage.html')
-
-@login_required(login_url='/authentication/login/')
-@admin_required
-def admin(request):
-    return render(request, 'admin.html')
 
 def logout_user(request):
     logout(request)
