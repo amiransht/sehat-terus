@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, Profile
 class LoginForm(forms.Form):
     username = forms.CharField(
         widget= forms.TextInput(
@@ -16,6 +16,20 @@ class LoginForm(forms.Form):
             }
         )
     )
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'gender',
+                  'number_phone', 'bio', 'province', 'city', 'district']
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(
@@ -50,3 +64,10 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2", "is_lurah", "is_nakes")
+
+    def save(self, commit=True):
+        user = super(SignUpForm, self).save(commit=False)
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user
