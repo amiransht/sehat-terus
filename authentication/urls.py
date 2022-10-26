@@ -13,4 +13,5 @@ urlpatterns = [
     path('nakes/', views.nakes, name= 'nakes'),
     path('profil/', views.profile, name='profil'),
     path('setting/', views.setting, name='setting'),
+    path('delete-user/', views.delete_user, name='delete-user'),
 ]

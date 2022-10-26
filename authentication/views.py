@@ -73,6 +73,13 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+def delete_user(request):
+    user = request.user
+    user.delete()
+    messages.success(request, "user uccesfully deleted.")
+    logout(request)
+    return redirect("/")
+
 @login_required(login_url='/authentication/login/')
 def profile(request):
     context = {'title': 'User Profile'}
