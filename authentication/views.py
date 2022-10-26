@@ -9,10 +9,12 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from .decorators import lurah_required, nakes_required
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
+@csrf_exempt
 def register(request):
     msg = None
     form = SignUpForm()
@@ -21,12 +23,13 @@ def register(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            msg = 'User created'
-            return redirect('authentication:login')
+            msg = 'Congratulations! Your account has been created. Please login to continue.'
+            # return redirect('authentication:register')
         else:
-            msg = 'Form not valid!'
+            msg = 'Oops, sorry, please check your input!'
     else:
         form = SignUpForm()
+        
     return render(request, 'register.html', {'form': form, 'msg': msg})
 
 def login(request):
