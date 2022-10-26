@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Sehat Terus | Homepage</title>
 </head>
 
@@ -137,7 +138,7 @@
         </section>
      
         <section class="section-data-covid">
-            <div class="d-flex flex-row justify-content-center m-xl-5" style="background-color: white;">
+            <div class="d-flex flex-row justify-content-center text-center m-xl-5" style="background-color: white;">
                 <div class="p-lg-4">
                     <div class=" title-5m text-center">
                         <h3>Data Covid-19</h3>
@@ -145,17 +146,26 @@
                     <div class="p-2">
                         <hr class="solid my-3">
                     </div>
+                    <form class="p-2" method="POST" name="provinsi" id="entry_provinsi">
+                        {% csrf_token %}
+                        <input class="form-control mb-3" type="text" placeholder="Nama provinsi" name="nama_provinsi">
+                        <span><button type="submit" class="btn btn-primary btnClick mb-3">Submit</button></span>
+                        <p id="error_messages"></p>
+                    </form>
+                
+                   
                     <div class="d-flex justify-content-between m-3">
                         <div class="card p-2 m-3"  style="width: 400px;">
                             
                             <div class="card-body text-center">
-                                <h5 class="card-text">Indonesia</h5>
+                                
+                                <h5 class="card-text" id="provinsi"></h5>
                                 <p class="card-text">Jumlah Positif</p>
-                                <h6 class="card-text"> {{ data.positive }}</h6>
+                                <h6 class="card-text" id="data-positif"></h6>
                                 <p class="card-text">Jumlah Sembuh</p>
-                                <h6 class="card-text"> {{ data.recovered }}</h6>
+                                <h6 class="card-text" id="data-sembuh"></h6>
                                 <p class="card-text">Jumlah Meninggal</p>
-                                <h6 class="card-text"> {{ data.death }}</h6>
+                                <h6 class="card-text" id="data-meninggal"></h6>
                             </div>
                         </div>
                         <div class="card p-2 m-3" style="width: 400px;" >
@@ -241,3 +251,44 @@
     </div>
 </body>
 </html>
+<script>
+
+   
+function getDataFromForm($form) {
+            var unindexed_items = $form.serializeArray();
+            var result = {};
+            $.map(unindexed_items, function (n, i) {
+                result[n['name']] = n['value'];
+            });
+            return result;
+        }
+
+
+$("#entry_provinsi").submit(function (e) {
+    e.preventDefault();
+    var $form = $(this);
+    var serializedData = getDataFromForm($form);
+    var provinsi = serializedData.nama_provinsi
+    console.log(provinsi)
+    $.get(
+        './api-indonesia', function(data){
+            var data = data.data.list_data
+            var data_filter = data.filter((data) => data.key == provinsi);
+            console.log(data_filter.length)
+            if (data_filter.length === 0){
+                $("#error_messages").text("Input Salah! Silahkan masukkan nama provinsi dalam kapital")
+                
+            } else {
+                $("#error_messages").text("")
+                $("#provinsi").text(provinsi)
+                $("#data-positif").text(data_filter[0].jumlah_kasus - data_filter[0].jumlah_sembuh)
+                $("#data-meninggal").text(data_filter[0].jumlah_meninggal)
+                $("#data-sembuh").text(data_filter[0].jumlah_sembuh)
+            }
+     
+            
+
+    });
+});
+
+</script>
