@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid" style="padding-top: 3%; padding-bottom: 1%; display: flex; align-items: center; justify-content: center;">
+
+<div class="container mt-10 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="new_card p-3 py-5">
+                <div class="d-flex justify-content-center mb-3">
+                    <h4 class="text-center">Profile Settings</h4>
+                </div>
+                <form action="" method="POST" class="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="card-block">
+                        </div>
+                    </div>
+                    <div class="row mt-4 d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <label class="labels">Nama Depan</label>
+                            <input type="text" value="{{user.profile.first_name}}" name= "first_name" class="form-control" placeholder="First Name" maxLength ="30" id="id_first_name" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="labels">Nama Belakang</label>
+                            <input type="text" value="{{user.profile.last_name}}" name= "last_name" class="form-control" placeholder="Last Name" maxLength ="30" id="id_last_name" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <label class="labels">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">@</div>
+                                </div>
+                                <input type="text" value="{{request.user.username}}" name= "username" class="form-control" placeholder="Username" maxLength ="30" id="id_username" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="labels">Email</label>
+                            <input type="text" name="email" value="{{request.user.email}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <label class="labels">Jenis Kelamin</label>
+                            <select name="gender" value="" id="id_gender" class="form-control" required>
+                                <option disable hidden selected>--Pilih Jenis Kelamin--</option>
+                                <option>Laki-laki</option>
+                                <option>Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="labels">Tanggal Lahir</label>
+                            <input type="date" value="{{user.profile.date_of_birth}}" name= "date_of_birth" class="form-control" placeholder="Date Of Birth" id="id_date_of_birth" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <label class="labels">No Telp.</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><img src="{% static 'img/indonesia.png' %}" width="20" height="15"> +62</div>
+                                </div>
+                                <input type="tel" value="{{user.profile.number_phone}}" name= "number_phone" class="form-control" placeholder="812-3456-789" maxLength ="13" id="id_number_phone" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="labels">Provinsi</label>
+                            <select name="province" data-provid = "1" id="id_provinsi" class="form-control" onchange="getKota()" required>
+                                <option disable hidden selected>--Pilih Provinsi--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <label class="labels">Kabupaten/Kota</label>
+                            <select name="city" value="{{user.profile.city}}" id="id_kota" class="form-control" onchange="getKecamatan()" required>
+                                <option disable hidden selected>--Pilih Kabupaten/Kota--</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="labels">Kecamatan</label>
+                            <select name="district" value="{{user.profile.district}}" id="id_kecamatan" class="form-control" required>
+                                <option disable hidden selected>--Pilih Kecamatan--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-md-10">
+                            <label class="labels">Bio</label>
+                            <textarea class="form-control" name="bio" type="text" placeholder="Bio" required>{{user.profile.bio}}</textarea>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center buttons">
+                        <button class="btn px-4" type="submit" value="Update">Save Profile</button>
+                    </div>
+                </form>
+                <div class="card-block">
+                    <div class="mt-4 mb-5 text-center buttons">
+                        <form method="get" action="/">
+                            <button class="btn px-4" type="submit" value="Cancel">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/wilayah.js' %}"></script>
+{% endblock %}

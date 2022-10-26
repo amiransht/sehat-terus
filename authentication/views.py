@@ -1,6 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import redirect, render
-from .forms import SignUpForm, LoginForm
+import requests
+from .forms import ProfileUpdateForm, SignUpForm, LoginForm, UserUpdateForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -71,3 +72,38 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('authentication:login'))
     response.delete_cookie('last_login')
     return response
+
+@login_required(login_url='/authentication/login/')
+def profile(request):
+    context = {'title': 'User Profile'}
+    if request.user.is_authenticated:
+        context['username'] = request.user.username
+    return render(request, 'profil.html', context)
+
+@login_required(login_url='/authentication/login/')
+def setting(request):
+    context = {}
+    response = requests.get(
+        'https://dev.farizdotid.com/api/daerahindonesia/provinsi').json()
+    for data in response['provinsi']:
+        data['nama'] = str(data['nama'])
+
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('authentication:profil')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context["title"] = "User Settings"
+    context["response"] = response
+    context["username"] = request.user.username
+    context["u_form"] = u_form
+    context["p_form"] = p_form
+    return render(request, 'settings.html', context)

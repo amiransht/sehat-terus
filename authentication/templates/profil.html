@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid" style="height: 82vh; padding-bottom: 5%; display: flex; align-items: center; justify-content: center;">
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="new_card p-3 py-4">
+                        <div class="text-center mt-4"> 
+                            <div class="province" style="font-size: 13px;">
+                                <span class="bg-secondary p-1 px-2 rounded text-white">@{{request.user.username}}</span>
+                            </div>
+                            <h4 class="mt-3 mb-1">{{user.profile.first_name}} {{user.profile.last_name}}</h4>
+                            <div class="labels">
+                                <span>{{user.profile.gender}}</span>
+                            </div>
+                            <div class="labels">
+                                <span>Kec. {{user.profile.district}}</span>
+                            </div>
+                        <div class="text-center mt-3 mb-4">
+                            <p class="bio" style="font-size: 11px;">{{user.profile.bio}}. </p>
+                        </div>
+                    <div> 
+                        <a href="{% url 'authentication:setting' %}">EDIT PROFILE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
