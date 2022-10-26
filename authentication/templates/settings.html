@@ -1,13 +1,127 @@
 {% extends "base.html" %}
-{% load static %}
+
+
 
 {% block content %}
-<div class="container-fluid" style="padding-top: 3%; padding-bottom: 1%; display: flex; align-items: center; justify-content: center;">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
+            dataType: 'json',
+            type: 'GET',
+            success: function(response) {
+                const provinsi = response.provinsi;
+                let selectBox = document.getElementById('id_provinsi');
+                for (let i = 0; i < provinsi.length; i++ ) {
+                    let option = document.createElement('option');
+                    option.innerHTML = provinsi[i].nama;
+                    option.value = provinsi[i].id;
+                    selectBox.appendChild(option);
+                }
+            }
+        });
 
-<div class="container mt-10 mb-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-8">
-            <div class="new_card p-3 py-5">
+        function getKota() {
+            let selectBox = document.getElementById('id_provinsi');
+            var value = selectBox.value;
+            $.ajax({
+                url: `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${value}`,
+                dataType: 'json',
+                type: 'GET',
+                success: function(response) {
+                    const kota_kabupaten = response.kota_kabupaten;
+                    let selectBox2 = document.getElementById('id_kota');
+                    selectBox2.innerHTML = "";
+                    for (let i=0; i<kota_kabupaten.length; i++) {
+                        let kota = document.createElement('option');
+                        kota.innerHTML = kota_kabupaten[i].nama;
+                        kota.value = kota_kabupaten[i].id;
+                        selectBox2.appendChild(kota);
+                    }
+                }
+            });
+        }
+
+        function getKecamatan() {
+            let selectBox = document.getElementById('id_kota');
+            var value = selectBox.value;
+            $.ajax({
+                url: `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${value}`,
+                dataType: 'json',
+                type: 'GET',
+                success: function(response) {
+                    const kecamatan = response.kecamatan;
+                    let selectBox3 = document.getElementById('id_kecamatan');
+                    selectBox3.innerHTML = "";
+                    for (let i=0; i<kecamatan.length; i++) {
+                        let district = document.createElement('option');
+                        district.innerHTML = kecamatan[i].nama;
+                        district.value = kecamatan[i].nama;
+                        selectBox3.appendChild(district);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+
+<!-- Section: Design Block -->
+<body style="background-color: rgb(241, 240, 219);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Navbar</a>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'authentication:login' %}" tabindex="-1" aria-disabled="true">Log In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<section class="text-center text-lg-start">
+    <style>
+      .cascading-right {
+        margin-right: -50px;
+      }
+  
+      @media (max-width: 991.98px) {
+        .cascading-right {
+          margin-right: 0;
+        }
+      }
+    </style>
+  
+    <!-- Jumbotron -->
+    <div class="container py-4">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card cascading-right" style="
+              background: hsla(0, 0%, 100%, 0.55);
+              backdrop-filter: blur(30px);
+              ">
+            <div class="card-body p-5 shadow-5 text-center">
                 <div class="d-flex justify-content-center mb-3">
                     <h4 class="text-center">Profile Settings</h4>
                 </div>
@@ -19,11 +133,11 @@
                     </div>
                     <div class="row mt-4 d-flex justify-content-center">
                         <div class="col-md-5">
-                            <label class="labels">Nama Depan</label>
+                            <label class="labels">First Name</label>
                             <input type="text" value="{{user.profile.first_name}}" name= "first_name" class="form-control" placeholder="First Name" maxLength ="30" id="id_first_name" required>
                         </div>
                         <div class="col-md-5">
-                            <label class="labels">Nama Belakang</label>
+                            <label class="labels">Last Name</label>
                             <input type="text" value="{{user.profile.last_name}}" name= "last_name" class="form-control" placeholder="Last Name" maxLength ="30" id="id_last_name" required>
                         </div>
                     </div>
@@ -44,46 +158,46 @@
                     </div>
                     <div class="row mt-3 d-flex justify-content-center">
                         <div class="col-md-5">
-                            <label class="labels">Jenis Kelamin</label>
+                            <label class="labels">Gender</label>
                             <select name="gender" value="" id="id_gender" class="form-control" required>
-                                <option disable hidden selected>--Pilih Jenis Kelamin--</option>
+                                <option disable hidden selected>--Choose Gender--</option>
                                 <option>Laki-laki</option>
                                 <option>Perempuan</option>
                             </select>
                         </div>
                         <div class="col-md-5">
-                            <label class="labels">Tanggal Lahir</label>
+                            <label class="labels">Birthdate</label>
                             <input type="date" value="{{user.profile.date_of_birth}}" name= "date_of_birth" class="form-control" placeholder="Date Of Birth" id="id_date_of_birth" required>
                         </div>
                     </div>
                     <div class="row mt-3 d-flex justify-content-center">
                         <div class="col-md-5">
-                            <label class="labels">No Telp.</label>
+                            <label class="labels">No.</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                  <div class="input-group-text"><img src="{% static 'img/indonesia.png' %}" width="20" height="15"> +62</div>
+                                  <div class="input-group-text">+62</div>
                                 </div>
                                 <input type="tel" value="{{user.profile.number_phone}}" name= "number_phone" class="form-control" placeholder="812-3456-789" maxLength ="13" id="id_number_phone" required>
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <label class="labels">Provinsi</label>
+                            <label class="labels">Province (pick this first!)</label>
                             <select name="province" data-provid = "1" id="id_provinsi" class="form-control" onchange="getKota()" required>
-                                <option disable hidden selected>--Pilih Provinsi--</option>
+                                <option disable hidden selected>--Choose Province--</option>
                             </select>
                         </div>
                     </div>
                     <div class="row mt-3 d-flex justify-content-center">
                         <div class="col-md-5">
-                            <label class="labels">Kabupaten/Kota</label>
+                            <label class="labels">City/District</label>
                             <select name="city" value="{{user.profile.city}}" id="id_kota" class="form-control" onchange="getKecamatan()" required>
-                                <option disable hidden selected>--Pilih Kabupaten/Kota--</option>
+                                <option disable hidden selected>--Choose City/District--</option>
                             </select>
                         </div>
                         <div class="col-md-5">
-                            <label class="labels">Kecamatan</label>
+                            <label class="labels">Sub District</label>
                             <select name="district" value="{{user.profile.district}}" id="id_kecamatan" class="form-control" required>
-                                <option disable hidden selected>--Pilih Kecamatan--</option>
+                                <option disable hidden selected>--Choose Sub-District--</option>
                             </select>
                         </div>
                     </div>
@@ -99,18 +213,24 @@
                 </form>
                 <div class="card-block">
                     <div class="mt-4 mb-5 text-center buttons">
-                        <form method="get" action="/">
+                        <form method="get" action="/authentication/profil/">
                             <button class="btn px-4" type="submit" value="Cancel">Cancel</button>
                         </form>
                     </div>
                 </div>
             </div>
+          </div>
         </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <img src="sehat-terus-logo.jpg" class="w-100 rounded-4 shadow-4"
+            alt="" />
+        </div>
+      </div>
     </div>
-</div>
+    <!-- Jumbotron -->
+  </section>
+</body>
+  <!-- Section: Design Block -->
 
-{% endblock %}
-
-{% block script %}
-<script src="{% static 'js/wilayah.js' %}"></script>
-{% endblock %}
+  {% endblock %}
