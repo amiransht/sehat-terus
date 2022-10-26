@@ -1,258 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lurah Page</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="http://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        important: true,
+      };
+    </script>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-* {
-    padding:0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  body {
-    height: 100vh;
-    width: 100%;
-    background-color: #D2D0DD;
-  }
-  
-  section {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .container {
-    position: relative;
-    width: 90%;
-    max-width: 800px;
-    padding-bottom: 32px;
-    margin-top: 32px;
-  }
+    <title>Tambah Pasien</title>
 
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  table {
-    width: 100%;
-    border-spacing: 0;
-    background-color: #FFFFFF;
-    font-size: 14px;
-  }
-  
-  thead th {
-    color: #7A7A7A;
-    text-align: left;
-    background-color: #F9FAFC;
-  }
-  
-  thead th, tbody td {
-    padding: 14px;
-    border: 0;
-    border-bottom: 1px solid #E7E7E7;
-  }
-  
-  tbody td:first-child {
-    border-left: 4px solid transparent;
-    transition: all ease 0.3s;
-  }
-  
-  tbody tr:last-child td {
-    border-bottom: 0;
-  }
-  
-  tbody tr:hover {
-    background-color: #F7F9FC;
-  }
-  
-  tbody tr:hover td:first-child {
-    border-left-color: #0F6FDE;
-  }
-  
-  td.status {
-    text-align: center;
-  }
-  
-  td.status span {
-    font-size: 12px;
-    border-radius: 3px;
-    padding: 4px 8px;
-  }
-  
-  td.status span.approved {
-    color: #FFFFFF;
-    background-color: #00C455;
-  }
-  
-  td.status span.decline {
-    color: #FFFFFF;
-    background-color: #F13426;
-  }
-  
-  td.status span.pending {
-    color: #132D4A;
-    background-color: #EBF0F5;
-  }
-  
-  #toggleView:checked ~ table thead {
-    display: none;
-  }
-  
-  #toggleView:checked ~ table tbody {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 4px;
-  }
-  
-  #toggleView:checked ~ table tbody tr, #toggleView:checked ~ table tbody td {
-    display: block;
-    border: 0;
-  }
-  
-  #toggleView:checked ~ table tbody td {
-    padding: 4px;
-    font-weight: bold;
-  }
-  
-  #toggleView:checked ~ table tbody td:before {
-    content: attr(data-name);
-    width: 100px;
-    display: inline-block;
-    text-transform: capitalize;
-    font-weight: normal;
-  }
-  
-  #toggleView:checked ~ table tbody td.status {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-  }
-  
-  #toggleView:checked ~ table tbody tr {
-    position: relative;
-    width: calc(50% - 8px);
-    border: 1px solid #E7E7E7;
-    padding: 8px;
-    margin: 4px;
-  }
-</style>
+    <style>
+      table,
+      th,
+      td {
+        border-collapse: collapse;
+      }
 
-<body style="background-color: rgb(39, 140, 39);">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Navbar</a>
-            </div>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Log In</a>
-                    </li>
-                </ul>
-            </div>
+      th,
+      td {
+        padding: 15px;
+      }
+
+      .task-container {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 24px;
+        padding: 32px;
+        gap: 20px;
+      }
+
+      .flex-parent {
+        display: flex;
+      }
+
+      .jc-center {
+        justify-content: center;
+      }
+
+      button.margin-right {
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-amber-100 text-zinc-100">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <head>
+      <script>
+        $(document).ready(function () {
+          const card = (data) => `
+    <div id='${data.pk}-card'
+        class="task-container mt-5">
+      <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
+        <div class="task-title">
+              <div class="flex gap-4">
+              <div
+                id=${data.pk}
+                class="cursor-pointer remove-todo ${data.pk}"
+              >
+                <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Delete</a></button>
+              </div>
         </div>
-    </nav>
-
-    <br><br>
-    <div class = "center">
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Pasien</button>
-      
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-          
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-              </div>
-              <div class="modal-body">
-                <p>Some text in the modal.</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-            
-          </div>
+        <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
+        </a>
+              <div class="task-checkbox-container">
+      </div>
+        </div>
+        <div class="task-description">
+          <hr />
+          <p>${data.fields.umur}</p>
+          <p>${data.fields.gender}</p>
+          <p>${data.fields.status}</p>
+          <p>${data.fields.alamat}</p>
         </div>
         
       </div>
+          `;
+          const addCard = (data) => {
+            return $("#todo").append(card(data));
+          };
 
-    <section>
-      <div class="container">
-        <input type="checkbox" name="" id="toggleView"/>
-        <label for="toggleView"> Card View </label>
-        <table>
-          <thead>
-            <tr>
-              <th>Nama</th>
-              <th>Gender</th>
-              <th>Alamat</th>
-              <th>Umur</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-name="Nama">Tia</td>
-              <td data-name="Gender">Perempuan</td>
-              <td data-name="Alamat">Jalan Yuk</td>
-              <td data-name="Umur">30</td>
-              <td class="status"><span class="pending">Pending</span></td>
-            </tr>
-            <tr>
-              <td data-name="Nama">Raihan</td>
-              <td data-name="Gender">Laki-laki</td>
-              <td data-name="Alamat">Jalan Doang Ga Jadian</td>
-              <td data-name="Umur">27</td>
-              <td class="status"><span class="decline">Positive</span></td>
-            </tr>
-            <tr>
-              <td data-name="Nama">Romeo</td>
-              <td data-name="Gender">Laki-laki</td>
-              <td data-name="Alamat">Jalanku Putus di Tengah</td>
-              <td data-name="Umur">23</td>
-              <td class="status"><span class="approved">Negative</span></td>
-            </tr>
-            
-          </tbody>
-        </table>
+          const removeCard = (task) => {
+            $(`#${task.pk}`).click(function () {
+              $.ajax({
+                url: `/lurah-page/delete-pasien/${task.pk}`,
+                type: "DELETE",
+                success: function (response) {
+                  $(`#${task.pk}-card`).remove();
+                },
+              });
+            });
+          };
+
+          $.get("/lurah-page/json", function (todo) {
+            todo.map((task) => {
+              addCard(task);
+              removeCard(task);
+            });
+          });
+
+          $("#add-todo").click(function () {
+            if ($("#nama").val() && $("#umur").val()) {
+              $.post(
+                "/lurah-page/add/",
+                {
+                  nama: $("#nama").val(),
+                  umur: $("#umur").val(),
+                },
+                function (res, status) {
+                  if (status == "success") {
+                    addCard(res);
+                    $("#nama").val("");
+                    $("#umur").val("");
+                    removeCard(res);
+                  }
+                }
+              );
+            }
+          });
+        });
+      </script>
+    </head>
+
+    <! -- {% if user.is_authenticated %} -->
+    <div class="mx-8 md:mx-14 lg:mx-14 mt-14">
+      <div class="text-black mt-2 ml-2 text-5xl" style="text-align: center">
+        Hai Mr. <b>{{user.get_username}}</b>
       </div>
-    </section>
+      <br />
+
+      <div class="flex-parent jc-center">
+        <div class="flex gap-2 lg:gap-5">
+          <button
+            class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded-xl"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            style="background-color: green"
+          >
+            Tambah Pasien
+          </button>
+          <button
+            class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded-xl"
+            style="background-color: red"
+          >
+            <a href="{% url 'authentication/logout/' %}  ">Logout</a>
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none"
+        >
+          <div
+            class="modal-content"
+            style="background-color: rgba(0, 0, 0, 0.5)"
+          >
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-zinc-200" id="exampleModalLabel">
+                Tambah Pasien
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="flex justify-center">
+                <div class="lg:w-64 mt-3">
+                  <form method="POST" action="">
+                    {% csrf_token %}
+                    <label class="block">
+                      <span
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                      >
+                        Nama
+                      </span>
+                      <input
+                        type="text"
+                        name="nama"
+                        id="nama"
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                        placeholder="Nama"
+                        required
+                      />
+                    </label>
+
+                    <label class="block mt-2">
+                      <span
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                      >
+                        Umur
+                      </span>
+                      <input
+                        type="text"
+                        name="umur"
+                        id="umur"
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                        placeholder="Umur"
+                        required
+                      />
+                    </label>
+
+                    <label class="block mt-2">
+                      <span
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                      >
+                        Jenis Kelamin
+                      </span>
+                      <select
+                        name="gender"
+                        id="gender"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                      >
+                        <option selected>Pilih</option>
+                        <option value="laki">Laki-laki</option>
+                        <option value="perempuan">Perempuan</option>
+                      </select>
+                    </label>
+
+                    <label class="block mt-2">
+                      <span
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                      >
+                        Status Gejala
+                      </span>
+                      <select
+                        name="status"
+                        id="status"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                      >
+                        <option selected>Pilih</option>
+                        <option value="nogejala">Tidak Ada</option>
+                        <option value="gejalasedang">Sedang</option>
+                        <option value="gejalaberat">Berat</option>
+                      </select>
+                    </label>
+
+                    <label class="block mt-2">
+                      <span
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                      >
+                        Alamat
+                      </span>
+                      <input
+                        type="text"
+                        name="alamat"
+                        id="alamat"
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                        placeholder="Alamat"
+                        required
+                      />
+                    </label>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded-xl"
+                data-bs-dismiss="modal"
+                style="background-color: red"
+              >
+                Cancel
+              </button>
+
+              <button
+                id="add-todo"
+                type="button"
+                class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl"
+                data-bs-dismiss="modal"
+                style="background-color: green"
+              >
+                Tambah Pasien
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5"
+        id="todo"
+      ></div>
+      <! -- {% else %} -->
+      <div></div>
+    </div>
+    <! -- {% endif %} -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
