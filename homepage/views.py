@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.core import serializers
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Data
@@ -7,31 +9,22 @@ import requests as req
 
 # Create your views here.
 def show_homepage(request):
-    datas = Data.objects.all()
-    context = {'data' : datas}
-    return render(request, "homepage.html", context)
+    return render(request, "homepage.html")
 
 def get_covid_api(request):
+   
     fetch_data = req.get("https://data.covid19.go.id/public/api/prov.json")
     data_raw = fetch_data.json()
+    data_parse = data_raw['list_data']
+    print(len(data_parse))
 
-    return JsonResponse(data = {
-        "data" : data_raw
-    }, safe=False)
-
-
-def search_prov(request):
-    array_prov = ["DKI JAKARTA", "JAWA BARAT", "JAWA TIMUR", "BANTEN", ]
-    if request.method == 'POST':
-        nama_prov = request.POST['nama_prov']
-        buat_barang = Data.objects.create(
-            provinsi = nama_prov
-
+    for i in range(len(data_parse)):
+        new_data = Data.objects.create(
+            provinsi = data_parse[i]['key'],
+            positive = data_parse[i]['jumlah_kasus'] - data_parse[i]['jumlah_sembuh'],
+            death = data_parse[i]['jumlah_meninggal'],
+            recovered = data_parse[i]['jumlah_sembuh']
         )
-        return JsonResponse(
-            {
-                'error':False,
-                'msg':'Success'
-            }
-        )
-    return redirect('homepage:show_homepage')
+    return JsonResponse(data = data_parse, safe=False)
+
+ 

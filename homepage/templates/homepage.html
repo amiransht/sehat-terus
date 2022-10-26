@@ -255,13 +255,13 @@
 
    
 function getDataFromForm($form) {
-            var unindexed_items = $form.serializeArray();
-            var result = {};
-            $.map(unindexed_items, function (n, i) {
-                result[n['name']] = n['value'];
-            });
-            return result;
-        }
+    var unindexed_items = $form.serializeArray();
+    var result = {};
+    $.map(unindexed_items, function (n, i) {
+        result[n['name']] = n['value'];
+    });
+    return result;
+}
 
 
 $("#entry_provinsi").submit(function (e) {
@@ -269,12 +269,11 @@ $("#entry_provinsi").submit(function (e) {
     var $form = $(this);
     var serializedData = getDataFromForm($form);
     var provinsi = serializedData.nama_provinsi
-    console.log(provinsi)
+
+        
     $.get(
         './api-indonesia', function(data){
-            var data = data.data.list_data
             var data_filter = data.filter((data) => data.key == provinsi);
-            console.log(data_filter.length)
             if (data_filter.length === 0){
                 $("#error_messages").text("Input Salah! Silahkan masukkan nama provinsi dalam kapital")
                 
@@ -285,10 +284,12 @@ $("#entry_provinsi").submit(function (e) {
                 $("#data-meninggal").text(data_filter[0].jumlah_meninggal)
                 $("#data-sembuh").text(data_filter[0].jumlah_sembuh)
             }
+
+        });
      
             
 
-    });
-});
+    
 
+});
 </script>
