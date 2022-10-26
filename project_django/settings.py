@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+import sys
 import dj_database_url
 from pathlib import Path
 
@@ -28,7 +29,11 @@ PRODUCTION = os.getenv('DATABASE_URL') is not None
 SECRET_KEY = 'django-insecure-3@5wx%(^*zl68l(o$^m-3%cvjv0g&mom1ra=oj5f048_al57s7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
+    DEBUG = True
+else:
+    DEBUG = False
+
 
 ALLOWED_HOSTS = ["*"]
 
