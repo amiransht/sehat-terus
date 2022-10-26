@@ -11,6 +11,7 @@ import os
 import dj_database_url
 from pathlib import Path
 
+
 import os
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'example_app',
     'homepage',
     'lurah_page',
-    'authentication',
+    'authentication.apps.AuthenticationConfig',
     'faq_page',
 ]
 

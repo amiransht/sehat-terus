@@ -1,72 +1,160 @@
-<!doctype html>
+
+{% extends 'base.html' %}
 
 {% block meta %}
-<head>
-  <title>REGISTER</title>
-</head>
+<title>Register</title>
 {% endblock meta %}
 
-{% block content %}
+{% block content %}  
 
-{% load static %}
-<html lang="en">
-
-  <body>
-  <div class="content">
-    <span class="mb-0 text-muted">
-        {% if msg %}
-            {{ msg | safe }}
-        {% else %}
-            Login page
-        {% endif %}
-      </span>
-        <form  method="post">
-            {% csrf_token %}
-          <div class="form-group first">
-            <label for="username">Username</label>
-              {{ form.username }}
-          </div>
-          <div class="form-group first">
-            <label for="email">Email</label>
-              {{ form.email}}
-          </div>
-          <div class="form-group last mb-4">
-            <label for="password">Password</label>
-              {{ form.password1 }}
-          </div>
-          <div class="form-group last mb-4">
-            <label for="password">confirm Password</label>
-              {{ form.password2 }}
-          </div>
-          <div class="d-flex mb-5 align-items-center">
-            <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
-                {{ form.is_admin }}
-              <div class="control__indicator"></div>
-            </label>
-          </div>
-          <div class="d-flex mb-5 align-items-center">
-            <label class="control control--checkbox mb-0"><span class="caption">lurah</span>
-                {{ form.is_lurah }}
-              <div class="control__indicator"></div>
-            </label>
-          </div>
-          <div class="d-flex mb-5 align-items-center">
-            <label class="control control--checkbox mb-0"><span class="caption">nakes</span>
-                {{ form.is_nakes }}
-              <div class="control__indicator"></div>
-            </label>
-          </div>
-            <span class="text-error">{{ form.errors }}</span>
-          <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
-        </form>
-  </div>
+<head>
+  <script> src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#registerAkun').click(function() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var email = $('#email').val();
+        var role = $('#role').val();
+        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+        $('#greetings').text("Hm!")
+        $.ajax({
+          url: "{% url 'authentication:register' %}",
+          type: "POST",
+          data: {
+            'username': username,
+            'password': password,
+            'email': email,
+            'role': role,
+            'csrfmiddlewaretoken': csrfmiddlewaretoken
+          },
+          success: function(response) {
+            var success = response['success'];
+            if (success) {
+              alert('Register Success');
+              $('#greetings').text("Congratulations! You have successfully registered. Please login to continue.");
+            } else {
+              alert('Register Failed');
+            }
+          }
+        });
+      });
+    })
+  </script>
+</head>
 
 
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-  </body>
-</html>
 
+
+
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+      .background-radial-gradient {
+        background-color: rgb(214, 154, 130);
+      }
+  
+      .bg-glass {
+        background-color: hsla(0, 0%, 100%, 0.9) !important;
+        backdrop-filter: saturate(200%) blur(25px);
+      }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="#">Navbar</a>
+          </div>
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'authentication:login' %}" tabindex="-1" aria-disabled="true">Log In</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+            Register Yourself <br />
+            <span style="color: hsl(44, 81%, 75%)">as Nakes and/or Lurah!</span>
+          </h1>
+          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+            Sehat-terus
+            sehat-sehat-sehat
+          </p>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+  
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+              <h3 id="greetings">Hi!</h3>
+              <span class="mb-0 text-muted" style="text-align: center;">
+                {% if msg %}
+                    {{ msg | safe }}
+                {% else %}
+                    
+                {% endif %}
+              </span>
+                <form  method="post" id="signup">
+                    {% csrf_token %}
+                  <div class="form-group first">
+                    <label for="username">Username</label>
+                      {{ form.username }}
+                  </div>
+                  <div class="form-group first">
+                    <label for="email">Email</label>
+                      {{ form.email}}
+                  </div>
+                  <div class="form-group last mb-4">
+                    <label for="password">Password</label>
+                      {{ form.password1 }}
+                  </div>
+                  <div class="form-group last mb-4">
+                    <label for="password">Confirm Password</label>
+                      {{ form.password2 }}
+                  </div>
+                  <p>Choose Your Role</p>
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"><span class="caption">Lurah</span>
+                        {{ form.is_lurah }}
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"><span class="caption">Nakes</span>
+                        {{ form.is_nakes }}
+                      <div class="control__indicator"></div>
+                    </label>
+                  </div>
+                    <span class="text-error">{{ form.errors }}</span>
+                  <input type="submit" id="registerAkun" value="Register" class="btn btn-pill text-white btn-block btn-primary">
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
 {% endblock content %}
