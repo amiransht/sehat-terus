@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.urls import reverse
+# from django.contrib import messages
+# from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse, JsonResponse  # , HttpResponseRedirect
+# from django.urls import reverse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
@@ -70,7 +70,7 @@ def delete_pasien(request, id):
     if request.method == 'DELETE':
         task = get_object_or_404(DataPasien, id=id)
         task.delete()
-    return HttpResponse(status=204)
+    return HttpResponse(status=202)
 
 
 @login_required(login_url='authentication/login/')

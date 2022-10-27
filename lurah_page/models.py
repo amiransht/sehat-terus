@@ -1,4 +1,6 @@
+from email.policy import default
 from django.db import models
+from authentication.models import User
 
 # Create your models here.
 GENDER_CHOICES = (
@@ -12,9 +14,13 @@ STATUS_CHOICES = (
     ('gejalaberat', 'Gejala Berat'),
 )
 
+
 class DataPasien(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     nama = models.CharField(max_length=100)
     umur = models.IntegerField()
-    gender = models.CharField(max_length=10, choices= GENDER_CHOICES)
-    status = models.CharField(max_length=20, choices= STATUS_CHOICES)
+    gender = models.CharField(
+        max_length=10, choices=GENDER_CHOICES)
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES)
     alamat = models.CharField(max_length=100)
