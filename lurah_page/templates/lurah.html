@@ -11,6 +11,7 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link href="http://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
     <script>
@@ -57,37 +58,88 @@
   <body class="bg-amber-100 text-zinc-100">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="navbar-header p-lg-3">
+          <a class="navbar-brand" href="#">Sehat Terus</a>
+        </div>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
+                >Log In</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <head>
       <script>
         $(document).ready(function () {
           const card = (data) => `
-    <div id='${data.pk}-card'
-        class="task-container mt-5">
-      <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
-        <div class="task-title">
-              <div class="flex gap-4">
-              <div
-                id=${data.pk}
-                class="cursor-pointer remove-todo ${data.pk}"
-              >
-                <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Delete</a></button>
+          <div id='${data.pk}-card'
+            class="task-container mt-5">
+            <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
+              <div class="task-title">
+                  <div class="flex gap-4">
+                    <div
+                    id=${data.pk}
+                    class="cursor-pointer remove-todo ${data.pk}"
+                    >
+                    <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Delete</a></button>
+                    </div>
+                  </div>
+                <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
+                  </a>
+                  <div class="task-checkbox-container">
+                  </div>
               </div>
-        </div>
-        <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
-        </a>
-              <div class="task-checkbox-container">
-      </div>
-        </div>
-        <div class="task-description">
-          <hr />
-          <p>${data.fields.umur}</p>
-          <p>${data.fields.gender}</p>
-          <p>${data.fields.status}</p>
-          <p>${data.fields.alamat}</p>
-        </div>
-        
-      </div>
-          `;
+              <div class="task-description">
+              <hr />
+              <p>Umur: ${data.fields.umur}</p>
+              <p>Jenis Kelamin: ${data.fields.gender}</p>
+              <p>Alamat: ${data.fields.alamat}</p>
+              <p>Status Gejala: ${data.fields.gejala}</p>
+            </div>
+          </div>
+              `;
           const addCard = (data) => {
             return $("#todo").append(card(data));
           };
@@ -112,18 +164,30 @@
           });
 
           $("#add-todo").click(function () {
-            if ($("#nama").val() && $("#umur").val()) {
+            if (
+              $("#nama").val() &&
+              $("#umur").val() &&
+              $("#gender").val() &&
+              $("#gejala").val() &&
+              $("#alamat").val()
+            ) {
               $.post(
                 "/lurah-page/add/",
                 {
                   nama: $("#nama").val(),
                   umur: $("#umur").val(),
+                  gender: $("#gender").val(),
+                  gejala: $("#gejala").val(),
+                  alamat: $("#alamat").val(),
                 },
                 function (res, status) {
                   if (status == "success") {
                     addCard(res);
                     $("#nama").val("");
                     $("#umur").val("");
+                    $("#gender").val("");
+                    $("#gejala").val("");
+                    $("#alamat").val("");
                     removeCard(res);
                   }
                 }
@@ -131,6 +195,14 @@
             }
           });
         });
+
+        var e = document.getElementById("gejala");
+        var strUser = e.options[e.selectedIndex].value;
+        if (strUser == "Ada") {
+          document.getElementById("gejala").style.color = "red";
+        } else {
+          document.getElementById("gejala").style.color = "green";
+        }
       </script>
     </head>
 
@@ -138,7 +210,7 @@
     {% if user.is_authenticated %}
     <div class="mx-8 md:mx-14 lg:mx-14 mt-14">
       <div class="text-black mt-2 ml-2 text-5xl" style="text-align: center">
-        Hai Mr. <b>{{user.get_username}}</b>
+        Hai Lurah <b>{{user.get_username}}!</b>
       </div>
       <br />
 
@@ -214,7 +286,7 @@
                         Umur
                       </span>
                       <input
-                        type="text"
+                        type="number"
                         name="umur"
                         id="umur"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
@@ -235,9 +307,9 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required
                       >
-                        <option selected>Pilih</option>
-                        <option value="laki">Laki-laki</option>
-                        <option value="perempuan">Perempuan</option>
+                        <option selected>-Pilih-</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
                       </select>
                     </label>
 
@@ -245,18 +317,17 @@
                       <span
                         class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                       >
-                        Status Gejala
+                        Gejala
                       </span>
                       <select
-                        name="status"
-                        id="status"
+                        name="gejala"
+                        id="gejala"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required
                       >
-                        <option selected>Pilih</option>
-                        <option value="nogejala">Tidak Ada</option>
-                        <option value="gejalasedang">Sedang</option>
-                        <option value="gejalaberat">Berat</option>
+                        <option selected>-Pilih-</option>
+                        <option value="Ada">Ada</option>
+                        <option value="Tidak">Tidak</option>
                       </select>
                     </label>
 
