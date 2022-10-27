@@ -167,7 +167,7 @@ p {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'authentication:login' %}" tabindex="-1" aria-disabled="true">Log In</a>
+                        <a class="nav-link" href="{% url 'authentication:logout' %}" tabindex="-1" aria-disabled="true">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -200,8 +200,10 @@ p {
                             <p class="m-b-10 f-w-600">Role</p>
                             {% if user.is_nakes %}
                                 <h6 class="text-muted f-w-400">Nakes</h6>
-                            {% else %}
+                            {% elif user.is_lurah %}
                                 <h6 class="text-muted f-w-400">Lurah</h6>
+                            {% else %}
+                                <h6 class="text-muted f-w-400">Admin</h6>
                             {% endif %}
                         </div>
                         <div class="col-sm-6">
