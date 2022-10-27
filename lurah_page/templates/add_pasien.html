@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Pasien</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+
+<style>
+    table, th, td {
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+    }
+    form {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 24px;
+        padding: 32px;
+        gap: 20px;
+    }
+    </style>
+    {% endblock meta %}
+    
+    {% block content %}
+    
+    <div class = "login">
+    
+        <h1 class="text-5xl font-bold text-white flex justify-center mt-16">Tambah Task</h1>
+    
+        <form method="POST" action="" class="text-zinc-700 flex justify-center mt-8 mx-64">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+                <tr>
+                    <td></td>
+                    <td><input class="inline-flex hover:cursor-pointer text-zinc-100 space-x-2 items-center justify-center px-6 py-3 bg-gradient-to-br from-green-400 to-indigo-600 rounded-xl" type="submit" name="submit" value="Tambah"></td>
+                </tr>
+            </table>
+        </form>
+    
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}     
+    
+    </div>
+    
+    {% endblock content %}
