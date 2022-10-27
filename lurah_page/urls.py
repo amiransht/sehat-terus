@@ -1,5 +1,5 @@
 from django.urls import path
-from lurah_page.views import add_pasien_ajax, show_lurah_page, add_pasien, delete_pasien, show_json, add_pasien_ajax
+from lurah_page.views import add_pasien_ajax, show_lurah_page, delete_pasien, show_json, add_pasien_ajax
 
 app_name = 'lurah_page'
 

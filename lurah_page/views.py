@@ -14,10 +14,13 @@ import datetime
 from lurah_page.models import DataPasien
 from lurah_page.forms import DataPasienForm
 
+from authentication.decorators import lurah_required
+
 
 # Create your views here.
 
 @login_required(login_url='authentication/login/')
+@lurah_required
 def show_lurah_page(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
     context = {'data_pasien': data_pasien,
@@ -27,6 +30,7 @@ def show_lurah_page(request):
 
 
 @login_required(login_url='authentication/login/')
+@lurah_required
 def add_pasien(request):
     form = DataPasienForm()
     if request.method == 'POST':
@@ -47,17 +51,17 @@ def add_pasien_ajax(request):
         nama = request.POST.get('nama')
         umur = request.POST.get('umur')
         gender = request.POST.get('gender')
-        status = request.POST.get('status')
+        gejala = request.POST.get('gejala')
         alamat = request.POST.get('alamat')
         todo = DataPasien.objects.create(
-            nama=nama, umur=umur, gender=gender, status=status, alamat=alamat, user=request.user)
+            nama=nama, umur=umur, gender=gender, gejala=gejala, alamat=alamat, user=request.user)
 
         result = {
             'fields': {
                 'nama': todo.nama,
                 'umur': todo.umur,
                 'gender': todo.gender,
-                'status': todo.status,
+                'gejala': todo.gejala,
                 'alamat': todo.alamat,
             },
             'pk': todo.pk
@@ -74,6 +78,7 @@ def delete_pasien(request, id):
 
 
 @login_required(login_url='authentication/login/')
+@lurah_required
 def show_json(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
     data = serializers.serialize('json', data_pasien)
