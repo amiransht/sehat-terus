@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}"/>
+{% endblock meta %}
+{% block content %}
+<head>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <p>Title name:<br>
+            {{blog_form.title}}</p>
+        </div>
+        <div>
+            <p>Content:<br>
+            {{blog_form.content}}</p>
+        </div>
+    </div>
+        <button id="add-blog" class="btn btn-primary btn-lg">Share</button>
+    </form>
+</body>
+{% endblock content %}
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'script/forms.js' %}"></script>
+{% endblock script %}

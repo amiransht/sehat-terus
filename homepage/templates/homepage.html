@@ -1,419 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <title>Sehat Terus | Homepage</title>
-  </head>
+</head>
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: left;
+        background-color: #fff; }
 
-  <body style="background-color: rgb(241, 240, 219)">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <div class="navbar-header p-lg-3">
-          <a class="navbar-brand" href="#">Sehat Terus</a>
-        </div>
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    h3 {
+        color: #17a2b8;
+    }
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
-                >Log In</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    .navbar {
+        padding-top: 25px;
+        background-color: white;
+    }
 
-    <div class="content-wrapper">
-      <!-- BANNER -->
-      <section class="section-banner">
-        <div class="d-flex flex-row justify-content-center m-xl-5">
-          <!-- Carousel -->
-          <div id="demo" class="carousel slide" data-bs-ride="carousel">
-            <!-- Indicators/dots -->
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#demo"
-                data-bs-slide-to="0"
-                class="active"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#demo"
-                data-bs-slide-to="1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#demo"
-                data-bs-slide-to="2"
-              ></button>
-            </div>
 
-            <!-- The slideshow/carousel -->
-            <div class="card">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    src="https://img.freepik.com/premium-vector/coronavirus-design-with-infographic-elements-coronavirus-symptoms-prevention-infographic-novel-coronavirus-2019-ncov-banner-covid-19-pandemic_201250-90.jpg?size=626&ext=jpg&ga=GA1.2.60779761.1665937069"
-                    alt="Banner 1"
-                    class="d-block"
-                    style="max-width: 1292px"
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="https://img.freepik.com/free-vector/coronavirus-covid-19-pandemic-outbreak-virus-background-concept_1017-24318.jpg?size=626&ext=jpg"
-                    alt="Banner 2"
-                    class="d-block"
-                    style="max-width: 1292px"
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="https://img.freepik.com/premium-vector/crowd-people-wearing-medical-masks-banner-preventive-measures-human-protection-from-pneumonia-outbreak-coronavirus-epidemic-concept-respiratory-disease-virus-spread-illustration_198278-261.jpg?size=626&ext=jpg&ga=GA1.2.60779761.1665937069"
-                    alt="Banner 3"
-                    class="d-block"
-                    style="max-width: 1292px"
-                  />
-                </div>
-              </div>
-            </div>
+    .bg-light {
+        background-color: white;
+    }
 
-            <!-- Left and right controls/icons -->
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#demo"
-              data-bs-slide="prev"
-            >
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#demo"
-              data-bs-slide="next"
-            >
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-        </div>
-      </section>
-      <section class="section-5m">
-        <div
-          class="d-flex flex-row justify-content-lg-center m-xl-5"
-          style="background-color: white"
-        >
-          <div class="p-lg-4">
-            <div class="title-5m text-center">
-              <h3>Protokol Kesehatan 5M</h3>
-            </div>
-            <div class="p-2">
-              <hr class="solid my-3" />
-            </div>
-            <div class="d-flex flex-row justify-content-between m-3">
-              <div class="card p-2 m-3">
-                <img
-                  class="card-img-top m-auto"
-                  src="https://w7.pngwing.com/pngs/644/502/png-transparent-avoid-community-coronavirus-crowd-dont-gathering-coronavirus-icon.png"
-                  alt="Card image cap"
-                  style="width: 120px; height: 120px"
-                />
-                <div class="card-body">
-                  <p class="card-text">Menjauhi Kerumuman</p>
-                </div>
-              </div>
-              <div class="card p-2 m-3">
-                <img
-                  class="card-img-top m-auto"
-                  src="https://www.saronda.desa.id/wp-content/uploads/jaga-jarak.png"
-                  alt="Card image cap"
-                  style="width: 120px; height: 120px"
-                />
-                <div class="card-body">
-                  <p class="card-text">Menjaga Jarak</p>
-                </div>
-              </div>
-              <div class="card p-2 m-3">
-                <img
-                  class="card-img-top m-auto"
-                  src="https://media.istockphoto.com/vectors/washing-hands-with-soap-to-prevent-virus-icon-vector-id1284014534?k=20&m=1284014534&s=170667a&w=0&h=EIeCxGfhnUhC_2qbTvA41348axPmiGRICaiAOu2soIc="
-                  alt="ikon mencuci tangan"
-                  style="width: 120px; height: 120px"
-                />
-                <div class="card-body">
-                  <p class="card-text">Mencuci Tangan</p>
-                </div>
-              </div>
-              <div class="card p-2 m-3">
-                <img
-                  class="card-img-top m-auto"
-                  src="https://smartgabek.pangkalpinangkota.go.id/wp-content/uploads/2019/11/masker.svg"
-                  alt="Card image cap"
-                  style="width: 120px; height: 120px"
-                />
-                <div class="card-body">
-                  <p class="card-text">Memakai Masker</p>
-                </div>
-              </div>
-              <div class="card p-2 m-3">
-                <img
-                  class="card-img-top m-auto"
-                  src="https://png.pngtree.com/png-vector/20190121/ourlarge/pngtree-vector-house-icon-png-image_332900.jpg"
-                  alt="Card image cap"
-                  style="width: 120px; height: 120px"
-                />
-                <div class="card-body">
-                  <p class="card-text">Membatasi Mobilitas</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    .navbar-nav {
+        font-weight: 400;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.55);
+    }
+    .navbar .navbar-collapse {
+        text-align: center;
+      }
+    .nav-item:hover, .navbar-nav .nav-link.active{
+        color: #17a2b8;
+    }
 
-      <section class="section-data-covid">
-        <div
-          class="d-flex flex-row justify-content-center text-center m-xl-5"
-          style="background-color: white"
-        >
-          <div class="p-lg-4">
-            <div class="title-5m text-center">
-              <h3>Data Covid-19</h3>
-            </div>
-            <div class="p-2">
-              <hr class="solid my-3" />
-            </div>
-            <form class="p-2" method="POST" name="provinsi" id="entry_provinsi">
-              {% csrf_token %}
-              <input
-                class="form-control mb-3"
-                type="text"
-                placeholder="Nama provinsi"
-                name="nama_provinsi"
-              />
-              <span
-                ><button type="submit" class="btn btn-primary btnClick mb-3">
-                  Submit
-                </button></span
-              >
-              <p id="error_messages"></p>
-            </form>
+    #title-brand {
+        font-weight: 900;
+        font-size: 26px;
+    }
+    .btn, .btn-primary, #btn-login {
+        border-radius: 40px;
+        --bs-btn-bg: white;
+        --bs-btn-border-color: black;
+        --bs-btn-color: rgba(0, 0, 0, 0.55);
+        --bs-btn-hover-color: white;
+        --bs-btn-hover-bg: #17a2b8;
+        --bs-btn-hover-border-color: #17a2b8;
+    }
 
-            <div class="d-flex justify-content-between m-3">
-              <div class="card p-2 m-3" style="width: 400px">
-                <div class="card-body text-center">
-                  <h5 class="card-text" id="provinsi"></h5>
-                  <p class="card-text">Jumlah Positif</p>
-                  <h6 class="card-text" id="data-positif"></h6>
-                  <p class="card-text">Jumlah Sembuh</p>
-                  <h6 class="card-text" id="data-sembuh"></h6>
-                  <p class="card-text">Jumlah Meninggal</p>
-                  <h6 class="card-text" id="data-meninggal"></h6>
-                </div>
-              </div>
-              <div class="card p-2 m-3" style="width: 400px">
-                <div class="card-body text-center">
-                  <h5 class="card-text">Indonesia</h5>
-                  <p class="card-text">Jumlah Positif</p>
-                  <p class="card-text">Jumlah Negatif</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    .main{
+        padding-top: 0;
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    .carousel img {
+        top: 0;
+        left: 0;
+        height: 350px;
+        max-height: 700px;
+        width: 1400px;
+       
+    }
 
-      <section class="section-berita">
-        <div class="container" style="background-color: white">
-          <div class="row justify-content-start">
-            <div class="col-sm-3 d-flex flex-column align-self-center">
-              <div class="title-5m text-center">
-                <h3>Berita Terkini</h3>
-              </div>
-              <div class="p-2">
-                <hr class="solid my-3" />
-              </div>
-              <div class="p-3">
-                <p>
-                  Dalam Pamdemi ini, Ingatlah setiap kita memiliki peran
-                  penting. Bersama-sama kita bisa melindungi diri dan melindungi
-                  sesama.
-                </p>
-              </div>
-            </div>
-            <div class="col-sm-9">
-              <div class="d-flex justify-content-between">
-                <div class="card m-3" style="height: 400px; width: 300px">
-                  <img
-                    class="card-img-top"
-                    style="height: 150px; width: 100%"
-                    src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                    alt="Card image cap"
-                  />
-                  <div
-                    class="card-body p-4 z-index-1"
-                    style="display: flex; flex-direction: column"
-                  >
-                    <time class="text-muted" pubdate="" datetime="2022-10-07"
-                      >07 Okt 2022</time
-                    >
-                    <div class="card-body p-0 mb-3" style="flex-grow: 1">
-                      <h5>
-                        Aplikasi PeduliLindungi bisa untuk 6 Sertifikat Vaksin
-                      </h5>
+    .section-5m .row{
+        margin-left: 48px;
+        margin-right: 48px;
+    }
+    .card{
+        border-color: #fff;
+    }
+    .card-5m:hover {
+        transform: scale(1.3);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
+
+    .card-datacovid{
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        border-radius: 20px;
+    }
+
+    .card-berita:hover{
+        background-color: #EFFBF9;
+        transform: scale(1.08);
+    }
+
+    #data-positif, #data-sembuh, #data-meninggal{
+        color: #17a2b8;
+        font-size: 23px;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light"> 
+            <div class="container-fluid main">
+                <a class="navbar-brand me-2 mb-1 d-flex align-self-baseline" href="#" id="title-brand">
+                    <p style="margin-top: 10px; margin-bottom:0px;">SE</p><img src="https://cdn.discordapp.com/attachments/814499566245249047/1035481656624160798/output-onlinepngtools.png" height="50" alt="test" loading="lazy"
+                      style="margin-top: 2px" /><p style="margin-top: 10px; margin-bottom:0px;">AT TERUS</p>
+                  </a>
+              
+                <!-- <a href="#" class="navbar-brand me-xl-5 ms-xl-5" id="title-brand">
+                    SEHAT TERUS
+                </a> -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="#" class="nav-item nav-link px-4 active">Home</a>
+                        <a href="#" class="nav-item nav-link px-4">Profile</a>
+                        <a href="#" class="nav-item nav-link px-4">Messages</a>
+                        <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
                     </div>
-                    <div class="row">
-                      <div class="col p-0">
-                        <a
-                          href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia"
-                          class="btn btn-block"
-                          >selengkapnya</a
-                        >
-                      </div>
+                    <div class="navbar-nav">
+                        <a href="#" class="btn btn-outline-danger mx-3 px-3 py-1" id="btn-login">Login</a>
                     </div>
-                  </div>
                 </div>
-                <div class="card m-3" style="height: 400px; width: 300px">
-                  <img
-                    class="card-img-top"
-                    style="height: 150px; width: 100%"
-                    src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                    alt="Card image cap"
-                  />
-                  <div
-                    class="card-body p-4 z-index-1"
-                    style="display: flex; flex-direction: column"
-                  >
-                    <time class="text-muted" pubdate="" datetime="2022-10-07"
-                      >07 Okt 2022</time
-                    >
-                    <div class="card-body p-0 mb-3" style="flex-grow: 1">
-                      <h5>
-                        Presiden Resmikan Pabrik Vaksin COVID-19 di Indonesia
-                      </h5>
-                    </div>
-                    <div class="row">
-                      <div class="col p-0">
-                        <a
-                          href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia"
-                          class="btn btn-block"
-                          >selengkapnya</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card m-3" style="height: 400px; width: 300px">
-                  <img
-                    class="card-img-top"
-                    style="height: 150px; width: 100%"
-                    src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                    alt="Card image cap"
-                  />
-                  <div
-                    class="card-body p-4 z-index-1"
-                    style="display: flex; flex-direction: column"
-                  >
-                    <time class="text-muted" pubdate="" datetime="2022-10-07"
-                      >07 Okt 2022</time
-                    >
-                    <div class="card-body p-0 mb-3" style="flex-grow: 1">
-                      <h5>WNA Bisa Vaksinasi COVID-19 di Indonesia</h5>
-                    </div>
-                    <div class="row">
-                      <div class="col p-0">
-                        <a
-                          href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia"
-                          class="btn btn-block"
-                          >selengkapnya</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
+        </nav>
+        <span class="p-0">
+            <hr class="solid">
+        </span>
+        <!-- BANNER -->
+        <div class="section-banner">
+            <div class="d-flex flex-row justify-content-center">
+                <!-- Carousel -->
+                <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+                    <!-- Indicators/dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                    </div>
+                    
+                    <!-- The slideshow/carousel -->
+                    <div class="card">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active ">
+                                <img src="https://images.pexels.com/photos/4261252/pexels-photo-4261252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Banner 1" class="d-block">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://images.pexels.com/photos/4261252/pexels-photo-4261252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Banner 2" class="d-block">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://images.pexels.com/photos/4261252/pexels-photo-4261252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Banner 3" class="d-block">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Left and right controls/icons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
         </div>
-      </section>
+        <div class="section-5m">
+            <div class="container pt-5">
+                <div class="row">
+                    
+                        <div style="position: relative;font-size: 45px;">
+                            <h1>TERAPKAN PROTOKOL KESEHATAN</h1>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="d-none d-lg-block">
+                                <img class="img-fluid mb-3" src="https://corona.jakarta.go.id/img/logo/img-waspada.svg" alt="" style="width:59%;height:auto;">
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="align-self: center;">
+                            <h3>Waspada Penularan COVID-19</h3>
+                            <p>SARS-CoV-2 penyebab COVID-19 menyebar melalui kontak dengan droplet saluran napas penderita yang dihasilkan pada saat bicara, batuk, atau bersin. Droplet dapat bertahan di udara dalam beberapa waktu tertentu dan sampai jarak tertentu.</p>
+                            <div class="d-lg-none">
+                                <img class="img-fluid mb-3" src="https://corona.jakarta.go.id/img/logo/img-waspada.svg" alt="" style="width:100%;height:auto;">
+                            </div>
+                        </div>
+                
+                    <div class="col-md-4">
+                        <div class="d-none d-lg-block" style="position: absolute;top:-150px;right:-10px;">
+                            <img src="https://corona.jakarta.go.id/img/logo/bg-dot-2.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-lg-center" style="background-color: white;">
+                <div class="p-lg-4">
+                    <div class="d-flex flex-row justify-content-between m-3">
+                        <div class="card-5m card p-2 m-3" >
+                            <img class="card-img-top m-auto" src="https://daftarvaksin.depok.go.id/assets/images/no-crowd.png" alt="Card image cap"
+                            style="width: 120px; height: 120px">
+                            <div class="card-body">
+                                <p class="card-text">Menjauhi Kerumuman</p>
+                            </div>
+                        </div>
+                        <div class="card-5m card p-2 m-3"  >
+                            <img class="card-img-top m-auto" src="https://www.saronda.desa.id/wp-content/uploads/jaga-jarak.png" alt="Card image cap"
+                            style="width: 120px; height: 120px;">
+                            <div class="card-body">
+                                <p class="card-text">Menjaga Jarak</p>
+                            </div>
+                        </div>
+                        <div class="card-5m card p-2 m-3" >
+                            <img class="card-img-top m-auto" src="https://media.istockphoto.com/vectors/washing-hands-with-soap-to-prevent-virus-icon-vector-id1284014534?k=20&m=1284014534&s=170667a&w=0&h=EIeCxGfhnUhC_2qbTvA41348axPmiGRICaiAOu2soIc=" alt="ikon mencuci tangan"
+                                style="width: 120px; height: 120px;">
+                            <div class="card-body">
+                                <p class="card-text">Mencuci Tangan</p>
+                            </div>
+                        </div>
+                        <div class="card-5m card p-2 m-3"  >
+                            <img class="card-img-top m-auto" src="https://smartgabek.pangkalpinangkota.go.id/wp-content/uploads/2019/11/masker.svg" alt="Card image cap"
+                            style="width: 120px; height: 120px;">
+                            <div class="card-body">
+                                <p class="card-text">Memakai Masker</p>
+                            </div>
+                        </div>
+                        <div class="card-5m card p-2 m-3"  >
+                            <img class="card-img-top m-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Icons8_flat_home.svg/2048px-Icons8_flat_home.svg.png" alt="Card image cap"
+                            style="width: 120px; height: 120px;">
+                            <div class="card-body">
+                                <p class="card-text">Membatasi Mobilitas</p>
+                            </div>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+     
+        <div class="section-data-covid">
+            <div class="d-flex flex-row justify-content-center text-center m-xl-5" style="background-color: white;">
+                <div class="p-lg-4">
+                    <div class=" title-5m text-center">
+                        <h1>DATA KASUS</h1><h3>COVID-19</h3>
+                    </div>
+                    <div class="p-2">
+                        <hr class="solid my-3">
+                    </div>
+                    <form class="p-2" method="POST" name="provinsi" id="entry_provinsi">
+                        {% csrf_token %}
+                        <input class="form-control mb-3" type="text" placeholder="Masukkan nama provinsi dalam kapital" name="nama_provinsi">
+                        <span><button type="submit" class="btn btn-primary btnClick mb-3">Submit</button></span>
+                        <p id="error_messages"></p>
+                    </form>
+                
+                   
+                    <div class="d-flex justify-content-between m-3">
+                        <div class="card-datacovid card p-2 m-3"  style="width: 550px;">
+                            <div class="card-body text-center">
+                                <h5 class="card-text" id="provinsi">Provinsi</h5>
+                                <div class="row">
+                                    <div class="col">
+                                        
+                                        <span class="card-text">Jumlah Positif</span>
+                                        <h6 class="card-text val" id="data-positif">0</h6>
+                                    </div>
+                                    <div class="col">
+                                        <span class="card-text">Jumlah Sembuh</span>
+                                        <h6 class="card-text val" id="data-sembuh">0</h6>
+                                    </div>
+                                    <div class="col">
+                                        <span class="card-text">Jumlah Meninggal</span>
+                                        <h6 class="card-text val" id="data-meninggal">0</h6>
+                                        
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="card-datacovid card p-2 m-3" style="width: 550px;" >
+                            <div class="card-body text-center">
+                                <h5 class="card-text">Indonesia</h5>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="card-text">Jumlah Positif</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="card-text">Jumlah Negatif</p>
+                                    </div>
+                                </div>
+                                
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+     
+        <div class="section-berita">
+            <div class="container" style="background-color: white;">
+                <div class="row justify-content-start">
+                    <div class="col-sm-3 d-flex flex-column  align-self-center">
+                        <div class=" title-5m text-center">
+                            <h3>Berita Terkini</h3>
+                        </div>
+                        <div class="p-2">
+                            <hr class="solid my-3">
+                        </div>
+                        <div class="p-3">
+                            <p>Dalam Pamdemi ini, Ingatlah setiap kita memiliki peran penting. Bersama-sama kita bisa melindungi diri dan melindungi sesama.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-9">
+                        <div class="d-flex justify-content-between">
+                            <div class="card card-berita m-3" style="height: 400px; width: 300px;" >
+                                <img class="card-img-top" style="height: 150px; width: 100%" src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Card image cap">
+                                <div class="card-body p-4 z-index-1" style="display: flex; flex-direction: column">
+                                    <time class="text-muted" pubdate="" datetime="2022-10-07">07 Okt 2022</time>
+                                    <div class="card-body p-0 mb-3" style="flex-grow: 1">
+                                        <h5>Aplikasi PeduliLindungi bisa untuk 6 Sertifikat Vaksin</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col p-0">
+                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-berita m-3" style="height: 400px; width: 300px;" >
+                                <img class="card-img-top" style="height: 150px; width: 100%" src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Card image cap">
+                                <div class="card-body p-4 z-index-1" style="display: flex; flex-direction: column">
+                                    <time class="text-muted" pubdate="" datetime="2022-10-07">07 Okt 2022</time>
+                                    <div class="card-body p-0 mb-3" style="flex-grow: 1">
+                                        <h5>Presiden Resmikan Pabrik Vaksin COVID-19 di Indonesia</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col p-0">
+                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-berita m-3" style="height: 400px; width: 300px;" >
+                                <img class="card-img-top" style="height: 150px; width: 100%" src="https://plus.unsplash.com/premium_photo-1661685749365-064fad43c907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Card image cap">
+                                <div class="card-body p-4 z-index-1" style="display: flex; flex-direction: column">
+                                    <time class="text-muted" pubdate="" datetime="2022-10-07">07 Okt 2022</time>
+                                    <div class="card-body p-0 mb-3" style="flex-grow: 1">
+                                        <h5>WNA Bisa Vaksinasi COVID-19 di Indonesia</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col p-0">
+                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+
+            </div>
+        </div>
     </div>
-  </body>
+</body>
 </html>
 <script>
-  function getDataFromForm($form) {
+
+   
+function getDataFromForm($form) {
     var unindexed_items = $form.serializeArray();
     var result = {};
     $.map(unindexed_items, function (n, i) {
-      result[n["name"]] = n["value"];
+        result[n['name']] = n['value'];
     });
     return result;
-  }
+}
 
-  $("#entry_provinsi").submit(function (e) {
+
+$("#entry_provinsi").submit(function (e) {
     e.preventDefault();
     var $form = $(this);
     var serializedData = getDataFromForm($form);
-    var provinsi = serializedData.nama_provinsi;
+    var provinsi = serializedData.nama_provinsi
 
-    $.get("./api-indonesia", function (data) {
-      var data_filter = data.filter((data) => data.key == provinsi);
-      if (data_filter.length === 0) {
-        $("#error_messages").text(
-          "Input Salah! Silahkan masukkan nama provinsi dalam kapital"
-        );
-      } else {
-        $("#error_messages").text("");
-        $("#provinsi").text(provinsi);
-        $("#data-positif").text(
-          data_filter[0].jumlah_kasus - data_filter[0].jumlah_sembuh
-        );
-        $("#data-meninggal").text(data_filter[0].jumlah_meninggal);
-        $("#data-sembuh").text(data_filter[0].jumlah_sembuh);
-      }
-    });
-  });
+        
+    $.get(
+        './api-indonesia', function(data){
+            var data_filter = data.filter((data) => data.key == provinsi);
+            if (data_filter.length === 0){
+                $("#error_messages").text("Input Salah! Silahkan masukkan nama provinsi dalam kapital")
+                
+            } else {
+                $("#error_messages").text("")
+                $("#provinsi").text(provinsi)
+                $("#data-positif").text(data_filter[0].jumlah_kasus - data_filter[0].jumlah_sembuh)
+                $("#data-meninggal").text(data_filter[0].jumlah_meninggal)
+                $("#data-sembuh").text(data_filter[0].jumlah_sembuh)
+            }
+
+        });
+     
+            
+
+    
+
+});
 </script>

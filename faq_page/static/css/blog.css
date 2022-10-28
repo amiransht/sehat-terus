@@ -1,0 +1,13 @@
+body{
+    background-color: pink;
+}
+h1{
+    text-align: center;
+}
+.card {
+    margin: 25px 25px
+}
+
+.card:hover {
+    box-shadow: 5px 10px 20px black
+}
