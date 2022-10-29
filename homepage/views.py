@@ -6,6 +6,7 @@ from .models import Data
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import requests as req
+from authentication.views import login
 
 # Create your views here.
 def show_homepage(request):

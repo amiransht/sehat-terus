@@ -71,22 +71,35 @@
               style="margin-top: 2px" /><p style="margin-top: 10px; margin-bottom:0px;">AT TERUS</p>
           </a>
       
+        <!-- <a href="#" class="navbar-brand me-xl-5 ms-xl-5" id="title-brand">
+            SEHAT TERUS
+        </a> -->
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
+            {% if user.is_authenticated and user.is_lurah %}
             <div class="navbar-nav ms-auto">
                 <a href="#" class="nav-item nav-link px-4 active">Home</a>
-                <a href="#" class="nav-item nav-link px-4">Profile</a>
                 <a href="#" class="nav-item nav-link px-4">Messages</a>
                 <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
+                <a href="{% url 'lurah_page:show_lurah_page' %}" class="nav-item nav-link px-4">lurahpageBLOM</a>
             </div>
-            <div class="navbar-nav">
-                <a href="{% url 'authentication:login' %}" class="btn btn-outline-danger mx-3 px-3 py-1" id="btn-login">Login</a>
+            {% elif user.is_authenticated and user.is_nakes %}
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-item nav-link px-4 active">Home</a>
+                <a href="#" class="nav-item nav-link px-4">Messages</a>
+                <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
+                <a href="#" class="nav-item nav-link px-4">nakespageBLOM</a>
             </div>
+            {% else %}
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="btn btn-outline-danger mx-3 px-3 py-1" id="btn-login">Login</a>
+            </div>
+            {% endif %}
         </div>
     </div>
-  </nav>
+</nav>
   <span class="p-0">
     <hr class="solid">
   </span>
