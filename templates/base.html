@@ -13,79 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/base.css">
 </head>
-
-<style>
-  body {
-        font-family: 'Open Sans', sans-serif;
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #212529;
-        text-align: left;
-        background-color: #fff; }
-
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        line-height: 1.2;
-        font-family: 'Roboto', sans-serif;
-    }
-    
-    h3 {
-        color: #17a2b8;
-    }
-
-    .navbar {
-        padding-top: 25px;
-        background-color: white;
-    }
-
-    .main{
-        padding-top: 0;
-        padding-left: 48px;
-        padding-right: 48px;
-    }
-
-
-    .bg-light {
-        background-color: white;
-    }
-
-    .navbar-nav {
-        font-weight: 400;
-        font-size: 18px;
-        color: rgba(0, 0, 0, 0.55);
-    }
-    .navbar .navbar-collapse {
-        text-align: center;
-      }
-    .nav-link:hover, .navbar-nav .nav-link.active{
-        color: #17a2b8;
-    }
-
-    #title-brand {
-        font-weight: 900;
-        font-size: 26px;
-    }
-
-    .btn-primary{
-        border-radius: 40px;
-        --bs-btn-bg: white;
-        --bs-btn-border-color: black;
-        --bs-btn-color: rgba(0, 0, 0, 0.55);
-        --bs-btn-hover-color: white;
-        --bs-btn-hover-bg: #17a2b8;
-        --bs-btn-hover-border-color: #17a2b8;
-    }
-
-    #btn-logout {
-      align-self: center;
-      color: #b83128;
-    }
-</style>
 
 <body>
   {% block content %}
@@ -104,6 +33,7 @@
               <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_page' %}" class=" nav-link px-4 active">Lurah Page</a>
                 <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
                 <li class="nav-item"><a href="#" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
+
                 <li class="nav-item dropdown px-4">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Profile
@@ -153,6 +83,7 @@
         </div>
     </div>
   </nav>
+ 
   {% endblock content %}
   {% block script %}
   {% endblock script %}

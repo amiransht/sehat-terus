@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/base.css">
 </head>
 
 <body>
@@ -19,9 +20,7 @@
     <span class="p-0">
         <hr class="solid">
     </span>
-    <div class="container-fluid">
-        
-      
+    <div class="container-fluid mb-5">
         <!-- BANNER -->
         <div class="section-banner">
             <div class="d-flex flex-row justify-content-center">
@@ -79,12 +78,6 @@
                                 <img class="img-fluid mb-3" src="https://corona.jakarta.go.id/img/logo/img-waspada.svg" alt="" style="width:100%;height:auto;">
                             </div>
                         </div>
-                
-                    <div class="col-md-4">
-                        <div class="d-none d-lg-block" style="position: absolute;top:-150px;right:-10px;">
-                            <img src="https://corona.jakarta.go.id/img/logo/bg-dot-2.svg" alt="">
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="d-flex flex-row justify-content-lg-center" style="background-color: white;">
@@ -255,33 +248,15 @@
                         
                     </div>
                 </div>
-                
-                
-
             </div>
         </div>
     </div>
+    {% include 'footer.html' %}
+   
+
 </body>
 
 <style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #212529;
-        text-align: left;
-        background-color: #fff; }
-
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        line-height: 1.2;
-        font-family: 'Roboto', sans-serif;
-    }
-    
     h3 {
         color: #17a2b8;
     }
