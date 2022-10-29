@@ -129,15 +129,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
+                    {% if user.is_authenticated and user.is_lurah %}
                     <div class="navbar-nav ms-auto">
                         <a href="#" class="nav-item nav-link px-4 active">Home</a>
-                        <a href="#" class="nav-item nav-link px-4">Profile</a>
                         <a href="#" class="nav-item nav-link px-4">Messages</a>
                         <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
+                        <a href="{% url 'lurah_page:show_lurah_page' %}" class="nav-item nav-link px-4">lurahpageBLOM</a>
                     </div>
+                    {% elif user.is_authenticated and user.is_nakes %}
+                    <div class="navbar-nav ms-auto">
+                        <a href="#" class="nav-item nav-link px-4 active">Home</a>
+                        <a href="#" class="nav-item nav-link px-4">Messages</a>
+                        <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
+                        <a href="#" class="nav-item nav-link px-4">nakespageBLOM</a>
+                    </div>
+                    {% else %}
                     <div class="navbar-nav">
                         <a href="#" class="btn btn-outline-danger mx-3 px-3 py-1" id="btn-login">Login</a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </nav>

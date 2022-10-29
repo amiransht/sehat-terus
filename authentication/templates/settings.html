@@ -22,7 +22,7 @@
             }
         });
 
-        function getKota() {
+        function getCity() {
             let selectBox = document.getElementById('id_provinsi');
             var value = selectBox.value;
             $.ajax({
@@ -43,7 +43,7 @@
             });
         }
 
-        function getKecamatan() {
+        function getDistrict() {
             let selectBox = document.getElementById('id_kota');
             var value = selectBox.value;
             $.ajax({
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-md-5">
                             <label class="labels">Province (pick this first!)</label>
-                            <select name="province" data-provid = "1" id="id_provinsi" class="form-control" onchange="getKota()" required>
+                            <select name="province" data-provid = "1" id="id_provinsi" class="form-control" onchange="getCity()" required>
                                 <option disable hidden selected>--Choose Province--</option>
                             </select>
                         </div>
@@ -190,7 +190,7 @@
                     <div class="row mt-3 d-flex justify-content-center">
                         <div class="col-md-5">
                             <label class="labels">City/District</label>
-                            <select name="city" value="{{user.profile.city}}" id="id_kota" class="form-control" onchange="getKecamatan()" required>
+                            <select name="city" value="{{user.profile.city}}" id="id_kota" class="form-control" onchange="getDistrict()" required>
                                 <option disable hidden selected>--Choose City/District--</option>
                             </select>
                         </div>
@@ -234,3 +234,4 @@
   <!-- Section: Design Block -->
 
   {% endblock %}
+
