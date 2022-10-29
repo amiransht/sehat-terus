@@ -21,12 +21,18 @@ from authentication.decorators import lurah_required
 
 @login_required(login_url='authentication/login/')
 @lurah_required
+def show_lurah_homepage(request):
+    return render(request, 'lurah_homepage.html')
+
+
+@login_required(login_url='authentication/login/')
+@lurah_required
 def show_lurah_page(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
     context = {'data_pasien': data_pasien,
                'user': request.user
                }
-    return render(request, 'lurah.html', context)
+    return render(request, 'lurah_pasien.html', context)
 
 
 @login_required(login_url='authentication/login/')
