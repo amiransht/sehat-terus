@@ -54,7 +54,7 @@ def add_pasien_ajax(request):
         gejala = request.POST.get('gejala')
         alamat = request.POST.get('alamat')
         todo = DataPasien.objects.create(
-            nama=nama, umur=umur, gender=gender, gejala=gejala, alamat=alamat, user=request.user)
+            nama=nama, umur=umur, gender=gender, gejala=gejala, alamat=alamat, is_covid=True, user=request.user)
 
         result = {
             'fields': {
@@ -63,6 +63,7 @@ def add_pasien_ajax(request):
                 'gender': todo.gender,
                 'gejala': todo.gejala,
                 'alamat': todo.alamat,
+                'is_covid': todo.is_covid,
             },
             'pk': todo.pk
         }
