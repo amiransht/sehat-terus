@@ -11,3 +11,7 @@ h1{
 .card:hover {
     box-shadow: 5px 10px 20px black
 }
+
+.button {
+    margin: 0
+}
