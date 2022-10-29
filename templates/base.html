@@ -11,8 +11,85 @@
   {% endblock meta %}
 </head>
 
+<style>
+  body {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: left;
+        background-color: #fff; }
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    h3 {
+        color: #17a2b8;
+    }
+
+    .navbar {
+        padding-top: 25px;
+        background-color: white;
+    }
+
+
+    .bg-light {
+        background-color: white;
+    }
+
+    .navbar-nav {
+        font-weight: 400;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.55);
+    }
+    .navbar .navbar-collapse {
+        text-align: center;
+      }
+    .nav-item:hover, .navbar-nav .nav-link.active{
+        color: #17a2b8;
+    }
+
+    #title-brand {
+        font-weight: 900;
+        font-size: 26px;
+    }
+</style>
+
 <body>
   {% block content %}
+  <nav class="navbar navbar-expand-lg navbar-light"> 
+    <div class="container-fluid main">
+        <a class="navbar-brand me-2 mb-1 d-flex align-self-baseline" href="#" id="title-brand">
+            <p style="margin-top: 10px; margin-bottom:0px;">SE</p><img src="https://cdn.discordapp.com/attachments/814499566245249047/1035481656624160798/output-onlinepngtools.png" height="50" alt="test" loading="lazy"
+              style="margin-top: 2px" /><p style="margin-top: 10px; margin-bottom:0px;">AT TERUS</p>
+          </a>
+      
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-item nav-link px-4 active">Home</a>
+                <a href="#" class="nav-item nav-link px-4">Profile</a>
+                <a href="#" class="nav-item nav-link px-4">Messages</a>
+                <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
+            </div>
+            <div class="navbar-nav">
+                <a href="{% url 'authentication:login' %}" class="btn btn-outline-danger mx-3 px-3 py-1" id="btn-login">Login</a>
+            </div>
+        </div>
+    </div>
+  </nav>
+  <span class="p-0">
+    <hr class="solid">
+  </span>
   {% endblock content %}
   {% block script %}
   {% endblock script %}
