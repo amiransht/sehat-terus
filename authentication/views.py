@@ -25,7 +25,7 @@ def register(request):
         if form.is_valid():
             form.save()
             msg = 'Congratulations! Your account has been created. Please login to continue.'
-            # return redirect('authentication:register')
+            return redirect('authentication:login')
         else:
             msg = 'Oops, sorry, please check your input!'
     else:
