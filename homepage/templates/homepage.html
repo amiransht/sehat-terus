@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Sehat Terus | Homepage</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,112 +11,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <title>Sehat Terus | Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 </head>
-<style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #212529;
-        text-align: left;
-        background-color: #fff; }
 
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        line-height: 1.2;
-        font-family: 'Roboto', sans-serif;
-    }
-    
-    h3 {
-        color: #17a2b8;
-    }
-
-    .navbar {
-        padding-top: 25px;
-        background-color: white;
-    }
-
-
-    .bg-light {
-        background-color: white;
-    }
-
-    .navbar-nav {
-        font-weight: 400;
-        font-size: 18px;
-        color: rgba(0, 0, 0, 0.55);
-    }
-    .navbar .navbar-collapse {
-        text-align: center;
-      }
-    .nav-item:hover, .navbar-nav .nav-link.active{
-        color: #17a2b8;
-    }
-
-    #title-brand {
-        font-weight: 900;
-        font-size: 26px;
-    }
-    .btn, .btn-primary, #btn-login {
-        border-radius: 40px;
-        --bs-btn-bg: white;
-        --bs-btn-border-color: black;
-        --bs-btn-color: rgba(0, 0, 0, 0.55);
-        --bs-btn-hover-color: white;
-        --bs-btn-hover-bg: #17a2b8;
-        --bs-btn-hover-border-color: #17a2b8;
-    }
-
-    .main{
-        padding-top: 0;
-        padding-left: 48px;
-        padding-right: 48px;
-    }
-    .carousel img {
-        top: 0;
-        left: 0;
-        height: 350px;
-        max-height: 700px;
-        width: 1400px;
-       
-    }
-
-    .section-5m .row{
-        margin-left: 48px;
-        margin-right: 48px;
-    }
-    .card{
-        border-color: #fff;
-    }
-    .card-5m:hover {
-        transform: scale(1.3);
-        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    }
-
-    .card-datacovid{
-        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-        border-radius: 20px;
-    }
-
-    .card-berita:hover{
-        background-color: #EFFBF9;
-        transform: scale(1.08);
-    }
-
-    #data-positif, #data-sembuh, #data-meninggal{
-        color: #17a2b8;
-        font-size: 23px;
-    }
-</style>
 <body>
+    {% include 'base.html' %}
+    <span class="p-0">
+        <hr class="solid">
+    </span>
     <div class="container-fluid">
-        {% include 'base.html' %}
+        
       
         <!-- BANNER -->
         <div class="section-banner">
@@ -312,8 +217,8 @@
                                         <h5>Aplikasi PeduliLindungi bisa untuk 6 Sertifikat Vaksin</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col p-0">
-                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
+                                        <div class="col p-3">
+                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block" style="font-size:14px ;">selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
@@ -326,8 +231,8 @@
                                         <h5>Presiden Resmikan Pabrik Vaksin COVID-19 di Indonesia</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col p-0">
-                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
+                                        <div class="col p-3">
+                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block" style="font-size:14px ;">selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
@@ -340,8 +245,8 @@
                                         <h5>WNA Bisa Vaksinasi COVID-19 di Indonesia</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col p-0">
-                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block">selengkapnya</a>
+                                        <div class="col p-3">
+                                            <a href="https://covid19.go.id/id/artikel/2022/10/07/wna-bisa-vaksinasi-covid-19-di-indonesia" class="btn btn-block" style="font-size:14px ;">selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +262,74 @@
         </div>
     </div>
 </body>
-</html>
+
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: left;
+        background-color: #fff; }
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    h3 {
+        color: #17a2b8;
+    }
+
+    .btn, .btn-primary{
+        border-radius: 40px;
+        --bs-btn-bg: white;
+        --bs-btn-border-color: black;
+        --bs-btn-color: rgba(0, 0, 0, 0.55);
+        --bs-btn-hover-color: white;
+        --bs-btn-hover-bg: #17a2b8;
+    }
+    .carousel img {
+        top: 0;
+        left: 0;
+        height: 350px;
+        max-height: 700px;
+        width: 1400px;
+       
+    }
+
+    .section-5m .row{
+        margin-left: 48px;
+        margin-right: 48px;
+    }
+    .card-5m{
+        --bs-border-color-translucent: white;
+    }
+    .card-5m:hover {
+        transform: scale(1.3);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
+
+    .card-datacovid{
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        border-radius: 20px;
+    }
+
+    .card-berita:hover{
+        background-color: #EFFBF9;
+        transform: scale(1.08);
+    }
+
+    #data-positif, #data-sembuh, #data-meninggal{
+        color: #17a2b8;
+        font-size: 23px;
+    }
+</style>
 <script>
 
    
@@ -400,3 +372,4 @@ $("#entry_provinsi").submit(function (e) {
 
 });
 </script>
+</html>
