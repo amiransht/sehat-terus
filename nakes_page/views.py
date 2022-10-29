@@ -16,19 +16,19 @@ from nakes_page.models import DataPasien
 # Create your views here.
 @login_required(login_url='authentication/login/')
 def show_nakes_page(request):
-    data_pasien = DataPasien.objects.filter(user=request.user)
-    context = {'data_pasien': data_pasien,
+    data_pasien = DataPasien.objects.all()
+    context = {'data_pasien': serializers.serialize('json', data_pasien),
                'user': request.user
                }
     return render(request, 'nakes.html', context)
 
-# @login_required(login_url='authentication/login/')
+@login_required(login_url='authentication/login/')
 def show_json(request):
-    data_pasien = DataPasien.objects.filter(user=request.user)
+    data_pasien = DataPasien.objects.filter.all()
     data = serializers.serialize('json', data_pasien)
     return HttpResponse(data, content_type='application/json')
 
-# @login_required(login_url='authentication/login/')
+@login_required(login_url='authentication/login/')
 def update_status_pasien(request, id_pasien):
     status_pasien = DataPasien.objects.get(id=id_pasien).status
     if status_pasien == True:
