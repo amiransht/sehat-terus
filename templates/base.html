@@ -4,11 +4,15 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-  {% block meta %}
-  {% endblock meta %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <style>
@@ -39,6 +43,12 @@
         background-color: white;
     }
 
+    .main{
+        padding-top: 0;
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
 
     .bg-light {
         background-color: white;
@@ -52,13 +62,28 @@
     .navbar .navbar-collapse {
         text-align: center;
       }
-    .nav-item:hover, .navbar-nav .nav-link.active{
+    .nav-link:hover, .navbar-nav .nav-link.active{
         color: #17a2b8;
     }
 
     #title-brand {
         font-weight: 900;
         font-size: 26px;
+    }
+
+    .btn-primary{
+        border-radius: 40px;
+        --bs-btn-bg: white;
+        --bs-btn-border-color: black;
+        --bs-btn-color: rgba(0, 0, 0, 0.55);
+        --bs-btn-hover-color: white;
+        --bs-btn-hover-bg: #17a2b8;
+        --bs-btn-hover-border-color: #17a2b8;
+    }
+
+    #btn-logout {
+      align-self: center;
+      color: #b83128;
     }
 </style>
 
@@ -67,42 +92,67 @@
   <nav class="navbar navbar-expand-lg navbar-light"> 
     <div class="container-fluid main">
         <a class="navbar-brand me-2 mb-1 d-flex align-self-baseline" href="#" id="title-brand">
-            <p style="margin-top: 10px; margin-bottom:0px;">SE</p><img src="https://cdn.discordapp.com/attachments/814499566245249047/1035481656624160798/output-onlinepngtools.png" height="50" alt="test" loading="lazy"
-              style="margin-top: 2px" /><p style="margin-top: 10px; margin-bottom:0px;">AT TERUS</p>
+            <div style="margin-top: 10px; margin-bottom:0px;">SE</div><img src="https://cdn.discordapp.com/attachments/814499566245249047/1035481656624160798/output-onlinepngtools.png" height="50" alt="test" loading="lazy"
+              style="margin-top: 2px" /><div style="margin-top: 10px; margin-bottom:0px;">AT TERUS</div>
           </a>
-      
-        <!-- <a href="#" class="navbar-brand me-xl-5 ms-xl-5" id="title-brand">
-            SEHAT TERUS
-        </a> -->
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             {% if user.is_authenticated and user.is_lurah %}
-            <div class="navbar-nav ms-auto">
-                <a href="#" class="nav-item nav-link px-4 active">Home</a>
-                <a href="#" class="nav-item nav-link px-4">Messages</a>
-                <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
-                <a href="{% url 'lurah_page:show_lurah_page' %}" class="nav-item nav-link px-4">lurahpageBLOM</a>
-            </div>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_page' %}" class=" nav-link px-4 active">Lurah Page</a>
+                <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
+                <li class="nav-item"><a href="#" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
+                <li class="nav-item dropdown px-4">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <div class="user-profile px-3 py-2">
+                      <div href="#">{{user.get_username}}</div>
+                      <div style="color:rgb(107 114 128);" >{{user.email}}</div>
+                    </div>
+                    
+                    <li><hr class="dropdown-divider"></li>
+                  
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Settings</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:logout' %}" id="btn-logout">Sign Out</a></li>
+                  </ul>
+                </li>
+              </li>
+            </ul>
             {% elif user.is_authenticated and user.is_nakes %}
-            <div class="navbar-nav ms-auto">
-                <a href="#" class="nav-item nav-link px-4 active">Home</a>
-                <a href="#" class="nav-item nav-link px-4">Messages</a>
-                <a href="#" class="nav-item nav-link px-4" tabindex="-1">Reports</a>
-                <a href="#" class="nav-item nav-link px-4">nakespageBLOM</a>
-            </div>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a href="#" class=" nav-link px-4 active">Nakes Page</a>
+                <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
+                <li class="nav-item"><a href="#" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
+                <li class="nav-item dropdown px-4">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <div class="user-profile px-3">
+                      <div class="py-2">{{user.get_username}}</div>
+                      <div class="py-2" style="color:rgb(107 114 128);" >{{user.email}}</div>
+                    </div>
+                    
+                    <li><hr class="dropdown-divider"></li>
+                  
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Settings</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:logout' %}" id="btn-logout">Sign Out</a></li>
+                  </ul>
+                </li>
+              </li>
+            </ul>
             {% else %}
             <div class="navbar-nav ms-auto">
-                <a href="#" class="btn btn-outline-danger mx-3 px-3 py-1" id="btn-login">Login</a>
+                <a href="{% url 'authentication:login' %}" class="btn mx-3 px-3 py-1  align-self-center" id="btn-login">Login</a>
             </div>
             {% endif %}
         </div>
     </div>
-</nav>
-  <span class="p-0">
-    <hr class="solid">
-  </span>
+  </nav>
   {% endblock content %}
   {% block script %}
   {% endblock script %}

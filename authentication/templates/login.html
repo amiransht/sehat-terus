@@ -1,81 +1,146 @@
 <!doctype html>
-{% extends 'base.html' %}
+<html lang="en">
+  <head>
+    <title>LOGIN</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  </head>
 
-{% block meta %}
-<head>
-  <title>LOGIN</title>
-</head>
-{% endblock meta %}
-
-{% block content %}
-
-{% load static %}
-<html lang="en" class="background-radial-gradient">
-
-<section class="background-radial-gradient overflow-hidden">
-  <style>
-    .background-radial-gradient {
-      background-color: rgb(214, 154, 130);
-    }
-
-    .bg-glass {
-      background-color: hsla(0, 0%, 100%, 0.9) !important;
-      backdrop-filter: saturate(200%) blur(25px);
-    }
-  </style>
-
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
-      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-          If you have succesfully registered, <br />
-          <span style="color: hsl(44, 81%, 75%)">please log in to continue</span>
-        </h1>
-        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-          Sehat-terus
-          sehat-sehat-sehat
-        </p>
-      </div>
-
-      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
-            <h3 id="greetings">Hi!</h3>
-            <span class="mb-0 text-muted" style="text-align: center;">
-              {% if msg %}
-                  {{ msg | safe }}
-              {% else %}
-                  
-              {% endif %}
-            </span>
-            <form  method="post">
-              {% csrf_token %}
-              <div class="form-group first">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username">
+  <body style="background-color: #EFFBF9">
+    {% include 'base.html' %}
+    <section class="overflow-hidden">
+      <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+          <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+            <h1 class="my-5 display-5 fw-bold ls-tight" >
+              If you have succesfully registered, <br />
+              <span style="color:black">please log in to continue</span>
+            </h1>
+          </div>
+          <!-- LOGIN CARD -->
+          <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+            <div class="card bg-glass">
+              <div class="card-body px-4 py-5 px-md-5">
+                <div class="pb-2">
+                  <h3 id="greetings">Hi!</h3>
+                </div>
+                <div>
+                  <span class="mb-0 text-muted" style="text-align: center;">
+                    {% if msg %}
+                        {{ msg | safe }}
+                    {% else %}
+                        
+                    {% endif %}
+                  </span>
+                </div>
+                <div>
+                  <form  method="post">
+                    {% csrf_token %}
+                    <div class="form-group first my-2">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="form-group first my-2">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="py-2">
+                      <input type="submit" value="Login" class="btn btn-pill btn-block btn-secondary">
+                    </div>
+                  </form>
+                </div>
+                <div>
+                  {% if messages %}
+                  <ul>
+                      {% for message in messages %}
+                          <li class="text-danger">{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+                  {% endif %} 
+                </div>
+              
+                Belum mempunyai akun? <a href="{% url 'authentication:register' %}">Buat Akun</a>
               </div>
-              <div class="form-group first">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-              </div>
-  
-            <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
-          </form>
-          {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}  
-
-        Belum mempunyai akun? <a href="{% url 'authentication:register' %}">Buat Akun</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </body>
+
+  <style>
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background-color: #EFFBF9; 
+    }
+
+    .navbar {
+        padding-top: 25px;
+        background-color: white;
+    }
+    .bg-light {
+        background-color: white;
+    }
+
+    .navbar-nav {
+        font-weight: 400;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.55);
+    }
+    .navbar .navbar-collapse {
+        text-align: center;
+      }
+    .nav-item:hover, .navbar-nav .nav-link.active{
+        color: #17a2b8;
+    }
+
+    #title-brand {
+        font-size: 26px;
+    }
+    .main{
+        padding-top: 0;
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    h1 {
+        color: #17a2b8;
+    }
+    .card, .bg-glass {
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+
+    .btn, .btn-secondary {
+      border-radius: 15px;
+      --bs-btn-bg: white;
+      --bs-btn-border-color: black;
+      --bs-btn-color: rgba(0, 0, 0, 0.55);
+      --bs-btn-hover-color: white;
+      --bs-btn-hover-bg: #17a2b8;
+      --bs-btn-hover-border-color: #17a2b8;
+    }
+  </style>
 </html>
-{% endblock content %}

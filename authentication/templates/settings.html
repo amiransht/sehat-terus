@@ -1,106 +1,91 @@
-{% extends "base.html" %}
-
-
-
-{% block content %}
+<!doctype html>
+<html lang="en">
 <head>
+    <title>Settings</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+        $(document).ready(function(){
+            // Prepare the preview for profile picture
+            document.getElementById("profpic").addEventListener("change", function(){
+                var reader = new FileReader();
+                reader.onload = function(){
+                    var output = document.getElementById('profpicPreview');
+                    output.src = reader.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            });
+        });
         $.ajax({
             url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
-            dataType: 'json',
             type: 'GET',
-            success: function(response) {
-                const provinsi = response.provinsi;
-                let selectBox = document.getElementById('id_provinsi');
-                for (let i = 0; i < provinsi.length; i++ ) {
-                    let option = document.createElement('option');
-                    option.innerHTML = provinsi[i].nama;
+            dataType: 'json',
+            success: function(data){
+                var provinsi = data.provinsi;
+                var provinsiSelect = document.getElementById('id_provinsi');
+                for (var i = 0; i < provinsi.length; i++) {
+                    var option = document.createElement('option');
                     option.value = provinsi[i].id;
-                    selectBox.appendChild(option);
+                    option.text = provinsi[i].nama;
+                    provinsiSelect.appendChild(option);
                 }
             }
         });
-
-        function getCity() {
-            let selectBox = document.getElementById('id_provinsi');
-            var value = selectBox.value;
+        function getCity(){
+            var provinsi = document.getElementById('id_provinsi').value;
             $.ajax({
-                url: `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${value}`,
-                dataType: 'json',
+                url: 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + provinsi,
                 type: 'GET',
-                success: function(response) {
-                    const kota_kabupaten = response.kota_kabupaten;
-                    let selectBox2 = document.getElementById('id_kota');
-                    selectBox2.innerHTML = "";
-                    for (let i=0; i<kota_kabupaten.length; i++) {
-                        let kota = document.createElement('option');
-                        kota.innerHTML = kota_kabupaten[i].nama;
-                        kota.value = kota_kabupaten[i].id;
-                        selectBox2.appendChild(kota);
+                dataType: 'json',
+                success: function(data){
+                    var kota = data.kota_kabupaten;
+                    var kotaSelect = document.getElementById('id_kota');
+                    kotaSelect.innerHTML = '';
+                    for (var i = 0; i < kota.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = kota[i].id;
+                        option.text = kota[i].nama;
+                        kotaSelect.appendChild(option);
+                    }
+                }
+            });
+        }
+        function getDistrict(){
+            var kota = document.getElementById('id_kota').value;
+            $.ajax({
+                url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' + kota,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    var kecamatan = data.kecamatan;
+                    var kecamatanSelect = document.getElementById('id_kecamatan');
+                    kecamatanSelect.innerHTML = '';
+                    for (var i = 0; i < kecamatan.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = kecamatan[i].id;
+                        option.text = kecamatan[i].nama;
+                        kecamatanSelect.appendChild(option);
                     }
                 }
             });
         }
 
-        function getDistrict() {
-            let selectBox = document.getElementById('id_kota');
-            var value = selectBox.value;
-            $.ajax({
-                url: `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${value}`,
-                dataType: 'json',
-                type: 'GET',
-                success: function(response) {
-                    const kecamatan = response.kecamatan;
-                    let selectBox3 = document.getElementById('id_kecamatan');
-                    selectBox3.innerHTML = "";
-                    for (let i=0; i<kecamatan.length; i++) {
-                        let district = document.createElement('option');
-                        district.innerHTML = kecamatan[i].nama;
-                        district.value = kecamatan[i].nama;
-                        selectBox3.appendChild(district);
-                    }
-                }
-            });
-        }
     </script>
 </head>
 
 <!-- Section: Design Block -->
-<body style="background-color: rgb(241, 240, 219);">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Navbar</a>
-            </div>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'authentication:logout' %}" tabindex="-1" aria-disabled="true">Log Out</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-<section class="text-center text-lg-start">
+<body style="background-color:  #EFFBF9">
+    {% include 'base.html' %}
+    <section class="text-center text-lg-start">
     <style>
       .cascading-right {
         margin-right: -50px;
@@ -111,24 +96,34 @@
           margin-right: 0;
         }
       }
+
+      .labels {
+        padding-bottom: 10px;
+      }
     </style>
   
     <!-- Jumbotron -->
-    <div class="container py-4">
-      <div class="row g-0 align-items-center">
+    <div class="container-fluid py-4 align-self-center">
+      <div class="row align-items-center">
         <div class="col-lg-6 mb-5 mb-lg-0">
           <div class="card cascading-right" style="
-              background: hsla(0, 0%, 100%, 0.55);
+              background: white;
               backdrop-filter: blur(30px);
               ">
             <div class="card-body p-5 shadow-5 text-center">
                 <div class="d-flex justify-content-center mb-3">
-                    <h4 class="text-center">Profile Settings</h4>
+                    <h3 class="text-center">Profile Settings</h3>
                 </div>
                 <form action="" method="POST" class="form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row mt-3 d-flex justify-content-center">
                         <div class="card-block">
+                            <div class="picture-container">
+                                <div class="picture">
+                                    <img src="{{user.profile.image.url}}" width="100" height="100" class="rounded-circle" id="profpicPreview"> 
+                                    <input type="file" id="profpic" name="image">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-4 d-flex justify-content-center">
@@ -229,9 +224,8 @@
       </div>
     </div>
     <!-- Jumbotron -->
-  </section>
+    </section>
 </body>
   <!-- Section: Design Block -->
 
-  {% endblock %}
 

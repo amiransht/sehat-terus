@@ -1,93 +1,169 @@
 
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>LOGIN</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  </head>
 
-{% block meta %}
-<title>Register</title>
-{% endblock meta %}
+  <body style="background-color: #EFFBF9">
+    {% include 'base.html' %}
+    <!-- Section: Design Block -->
+    <section class="background-radial-gradient overflow-hidden">
 
-{% block content %}  
+      <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+          <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+            <h1 class="my-5 display-5 fw-bold ls-tight">
+              Register Yourself <br />
+              <span style="color: black;">as Nakes and/or Lurah!</span>
+            </h1>
+          </div>
 
-<head>
-  
-</head>
+          <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
 
-<!-- Section: Design Block -->
-<section class="background-radial-gradient overflow-hidden">
-    <style>
-      .background-radial-gradient {
-        background-color: rgb(214, 154, 130);
-      }
-  
-      .bg-glass {
-        background-color: hsla(0, 0%, 100%, 0.9) !important;
-        backdrop-filter: saturate(200%) blur(25px);
-      }
-    </style>
-  
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            Register Yourself <br />
-            <span style="color: hsl(44, 81%, 75%)">as Nakes and/or Lurah!</span>
-          </h1>
-          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-            Sehat-terus
-            sehat-sehat-sehat
-          </p>
-        </div>
-  
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-  
-          <div class="card bg-glass">
-            <div class="card-body px-4 py-5 px-md-5">
-              <h3 id="greetings">Hi!</h3>
-              <span class="mb-0 text-muted" style="text-align: center;">
-                {% if msg %}
-                    {{ msg | safe }}
-                {% else %}
+            <div class="card bg-glass">
+              <div class="card-body px-4 py-5 px-md-5">
+                <h3 id="greetings">Hi!</h3>
+                <span class="mb-0 text-muted" style="text-align: center;">
+                  {% if msg %}
+                      {{ msg | safe }}
+                  {% else %}
+                      
+                  {% endif %}
+                </span>
+                  <form  method="post" id="signup">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                        {{ form.email}}
+                    </div>
+                    <div class="form-group last">
+                      <label for="password">Password</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group last mb-4">
+                      <label for="password">Confirm Password</label>
+                        {{ form.password2 }}
+                    </div>
+                    <div class="container p-3 text-center">
+                      <p>Choose Your Role</p>
+                      <div class="row">
+                        <div class="col-6">
+                          <label class="control control--checkbox mb-0"><span class="caption">Lurah</span>
+                              {{ form.is_lurah }}
+                            <div class="control__indicator"></div>
+                          </label>
+                        </div>
+                        <div class="col-6 ">
+                          <label class="control control--checkbox mb-0"><span class="caption">Nakes</span>
+                              {{ form.is_nakes }}
+                            <div class="control__indicator"></div>
+                          </label>
+                        </div>
+                      </div>
+                     
+
+                    </div>
                     
-                {% endif %}
-              </span>
-                <form  method="post" id="signup">
-                    {% csrf_token %}
-                  <div class="form-group first">
-                    <label for="username">Username</label>
-                      {{ form.username }}
-                  </div>
-                  <div class="form-group first">
-                    <label for="email">Email</label>
-                      {{ form.email}}
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="password">Password</label>
-                      {{ form.password1 }}
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="password">Confirm Password</label>
-                      {{ form.password2 }}
-                  </div>
-                  <p>Choose Your Role</p>
-                  <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption">Lurah</span>
-                        {{ form.is_lurah }}
-                      <div class="control__indicator"></div>
-                    </label>
-                  </div>
-                  <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption">Nakes</span>
-                        {{ form.is_nakes }}
-                      <div class="control__indicator"></div>
-                    </label>
-                  </div>
                     <span class="text-error">{{ form.errors }}</span>
-                  <input type="submit" id="registerAkun" value="Register" class="btn btn-pill text-white btn-block btn-primary">
-                </form>
+                    <div class="justify-content-center text-center">
+                      <input type="submit" id="registerAkun" value="Register" class="btn btn-pill w-100">
+                    </div>
+                    
+
+                  </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- Section: Design Block -->
-{% endblock content %}
+    </section>
+    <!-- Section: Design Block -->
+  </body>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background-color: #EFFBF9; 
+    }
+
+    .navbar {
+        padding-top: 25px;
+        background-color: white;
+    }
+    .bg-light {
+        background-color: white;
+    }
+
+    .navbar-nav {
+        font-weight: 400;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.55);
+    }
+    .navbar .navbar-collapse {
+        text-align: center;
+      }
+    .nav-item:hover, .navbar-nav .nav-link.active{
+        color: #17a2b8;
+    }
+
+    #title-brand {
+        font-size: 26px;
+    }
+    .main{
+        padding-top: 0;
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    h1 {
+        color: #17a2b8;
+    }
+    .card, .bg-glass {
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+
+    .form-group {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      border-radius: 15px;
+      --bs-btn-bg: white;
+      --bs-btn-border-color: black;
+      --bs-btn-color: rgba(0, 0, 0, 0.55);
+      --bs-btn-hover-color: white;
+      --bs-btn-hover-bg: #17a2b8;
+      --bs-btn-hover-border-color: #17a2b8;
+    }
+
+  </style>
+</html>
