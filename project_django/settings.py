@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'lurah_page',
     'authentication.apps.AuthenticationConfig',
     'faq_page',
+    'nakes_page',
 ]
 
 MIDDLEWARE = [
