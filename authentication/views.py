@@ -25,7 +25,7 @@ def register(request):
         if form.is_valid():
             form.save()
             msg = 'Congratulations! Your account has been created. Please login to continue.'
-            # return redirect('authentication:register')
+            return redirect('authentication:login')
         else:
             msg = 'Oops, sorry, please check your input!'
     else:
@@ -40,12 +40,12 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None and user.is_lurah:
             auth_login(request,user)
-            response = HttpResponseRedirect(reverse("authentication:lurah")) # membuat response
+            response = HttpResponseRedirect(reverse("homepage:show_homepage")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
         elif user is not None and user.is_nakes:
             auth_login(request,user)
-            response = HttpResponseRedirect(reverse("authentication:nakes")) # membuat response
+            response = HttpResponseRedirect(reverse("homepage:show_homepage")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
         else:
