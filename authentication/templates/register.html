@@ -8,44 +8,8 @@
 {% block content %}  
 
 <head>
-  <script> src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#registerAkun').click(function() {
-        var username = $('#username').val();
-        var password = $('#password').val();
-        var email = $('#email').val();
-        var role = $('#role').val();
-        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
-        $('#greetings').text("Hm!")
-        $.ajax({
-          url: "{% url 'authentication:register' %}",
-          type: "POST",
-          data: {
-            'username': username,
-            'password': password,
-            'email': email,
-            'role': role,
-            'csrfmiddlewaretoken': csrfmiddlewaretoken
-          },
-          success: function(response) {
-            var success = response['success'];
-            if (success) {
-              alert('Register Success');
-              $('#greetings').text("Congratulations! You have successfully registered. Please login to continue.");
-            } else {
-              alert('Register Failed');
-            }
-          }
-        });
-      });
-    })
-  </script>
+  
 </head>
-
-
-
-
 
 <!-- Section: Design Block -->
 <section class="background-radial-gradient overflow-hidden">
