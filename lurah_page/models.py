@@ -22,3 +22,4 @@ class DataPasien(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     gejala = models.CharField(max_length=100, choices=STATUS_CHOICES)
     alamat = models.CharField(max_length=100)
+    is_covid = models.BooleanField(default=True)

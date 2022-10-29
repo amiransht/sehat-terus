@@ -56,7 +56,7 @@
     </style>
   </head>
 
-  <body class="bg-amber-100">
+  <body style="background-color: #17a2b8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <nav
@@ -88,7 +88,7 @@
             <span class="sr-only">Open user menu</span>
             <img
               class="w-8 h-8 rounded-full"
-              src="https://www.kibrispdr.org/data/566/gambar-telur-twitter-1.jpg"
+              src="{{ user.profile.image.url }}"
               alt="user photo"
             />
           </button>
@@ -204,7 +204,15 @@
                     >
                     <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Hapus</a></button>
                     </div>
-                  </div>
+                    <div class="inline-flex space-x-2 items-center justify-end px-6 py-3">
+                      ${
+                        data.fields.is_covid
+                          ? `
+                  Status: &nbsp<b class="text-lg text-red-500"> Positif </b>`
+                          : `<b class="text-lg text-green-500"> Negatif </b>`
+                      }
+            </div>
+          </div>
                 <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
                   </a>
                   <div class="task-checkbox-container">
@@ -212,11 +220,36 @@
               </div>
               <div class="task-description">
               <hr />
-              <p>Umur: ${data.fields.umur}</p>
-              <p>Jenis Kelamin: ${data.fields.gender}</p>
-              <p>Alamat: ${data.fields.alamat}</p>
-              <p>Status Gejala: ${data.fields.gejala}</p>
+              <dl class="grid grid-cols-2 gap-8 p-4 mx-auto max-w-screen-xl text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
+              <div class="flex flex-col">
+                <dd class="font-light text-gray-500 dark:text-gray-400">Umur</dd>
+                    <dt class="mb-2 text-2xl font-extrabold">${
+                      data.fields.umur
+                    }</dt>
+              </div>
+              <div class="flex flex-col">
+                <dd class="font-light text-gray-500 dark:text-gray-400">Jenis Kelamin</dd>
+                    <dt class="mb-2 text-2xl font-extrabold">${
+                      data.fields.gender
+                    }</dt>
+              </div>
+              <div class="flex flex-col">
+                <dd class="font-light text-gray-500 dark:text-gray-400">Gejala</dd>
+                    <dt class="mb-2 text-2xl font-extrabold">${
+                      data.fields.gejala
+                    }</dt>
+              </div>
+              <div class="flex flex-col">
+                <dd class="font-light text-gray-500 dark:text-gray-400">Alamat</dd>
+                    <dt class="mb-2 text-2xl font-extrabold">${
+                      data.fields.alamat
+                    }</dt>
+              </div>
+            </dl>
+
+              
             </div>
+            
           </div>
               `;
           const addCard = (data) => {
@@ -289,7 +322,7 @@
     {% if user.is_authenticated %}
     <div class="mx-8 md:mx-14 lg:mx-14 mt-14">
       <div class="text-black mt-2 ml-2 text-5xl" style="text-align: center">
-        Hai Lurah <b>{{user.get_username}}!</b>
+        Daftar Pasien
       </div>
       <br />
 
@@ -302,12 +335,6 @@
             style="background-color: green"
           >
             Tambah Pasien
-          </button>
-          <button
-            class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded-xl"
-            style="background-color: red"
-          >
-            <a href="{% url 'authentication:logout' %}  ">Logout</a>
           </button>
         </div>
       </div>
@@ -387,8 +414,8 @@
                         required
                       >
                         <option selected>-Pilih-</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
+                        <option value="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
                       </select>
                     </label>
 
@@ -406,7 +433,7 @@
                       >
                         <option selected>-Pilih-</option>
                         <option value="Ada">Ada</option>
-                        <option value="Tidak">Tidak</option>
+                        <option value="Tidak Ada">Tidak Ada</option>
                       </select>
                     </label>
 
