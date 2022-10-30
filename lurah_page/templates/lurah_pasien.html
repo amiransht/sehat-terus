@@ -115,6 +115,7 @@
               alamat: $("#alamat").val(),
             },
             function (res, status) {
+              console.log(res)
               if (status == "success") {
                 addCard(res);
                 $("#nama").val("");
