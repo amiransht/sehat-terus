@@ -1,5 +1,5 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif !important;
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
@@ -16,7 +16,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-h3, h1{
+h3{
     color: #17a2b8;
 }
 
@@ -26,7 +26,7 @@ h3, h1{
 
 .main{
     padding-top: 0;
-    padding-left: 48px;
+    padding-left: 48px !important;
     padding-right: 48px;
 }
 .bg-light {
@@ -43,7 +43,7 @@ h3, h1{
   }
   
 .nav-link:hover, .navbar-nav .nav-link.active{
-    color: #17a2b8;
+    color: #17a2b8 !important;
 }
 
 #title-brand {
