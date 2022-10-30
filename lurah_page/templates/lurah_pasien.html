@@ -89,7 +89,7 @@
         });
       };
 
-      $.get("/lurah-page/json", function (todo) {
+      $.get("/lurah-page/json/", function (todo) {
         todo.map((task) => {
           addCard(task);
           removeCard(task);
@@ -113,9 +113,11 @@
               gender: $("#gender").val(),
               gejala: $("#gejala").val(),
               alamat: $("#alamat").val(),
+              
             },
+            
             function (res, status) {
-              console.log(res)
+              console.log(status)
               if (status == "success") {
                 addCard(res);
                 $("#nama").val("");
@@ -124,6 +126,8 @@
                 $("#gejala").val("");
                 $("#alamat").val("");
                 removeCard(res);
+              } else {
+                
               }
             }
           );

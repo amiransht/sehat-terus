@@ -73,6 +73,7 @@ def add_pasien_ajax(request):
             },
             'pk': todo.pk
         }
+        print(result)
         return JsonResponse(result)
 
 
