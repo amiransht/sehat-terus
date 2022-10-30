@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block meta %}
+{% extends 'base.html' %}  {% block meta %}
 
 {% endblock meta %} {% block content %}
 
@@ -6,17 +6,18 @@
     <title>Lurah Page | Pasien</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="http://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
-    <link href="../../static/base.css" rel="stylesheet" type="text/css">
    
 
-    <!-- <script>
+    <script>
       tailwind.config = {
         important: true,
       };
-    </script> -->
+    </script>
   </head>
   <script>
     $(document).ready(function () {
@@ -138,6 +139,38 @@
     }
   </script>
   <style>
+        table,
+    th,
+    td {
+      border-collapse: collapse;
+    }
+    h1{
+      color: #17a2b8;
+    }
+
+    th,
+    td {
+      padding: 15px;
+    }
+
+    .task-container {
+      background: whitesmoke;
+      border-radius: 24px;
+      padding: 32px;
+      gap: 20px;
+    }
+
+    .flex-parent {
+      display: flex;
+    }
+
+    .jc-center {
+      justify-content: center;
+    }
+
+    button.margin-right {
+      margin-right: 20px;
+    }
     #button{
       border-radius: 40px;
       border-color: black;
