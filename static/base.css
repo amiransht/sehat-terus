@@ -36,7 +36,7 @@ h3{
 .navbar-nav {
     font-weight: 400;
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.55);
+    color: rgba(0, 0, 0, 0.55) !important;
 }
 .navbar .navbar-collapse {
     text-align: center;
@@ -57,7 +57,7 @@ h3{
     --bs-btn-border-color: black;
     --bs-btn-color: rgba(0, 0, 0, 0.55);
     --bs-btn-hover-color: white;
-    --bs-btn-hover-bg: #17a2b8;
+    --bs-btn-hover-bg: #17a2b8 !important; 
     --bs-btn-hover-border-color: #17a2b8;
 }
 
