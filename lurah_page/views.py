@@ -21,12 +21,18 @@ from authentication.decorators import lurah_required
 
 @login_required(login_url='authentication/login/')
 @lurah_required
+def show_lurah_homepage(request):
+    return render(request, 'lurah_homepage.html')
+
+
+@login_required(login_url='authentication/login/')
+@lurah_required
 def show_lurah_page(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
     context = {'data_pasien': data_pasien,
                'user': request.user
                }
-    return render(request, 'lurah.html', context)
+    return render(request, 'lurah_pasien.html', context)
 
 
 @login_required(login_url='authentication/login/')
@@ -54,7 +60,7 @@ def add_pasien_ajax(request):
         gejala = request.POST.get('gejala')
         alamat = request.POST.get('alamat')
         todo = DataPasien.objects.create(
-            nama=nama, umur=umur, gender=gender, gejala=gejala, alamat=alamat, user=request.user)
+            nama=nama, umur=umur, gender=gender, gejala=gejala, alamat=alamat, is_covid=True, user=request.user)
 
         result = {
             'fields': {
@@ -63,6 +69,7 @@ def add_pasien_ajax(request):
                 'gender': todo.gender,
                 'gejala': todo.gejala,
                 'alamat': todo.alamat,
+                'is_covid': todo.is_covid,
             },
             'pk': todo.pk
         }
