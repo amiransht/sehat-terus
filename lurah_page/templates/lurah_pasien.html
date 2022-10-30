@@ -1,51 +1,40 @@
-<!DOCTYPE html>
+{% extends 'base.html' %} {% load static %} {% block meta %}
+
+{% endblock meta %} {% block content %}
 
   <head>
     <title>Lurah Page | Pasien</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="http://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
     <link href="../../static/base.css" rel="stylesheet" type="text/css">
+   
 
-    <script>
+    <!-- <script>
       tailwind.config = {
         important: true,
       };
-    </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
+    </script> -->
   </head>
   <script>
     $(document).ready(function () {
       const card = (data) => `
-      <div id='${data.pk}-card'
-        class="task-container mt-5">
+      <div id='${data.pk}-card' class="task-container mt-5">
         <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
           <div class="task-title">
               <div class="flex gap-4">
-                <div
-                id=${data.pk}
-                class="cursor-pointer remove-todo ${data.pk}"
-                >
-                <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Hapus</a></button>
+                <div id=${data.pk} class="cursor-pointer remove-todo ${data.pk}">
+                  <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Hapus</a></button>
                 </div>
                 <div class="inline-flex space-x-2 items-center justify-end px-6 py-3">
-                  ${
-                    data.fields.is_covid
-                      ? `
-              Status: &nbsp<b class="text-lg text-red-500"> Positif </b>`
+                  ${data.fields.is_covid? `Status: &nbsp<b class="text-lg text-red-500"> Positif </b>`
                       : `<b class="text-lg text-green-500"> Negatif </b>`
                   }
-        </div>
-      </div>
-            <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
+                </div>
+              </div>
+              <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
               </a>
               <div class="task-checkbox-container">
               </div>
@@ -149,38 +138,6 @@
     }
   </script>
   <style>
-    table,
-    th,
-    td {
-      border-collapse: collapse;
-    }
-    h1{
-      color: #17a2b8;
-    }
-
-    th,
-    td {
-      padding: 15px;
-    }
-
-    .task-container {
-      background: whitesmoke;
-      border-radius: 24px;
-      padding: 32px;
-      gap: 20px;
-    }
-
-    .flex-parent {
-      display: flex;
-    }
-
-    .jc-center {
-      justify-content: center;
-    }
-
-    button.margin-right {
-      margin-right: 20px;
-    }
     #button{
       border-radius: 40px;
       border-color: black;
@@ -190,7 +147,7 @@
     }
     #button:hover {
       background-color: #17a2b8;
-      color: white;
+      color: white !important; 
       border-color: #17a2b8;
     }
   </style>
@@ -199,7 +156,7 @@
     {% include 'base.html' %}
 
     {% if user.is_authenticated %}
-    <div class="container-fluid px-0">
+    <div class="container-fluid px-0 text-center">
       <div class="mt-5" style="text-align: center">
         <h1 style="color: black">DAFTAR PASIEN</h1>
         <h3 style="color:#17a2b8">Covid-19</h3>
@@ -209,17 +166,18 @@
       <div class="flex-parent jc-center">
         <div class="flex gap-2 lg:gap-5">
           <button
-            class="inline-flex justify-center px-3 py-2"
+            class="inline-flex justify-center px-3 py-2 btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             id="button"
           >
             Tambah Pasien
           </button>
-
         </div>
       </div>
 
+
+      <!-- MODAL -->
       <div
         class="modal fade"
         id="exampleModal"
@@ -360,15 +318,17 @@
           </div>
         </div>
       </div>
+      
+      
 
-      <div
-        class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5"
-        id="todo"
-      ></div>
+      <div class="container"></div>
+      <div class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5" id="todo"></div>
     </div>
     {% else %}
     <div></div>
     {% endif %}
+  
     {% include 'footer.html' %}
   </body>
-</html>
+  
+  {% endblock content %}
