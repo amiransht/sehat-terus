@@ -1,17 +1,22 @@
-body{
-    background-color: pink;
-}
 h1{
     text-align: center;
+    margin: 5% auto;
+    color: #17a2b8 !important;
 }
 .card {
     margin: 25px 25px
 }
 
 .card:hover {
-    box-shadow: 5px 10px 20px black
+    box-shadow: 5px 10px 20px #17a2b8 !important;
 }
 
-.button {
-    margin: 0
+#kembali {
+    margin: 0 auto 25px;
+    display: block;
+}
+h5{
+    text-align: center;
+    margin: 5% auto;
+    color: rgb(107 114 128)!important;  
 }

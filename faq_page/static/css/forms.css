@@ -1,3 +1,25 @@
-body{
-    background-color: purple;
+form{
+    text-align: center;
+    margin: 5% auto;
+    display: block;
+    width:500px;
+}
+textarea#id_content {
+    border-radius:10px;
+  }
+
+input#id_title{
+    border-radius:10px;
+}
+h3{
+    text-align: center;
+    margin: 5% auto;
+}
+h6{
+    text-align: center;
+    margin: 5% auto;
+    color: rgb(107 114 128)!important;  
+}
+p{
+    color: rgb(107 114 128);
 }
