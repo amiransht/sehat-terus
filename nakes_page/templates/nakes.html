@@ -1,256 +1,117 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}  {% block meta %}
+
+{% endblock meta %} {% block content %}
+
   <head>
+    <title>Nakes Page | Tambah Pasien</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link href="http://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+ 
+   
+
     <script>
       tailwind.config = {
         important: true,
       };
     </script>
-
-    <title>Tambah Pasien</title>
-
-    <style>
-      table,
-      th,
-      td {
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        padding: 15px;
-      }
-
-      .task-container {
-        background: whitesmoke;
-        border-radius: 24px;
-        padding: 32px;
-        gap: 20px;
-      }
-
-      .flex-parent {
-        display: flex;
-      }
-
-      .jc-center {
-        justify-content: center;
-      }
-
-      button.margin-right {
-        margin-right: 20px;
-      }
-    </style>
   </head>
-
-  <body class="bg-amber-100">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-    <nav
-      class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900"
-    >
-      <div
-        class="container flex flex-wrap justify-between items-center mx-auto"
-      >
-        <a href="{% url 'homepage:show_homepage' %}" class="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            class="mr-3 h-6 sm:h-9"
-            alt="Flowbite Logo"
-          />
-          <span
-            class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-            >Sehat Terus</span
-          >
-        </a>
-        <div class="flex items-center md:order-2">
-          <button
-            type="button"
-            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
-          >
-            <span class="sr-only">Open user menu</span>
-            <img
-              class="w-8 h-8 rounded-full"
-              src="https://www.kibrispdr.org/data/566/gambar-telur-twitter-1.jpg"
-              alt="user photo"
-            />
-          </button>
-          <!-- Dropdown menu -->
-          <div
-            class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="user-dropdown"
-            data-popper-reference-hidden=""
-            data-popper-escaped=""
-            data-popper-placement="bottom"
-            style="
-              position: absolute;
-              inset: 0px auto auto 0px;
-              margin: 0px;
-              transform: translate3d(0px, 520px, 0px);
-            "
-          >
-            <div class="py-3 px-4">
-              <span class="block text-sm text-gray-900 dark:text-white"
-                >{{user.get_username}}</span
-              >
-              <span
-                class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"
-                >{{user.email}}</span
-              >
-            </div>
-            <ul class="py-1" aria-labelledby="user-menu-button">
-              <li>
-                <a
-                  href="{% url 'authentication:profil' %}"
-                  class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >Settings</a
+  <script>
+    $(document).ready(function () {
+      const card = (data) => `
+      <div id='${data.pk}-card'
+        class="task-container mt-5">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
+          <div class="task-title">
+              <div class="flex gap-4">
+                <div
+                id=${data.pk}
+                class="cursor-pointer remove-todo ${data.pk}"
                 >
-              </li>
-              <li>
-                <a
-                  href="{% url 'authentication:logout' %}"
-                  class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >Sign out</a
-                >
-              </li>
-            </ul>
+                <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:green;">Ubah Status</a></button>
+                </div>
+              </div>
+            <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
+              </a>
+              <div class="task-checkbox-container">
+              </div>
           </div>
-          <button
-            data-collapse-toggle="mobile-menu-2"
-            type="button"
-            class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="mobile-menu-2"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button>
-        </div>
-        <div
-          class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
-          id="mobile-menu-2"
-        >
-          <ul
-            class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-          >
-            <li>
-              <a
-                href="#"
-                class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                aria-current="page"
-                >Beranda</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Tentang</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Cara Kerja</a
-              >
-            </li>
-          </ul>
+          <div class="task-description">
+          <hr />
+          <p>Umur: ${data.fields.umur}</p>
+          <p>Jenis Kelamin: ${data.fields.gender}</p>
+          <p>Alamat: ${data.fields.alamat}</p>
+          <p>Status Gejala: ${data.fields.gejala}</p>
         </div>
       </div>
-    </nav>
+          `;
+    
+      
 
-    <head>
-      <script>
-        $(document).ready(function () {
-          const card = (data) => `
-          <div id='${data.pk}-card'
-            class="task-container mt-5">
-            <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
-              <div class="task-title">
-                  <div class="flex gap-4">
-                    <div
-                    id=${data.pk}
-                    class="cursor-pointer remove-todo ${data.pk}"
-                    >
-                    <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:green;">Ubah Status</a></button>
-                    </div>
-                  </div>
-                <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
-                  </a>
-                  <div class="task-checkbox-container">
-                  </div>
-              </div>
-              <div class="task-description">
-              <hr />
-              <p>Umur: ${data.fields.umur}</p>
-              <p>Jenis Kelamin: ${data.fields.gender}</p>
-              <p>Alamat: ${data.fields.alamat}</p>
-              <p>Status Gejala: ${data.fields.gejala}</p>
-            </div>
-          </div>
-              `;
-        
-          
+    const data_data = JSON.parse("{{data_pasien|escapejs}}");
+    // document.getElementById("tesanjay").innerHTML = JSON.stringify(data_data);
 
-        const data_data = JSON.parse("{{data_pasien|escapejs}}");
-        // document.getElementById("tesanjay").innerHTML = JSON.stringify(data_data);
+    for (var data of data_data) {
+        var model = JSON.stringify(data.model).replace(/\"/g, "");
+        var pk = JSON.stringify(data.pk).replace(/\"/g, "");
+        var user = JSON.stringify(data.fields.user).replace(/\"/g, "");
+        var nama = JSON.stringify(data.fields.nama).replace(/\"/g, "");
+        var umur = JSON.stringify(data.fields.umur).replace(/\"/g, "");
+        var gender = JSON.stringify(data.fields.gender).replace(/\"/g, "");
+        var gejala = JSON.stringify(data.fields.gejala).replace(/\"/g, "");
+        var alamat = JSON.stringify(data.fields.alamat).replace(/\"/g, "");
+        var data_card = {model: model, pk: pk, fields:{user: user,nama: nama,umur: umur, gender: gender, gejala: gejala, alamat: alamat}};
+        document.getElementById("todo").innerHTML += card(data_card)
+    }
+    });
 
-        for (var data of data_data) {
-            var model = JSON.stringify(data.model).replace(/\"/g, "");
-            var pk = JSON.stringify(data.pk).replace(/\"/g, "");
-            var user = JSON.stringify(data.fields.user).replace(/\"/g, "");
-            var nama = JSON.stringify(data.fields.nama).replace(/\"/g, "");
-            var umur = JSON.stringify(data.fields.umur).replace(/\"/g, "");
-            var gender = JSON.stringify(data.fields.gender).replace(/\"/g, "");
-            var gejala = JSON.stringify(data.fields.gejala).replace(/\"/g, "");
-            var alamat = JSON.stringify(data.fields.alamat).replace(/\"/g, "");
-            var data_card = {model: model, pk: pk, fields:{user: user,nama: nama,umur: umur, gender: gender, gejala: gejala, alamat: alamat}};
-            document.getElementById("todo").innerHTML += card(data_card)
-        }
-        });
+    
+    var e = document.getElementById("gejala");
+    var strUser = e.options[e.selectedIndex].value;
+    if (strUser == "Ada") {
+      document.getElementById("gejala").style.color = "red";
+    } else {
+      document.getElementById("gejala").style.color = "green";
+    }
+  </script>
+  <style>
+    table,
+    th,
+    td {
+      border-collapse: collapse;
+    }
 
-        
-        var e = document.getElementById("gejala");
-        var strUser = e.options[e.selectedIndex].value;
-        if (strUser == "Ada") {
-          document.getElementById("gejala").style.color = "red";
-        } else {
-          document.getElementById("gejala").style.color = "green";
-        }
-      </script>
-    </head>
+    th,
+    td {
+      padding: 15px;
+    }
 
-    <! -- {% if user.is_authenticated %} -->
+    .task-container {
+      background: whitesmoke;
+      border-radius: 24px;
+      padding: 32px;
+      gap: 20px;
+    }
+
+    .flex-parent {
+      display: flex;
+    }
+
+    .jc-center {
+      justify-content: center;
+    }
+
+    button.margin-right {
+      margin-right: 20px;
+    }
+  </style>
+
+  <body class="bg-amber-100">
+    {% include 'base.html' %}
+
     {% if user.is_authenticated %}
     <div class="mx-8 md:mx-14 lg:mx-14 mt-14">
       <div class="text-black mt-2 ml-2 text-5xl" style="text-align: center">
@@ -270,7 +131,7 @@
         </div>
       </div>
 
-      {% block content %}
+    
  
       <!--
         <div>
@@ -305,22 +166,17 @@
     
         -->
 
-      {% endblock content %}
-
       <div id="tesanjay"></div>
       <div
         class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5"
         id="todo"
       ></div>
-      <! -- {% else %} -->
-      <div></div>
     </div>
-    <! -- {% endif %} -->
+    {% else %}
+    <div></div>
     {% endif %}
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
+    {% include 'footer.html' %}
+
   </body>
-</html>
+
+{% endblock content %}

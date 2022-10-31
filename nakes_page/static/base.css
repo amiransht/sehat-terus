@@ -1,0 +1,67 @@
+body {
+    font-family: 'Open Sans', sans-serif !important;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff; }
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-family: 'Roboto', sans-serif;
+}
+
+h3{
+    color: #17a2b8;
+}
+
+.navbar {
+    background-color: white;
+}
+
+.main{
+    padding-top: 0;
+    padding-left: 48px !important;
+    padding-right: 48px;
+}
+.bg-light {
+    background-color: white;
+}
+
+.navbar-nav {
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.55) !important;
+}
+.navbar .navbar-collapse {
+    text-align: center;
+  }
+  
+.nav-link:hover, .navbar-nav .nav-link.active{
+    color: #17a2b8 !important;
+}
+
+#title-brand {
+    font-weight: 900;
+    font-size: 26px;
+}
+
+.btn-primary{
+    border-radius: 40px;
+    --bs-btn-bg: white !important;
+    --bs-btn-border-color: black;
+    --bs-btn-color: rgba(0, 0, 0, 0.55) !important;
+    --bs-btn-hover-color: white !important;
+    --bs-btn-hover-bg: #17a2b8 !important; 
+    --bs-btn-hover-border-color: #17a2b8 !important;
+}
+
+#btn-logout {
+  align-self: center;
+  color: #b83128;
+}
