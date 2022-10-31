@@ -167,16 +167,17 @@
                         </div>
                         <div class="card-datacovid card p-2 m-3" style="width: 550px;" >
                             <div class="card-body text-center">
-                                <h5 class="card-text">Indonesia</h5>
+                                <h5 class="card-text">Kelurahan</h5>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="card-text">Jumlah Positif</p>
+                                        <span class="card-text">Jumlah Positif</span>
+                                        <h6 class="card-text val" id="data-positif-kelurahan">0</h6>
                                     </div>
                                     <div class="col">
-                                        <p class="card-text">Jumlah Negatif</p>
+                                        <span class="card-text">Jumlah Sembuh</span>
+                                        <h6 class="card-text val" id="data-sembuh-kelurahan">0</h6>
                                     </div>
                                 </div>
-                                
             
                             </div>
                         </div>
@@ -298,7 +299,7 @@
         transform: scale(1.08);
     }
 
-    #data-positif, #data-sembuh, #data-meninggal{
+    .val{
         color: #17a2b8;
         font-size: 23px;
     }
@@ -313,6 +314,19 @@ function getDataFromForm($form) {
         result[n['name']] = n['value'];
     });
     return result;
+}
+
+function loadData() {
+    $.get(
+        './json', function(data){
+            var data_positif = data.filter((data) => data.fields.is_covid == true);
+            console.log(data_positif)
+            $("#data-positif-kelurahan").text(data_positif.length)
+            var data_sembuh = data.filter((data) => data.fields.is_covid == false);
+            console.log(data_sembuh)
+            $("#data-sembuh-kelurahan").text(data_sembuh.length)
+
+        });
 }
 
 
@@ -336,14 +350,10 @@ $("#entry_provinsi").submit(function (e) {
                 $("#data-meninggal").text(data_filter[0].jumlah_meninggal)
                 $("#data-sembuh").text(data_filter[0].jumlah_sembuh)
             }
-
         });
-        
-            
-
-    
-
 });
+loadData()
+
 </script>
 
 {% endblock content %}

@@ -29,15 +29,6 @@ def show_json(request):
 
 @login_required(login_url='authentication/login/')
 def update_status_pasien(request, id):
-    # if request.method == 'UPDATE':
-    #     status_pasien = DataPasien.objects.get(id=id_pasien).status
-    #     print(status_pasien)
-    #     if status_pasien == True:
-    #         status_pasien = False
-    #     else:
-    #         status_pasien = True
-    #     status_pasien.save()
-    # # return redirect('nakes_page:show_nakes_page')
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'UPDATE':
         pasien = DataPasien.objects.filter(pk=id)
         status_pasien = DataPasien.objects.get(pk=id).is_covid
