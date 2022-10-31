@@ -192,95 +192,76 @@
   
   </main>
   <script>
-    $(document).ready(function(e){
-    const getTaskURL = `/lurah-page/json`;
-    $.ajax({
-      type: 'GET',
-      url: getTaskURL,
-      success: function (response) {
-        console.log(response);
-        if (!response.length){
-          $('#todo').prepend(`
-          <div class="d-flex justify-content-center" id="no-task-div">
-            <h1>No Task</h1>
-          </div>`)
-        }
-        else{
-          for (let i = 0; i < response.length; i++){
-            addTaskAsync($('#todo'), response[i]["fields"], response[i]["pk"]);
-          }
-        }
-      },
-      error: function (response) {
-          console.log(response)
-      }
-    })
-});
 
-$("#add-todo").click(function(e){
-    e.preventDefault();
-    const serializedData = getFormData($('#add-pasien-form'));
-    const addTaskURL = `/lurah-page/pasien/add/`;
-    $.ajax({
-      type: 'POST',
-      url: addTaskURL,
-      data: serializedData,
-      success: function (response) {
-          // on successfull creating object
-          $("#add-pasien-form").trigger('reset');
-       
-          // display the newly friend to table.
-          var instance = JSON.parse(response);
-          var fields = instance[0]["fields"];
-          var task_id = instance[0]["pk"];
-          if ($('#no-task-div').length){
-            $('#no-task-div').remove();
-          }
-          addTaskAsync($('#todo'), fields, task_id);
-      },
-      error: function (response) {
-          // alert the error if any error occured
-          alert(response["responseJSON"]["error"]);
-      }
-    })
-});
-
-$('#todo').ready ( function () {
-    $('#todo').on('click', '.delete-task-ajax', function(e) {
-      e.preventDefault()
-      const deleteTaskURL = "delete-pasien/" + this.id;
-      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  function loadData(){
+   
+      const getTaskURL = `/lurah-page/json`;
       $.ajax({
-        type: 'DELETE',
-        url: deleteTaskURL,
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        type: 'GET',
+        url: getTaskURL,
+        success: function (response) {
+          console.log(response);
+          if (!response.length){
+            $('#todo').prepend(`
+            <div class="d-flex justify-content-center" id="no-task-div">
+              <h1>No Task</h1>
+            </div>`)
+          }
+          else{
+            for (let i = 0; i < response.length; i++){
+              addTaskAsync($('#todo'), response[i]["fields"], response[i]["pk"]);
+            }
+          }
+        },
+        error: function (response) {
+            console.log(response)
         }
       })
-      $(`#task-card-${this.id}`).remove();
-    });
-  });
-
-function addTaskAsync($element, fields, task_id) { 
+  };
+  function updateData(){
+    const getTaskURL = `/lurah-page/json`;
+      $.ajax({
+        type: 'GET',
+        url: getTaskURL,
+        success: function (response) {
+          for (let i = 0; i < response.length; i++){
+            console.log(response[i]["fields"].is_covid)
+            if (response[i]["fields"].is_covid) {
+              $(`#mark-${response[i].pk}`).addClass('badge-warning').text('Positif');
+              $(`#mark-${response[i].pk}`).removeClass('badge-success');
+            } else {
+              $(`#mark-${response[i].pk}`).addClass('badge-success').text('Negatif');
+              $(`#mark-${response[i].pk}`).removeClass('badge-warning');
+            }
+          }
+          
+        },
+        error: function (response) {
+            console.log(response)
+        }
+      })
+  };
+  function addTaskAsync($element, fields, task_id) { 
     const is_covid = fields["is_covid"];
     const nama = fields["nama"];
     const umur = fields["umur"];
     const gender = fields["gender"];
     const gejala = fields["gejala"];
     const alamat = fields["alamat"];
+    console.log(is_covid)
     var html = 
     `<div class="col px-3" id="task-card-${task_id}">` +
       `<div class="card px-3 pt-2" id="card">` +
         `{% if is_covid == true %}` +
           `<div class="card-header px-0 align-middle mb-auto mt-auto">` +
                 `<div class="d-flex align-middle pb-2 pt-2">` +
-                  `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-warning" id="positif">Positif</span></div>` +
+                  `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-warning" id="mark-${task_id}">Positif</span></div>` +
                 `</div>` +
           `</div>` +
         `{% else %}` +
           `<div class="card-header align-middle mb-auto mt-auto">` +
                 `<div class="d-flex align-middle pb-2 pt-2">` +
-                  `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-success" id="negatif">Negatif</span></div>` +
+                  `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-success" id="mark-${task_id}">Negatif</span></div>` +
                 `</div>` +
           `</div>` +
         `{% endif %}`+
@@ -320,8 +301,7 @@ function addTaskAsync($element, fields, task_id) {
   
     $($element).append(html);
   }
-
-  function getFormData($form){
+  function getFormData($form){  
     var unindexed_array = $form.serializeArray();
     var indexed_array = {};
   
@@ -331,7 +311,55 @@ function addTaskAsync($element, fields, task_id) {
   
     return indexed_array;
   }
+  
+// ADD_PASIEN
+$("#add-todo").click(function(e){
+    e.preventDefault();
+    const serializedData = getFormData($('#add-pasien-form'));
+    const addTaskURL = `/lurah-page/pasien/add/`;
+    $.ajax({
+      type: 'POST',
+      url: addTaskURL,
+      data: serializedData,
+      success: function (response) {
+          // on successfull creating object
+          $("#add-pasien-form").trigger('reset');
+       
+          // display the newly friend to table.
+          var instance = JSON.parse(response);
+          var fields = instance[0]["fields"];
+          var task_id = instance[0]["pk"];
+          if ($('#no-task-div').length){
+            $('#no-task-div').remove();
+          }
+          addTaskAsync($('#todo'), fields, task_id);
+      },
+      error: function (response) {
+          // alert the error if any error occured
+          alert(response["responseJSON"]["error"]);
+      }
+    })
+});
+// DELETE_PASIEN
+$('#todo').ready ( function () {
+    $('#todo').on('click', '.delete-task-ajax', function(e) {
+      e.preventDefault()
+      const deleteTaskURL = "delete-pasien/" + this.id;
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      $.ajax({
+        type: 'DELETE',
+        url: deleteTaskURL,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      })
+      $(`#task-card-${this.id}`).remove();
+    });
+  });
 
+
+loadData()
+updateData()
 
 
   </script>
@@ -365,18 +393,13 @@ function addTaskAsync($element, fields, task_id) {
     .badge-success {
       background-color: #dbeddb ;
       font-size: 16px;
+      color: #1d3829;
       font-weight: 700;
     }
     .badge-warning {
       background-color: #ffe2dd;
-      font-size: 16px;
-    }
-
-    #positif {
       color: #5d1615;
-    }
-    #negatif {
-      color: #1d3829;
+      font-size: 16px;
     }
 
     button.margin-right {

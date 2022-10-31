@@ -78,76 +78,125 @@
 
   </main>
   <script>
+    function loadData(){
+      const getTaskURL = `/nakes-page/json`;
+        $.ajax({
+          type: 'GET',
+          url: getTaskURL,
+          success: function (response) {
+            console.log(response);
+            if (!response.length){
+              $('#todo').prepend(`
+              <div class="d-flex justify-content-center" id="no-task-div">
+                <h1>No Task</h1>
+              </div>`)
+            }
+            else{
+              for (let i = 0; i < response.length; i++){
+                addTaskAsync($('#todo'), response[i]["fields"], response[i]["pk"]);
+              }
+            }
+          },
+          error: function (response) {
+              console.log(response)
+          }
+        })
+      };
+    function updateData(){
+        const getTaskURL = `/nakes-page/json`;
+          $.ajax({
+            type: 'GET',
+            url: getTaskURL,
+            success: function (response) {
+              for (let i = 0; i < response.length; i++){
+                console.log(response[i]["fields"].is_covid)
+                if (response[i]["fields"].is_covid) {
+                  $(`#mark-${response[i].pk}`).addClass('badge-warning').text('Positif');
+                  $(`#mark-${response[i].pk}`).removeClass('badge-success');
+                } else {
+                  $(`#mark-${response[i].pk}`).addClass('badge-success').text('Negatif');
+                  $(`#mark-${response[i].pk}`).removeClass('badge-warning');
+                }
+              }
+              
+            },
+            error: function (response) {
+                console.log(response)
+            }
+          })
+      };
+    function addTaskAsync($element, fields, task_id) { 
+        const is_covid = fields["is_covid"];
+        const nama = fields["nama"];
+        const umur = fields["umur"];
+        const gender = fields["gender"];
+        const gejala = fields["gejala"];
+        const alamat = fields["alamat"];
+        console.log(is_covid)
+        var html = 
+        `{% csrf_token %}`+
+        `<div class="col px-3" id="${task_id}-card">` +
+              `<div class="card px-3 pt-2" id="card">` +
+                `{% if data.fields.is_covid == true %}` +
+                  `<div class="card-header px-0 align-middle mb-auto mt-auto">` +
+                        `<div class="d-flex align-middle pb-2 pt-2">` +
+                          `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-warning" id="mark-${task_id}">Positif</span></div>` +
+                        `</div>` +
+                  `</div>` +
+                `{% else %}` +
+                  `<div class="card-header px-0 align-middle mb-auto mt-auto">` +
+                        `<div class="d-flex align-middle pb-2 pt-2">` +
+                          `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-success" id="mark">Negatif</span></div>` +
+                        `</div>` +
+                  `</div>` +
+                `{% endif %}`+
+                `<div class="card-body container-fluid p-4 pr-2 pl-4 justify-content-center" id="card-body">` +
+                  ` <div class="row my-2" id="desc">` +
+                      `<h3>${nama}</h3>` +
+                    `</div>` +
+                    `<div class="row">` +
+                      ` <div class="col" id="desc">` +
+                          `<p>Umur:</p>` +
+                          `<h5>${umur}</h5>` +
+                        `</div>` +
+                        `<div class="col" id="desc">` +
+                          `<p>Jenis Kelamin:</p>` +
+                          `<h5>${gender}</h5>` +
+                        `</div>` +
+                        `<div class="col" id="desc">` +
+                          `<p>Gejala:</p>` +
+                          `<h5>${gejala}</h5>` +
+                        `</div>` +
+                    `</div>` +
+              
+                    `<div class="row">` +
+                      ` <div class="col" id="desc">` +
+                          `<p>Alamat:</p>` +
+                          `<h5>${alamat}</h5>` +
+                        `</div>` +
+                    `</div>` +
+                    `<div class="mt-3 align-items-end">` +
+                      `<a class="update-task-ajax btn btn-primary" id="${task_id}">Update Pasien</a>` +
+                    `</div>` +
+        
+                `</div>` +
+              `</div>` ;
 
-    function loadData() {
-      const card = (data) => 
-      `{% csrf_token %}`+
-      `<div class="col px-3" id="${data.pk}-card">` +
-            `<div class="card px-3 pt-2" id="card">` +
-              `{% if data.fields.is_covid == true %}` +
-                `<div class="card-header px-0 align-middle mb-auto mt-auto">` +
-                      `<div class="d-flex align-middle pb-2 pt-2">` +
-                        `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-warning" id="mark-${data.pk}">Positif</span></div>` +
-                      `</div>` +
-                `</div>` +
-              `{% else %}` +
-                `<div class="card-header px-0 align-middle mb-auto mt-auto">` +
-                      `<div class="d-flex align-middle pb-2 pt-2">` +
-                        `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-success" id="mark">Negatif</span></div>` +
-                      `</div>` +
-                `</div>` +
-              `{% endif %}`+
-              `<div class="card-body container-fluid p-4 pr-2 pl-4 justify-content-center" id="card-body">` +
-                ` <div class="row my-2" id="desc">` +
-                    `<h3>${data.fields.nama}</h3>` +
-                  `</div>` +
-                  `<div class="row">` +
-                    ` <div class="col" id="desc">` +
-                        `<p>Umur:</p>` +
-                        `<h5>${data.fields.umur}</h5>` +
-                      `</div>` +
-                      `<div class="col" id="desc">` +
-                        `<p>Jenis Kelamin:</p>` +
-                        `<h5>${data.fields.gender}</h5>` +
-                      `</div>` +
-                      `<div class="col" id="desc">` +
-                        `<p>Gejala:</p>` +
-                        `<h5>${data.fields.gejala}</h5>` +
-                      `</div>` +
-                  `</div>` +
-            
-                  `<div class="row">` +
-                    ` <div class="col" id="desc">` +
-                        `<p>Alamat:</p>` +
-                        `<h5>${data.fields.alamat}</h5>` +
-                      `</div>` +
-                  `</div>` +
-                  `<div class="mt-3 align-items-end">` +
-                    `<a class="update-task-ajax btn btn-primary" id="${data.pk}">Update Pasien</a>` +
-                  `</div>` +
+
       
-              `</div>` +
-            `</div>` ;
-
-      const data_data = JSON.parse("{{data_pasien|escapejs}}");
-      // document.getElementById("tesanjay").innerHTML = JSON.stringify(data_data);
-
-      for (var data of data_data) {
-          var model = JSON.stringify(data.model).replace(/\"/g, "");
-          var pk = JSON.stringify(data.pk).replace(/\"/g, "");
-          var user = JSON.stringify(data.fields.user).replace(/\"/g, "");
-          var nama = JSON.stringify(data.fields.nama).replace(/\"/g, "");
-          var umur = JSON.stringify(data.fields.umur).replace(/\"/g, "");
-          var gender = JSON.stringify(data.fields.gender).replace(/\"/g, "");
-          var gejala = JSON.stringify(data.fields.gejala).replace(/\"/g, "");
-          var alamat = JSON.stringify(data.fields.alamat).replace(/\"/g, "");
-          var is_covid = JSON.stringify(data.fields.is_covid).replace(/\"/g, "");
-          var data_card = {model: model, pk: pk, fields:{user: user,nama: nama,umur: umur, gender: gender, gejala: gejala, alamat: alamat, is_covid: is_covid}};
-          document.getElementById("todo").innerHTML = card(data_card)
-      }            
-    }
-    
-
+        $($element).append(html);
+      }
+    function getFormData($form){
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+      
+        $.map(unindexed_array, function(n, i){
+            indexed_array[n['name']] = n['value'];
+        });
+      
+        return indexed_array;
+      }
+    // UPDATE_PASIEN
     $('#todo').ready ( function () {
       $('#todo').on('click', '.update-task-ajax', function(e) {
         e.preventDefault()
@@ -161,7 +210,6 @@
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
           },
           success: function(data) {
-            console.log("pass")
             if (data[0].fields.is_covid) {
               $(`#mark-${data[0].pk}`).addClass('badge-warning').text('Positif');
               $(`#mark-${data[0].pk}`).removeClass('badge-success');
@@ -178,6 +226,7 @@
       });
     });
     loadData()
+    updateData()
 
     
   </script>
