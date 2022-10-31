@@ -19,13 +19,13 @@ from authentication.decorators import lurah_required
 
 # Create your views here.
 
-@login_required(login_url='authentication/login/')
+@login_required(login_url='authentication:login')
 @lurah_required
 def show_lurah_homepage(request):
     return render(request, 'lurah_homepage.html')
 
 
-@login_required(login_url='authentication/login/')
+@login_required(login_url='authentication:login')
 @lurah_required
 def show_lurah_page(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
@@ -35,7 +35,7 @@ def show_lurah_page(request):
     return render(request, 'lurah_pasien.html', context)
 
 
-@login_required(login_url='authentication/login/')
+@login_required(login_url='authentication:login')
 @lurah_required
 def add_pasien(request):
     form = DataPasienForm()
@@ -87,7 +87,7 @@ def delete_pasien(request, id):
     return HttpResponse(status=202)
 
 
-@login_required(login_url='authentication/login/')
+@login_required(login_url='authentication:login')
 @lurah_required
 def show_json(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
