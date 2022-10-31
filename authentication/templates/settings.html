@@ -1,92 +1,143 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block meta %}
 
-<link rel="stylesheet" type="text/css" href="../static/base.css">
+{% block meta %}
+<title>Sehat Terus | Setting</title>
 {% endblock meta %}
+
 {% block content %}
 
-<head>
-    <title>Settings</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../static/base.css">
-    <script>
-        $(document).ready(function(){
-            // Prepare the preview for profile picture
-            document.getElementById("profpic").addEventListener("change", function(){
-                var reader = new FileReader();
-                reader.onload = function(){
-                    var output = document.getElementById('profpicPreview');
-                    output.src = reader.result;
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            });
-        });
-        $.ajax({
-            url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data){
-                var provinsi = data.provinsi;
-                var provinsiSelect = document.getElementById('id_provinsi');
-                for (var i = 0; i < provinsi.length; i++) {
-                    var option = document.createElement('option');
-                    option.value = provinsi[i].id;
-                    option.text = provinsi[i].nama;
-                    provinsiSelect.appendChild(option);
-                }
-            }
-        });
-        function getCity(){
-            var provinsi = document.getElementById('id_provinsi').value;
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + provinsi,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data){
-                    var kota = data.kota_kabupaten;
-                    var kotaSelect = document.getElementById('id_kota');
-                    kotaSelect.innerHTML = '';
-                    for (var i = 0; i < kota.length; i++) {
-                        var option = document.createElement('option');
-                        option.value = kota[i].id;
-                        option.text = kota[i].nama;
-                        kotaSelect.appendChild(option);
-                    }
-                }
-            });
-        }
-        function getDistrict(){
-            var kota = document.getElementById('id_kota').value;
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' + kota,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data){
-                    var kecamatan = data.kecamatan;
-                    var kecamatanSelect = document.getElementById('id_kecamatan');
-                    kecamatanSelect.innerHTML = '';
-                    for (var i = 0; i < kecamatan.length; i++) {
-                        var option = document.createElement('option');
-                        option.value = kecamatan[i].id;
-                        option.text = kecamatan[i].nama;
-                        kecamatanSelect.appendChild(option);
-                    }
-                }
-            });
-        }
 
-    </script>
-</head>
+<!-- Section: Design Block -->
+<main style="background-color:  #EFFBF9">
+
+    <div class="container-fluid justify-content-center py-5 w-75">
+  
+        <!-- Jumbotron -->
+       
+            <div class="card" style="
+                background: white;
+                backdrop-filter: blur(30px); min-width: 600px;
+                ">
+                <div class="card-body p-5 shadow-5 text-center">
+                    <div class="d-flex justify-content-center mb-3">
+                        <h3 class="text-center">Profile Settings</h3>
+                    </div>
+                    <form action="" method="POST" class="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="card-block">
+                                <div class="d-flex picture-container justify-content-center">
+                                    <div class="picture">
+                                        <img src="http://cdn.onlinewebfonts.com/svg/img_529971.png" width="100" height="100" class="rounded-circle" id="profpicPreview"> 
+                                        <div class="d-flex align-item-center">
+                                            <input  type="file" id="profpic" name="image">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 d-flex justify-content-center">
+                            <div class="col-md-5">
+                                <label class="labels">First Name</label>
+                                <input type="text" value="{{user.profile.first_name}}" name= "first_name" class="form-control" placeholder="First Name" maxLength ="30" id="id_first_name" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="labels">Last Name</label>
+                                <input type="text" value="{{user.profile.last_name}}" name= "last_name" class="form-control" placeholder="Last Name" maxLength ="30" id="id_last_name" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="col-md-5">
+                                <label class="labels">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    <div class="input-group-text">@</div>
+                                    </div>
+                                    <input type="text" value="{{request.user.username}}" name= "username" class="form-control" placeholder="Username" maxLength ="30" id="id_username" required>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="labels">Email</label>
+                                <input type="text" name="email" value="{{request.user.email}}" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="col-md-5">
+                                <label class="labels">Gender</label>
+                                <select name="gender" value="" id="id_gender" class="form-control" required>
+                                    <option disable hidden selected>--Choose Gender--</option>
+                                    <option>Laki-laki</option>
+                                    <option>Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="labels">Birthdate</label>
+                                <input type="date" value="{{user.profile.date_of_birth}}" name= "date_of_birth" class="form-control" placeholder="Date Of Birth" id="id_date_of_birth" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="col-md-5">
+                                <label class="labels">No.</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    <div class="input-group-text">+62</div>
+                                    </div>
+                                    <input type="tel" value="{{user.profile.number_phone}}" name= "number_phone" class="form-control" placeholder="812-3456-789" maxLength ="13" id="id_number_phone" required>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="labels">Province (pick this first!)</label>
+                                <select name="province" data-provid = "1" id="id_provinsi" class="form-control" onchange="getCity()" required>
+                                    <option disable hidden selected>--Choose Province--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="col-md-5">
+                                <label class="labels">City/District</label>
+                                <select name="city" value="{{user.profile.city}}" id="id_kota" class="form-control" onchange="getDistrict()" required>
+                                    <option disable hidden selected>--Choose City/District--</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="labels">Sub District</label>
+                                <select name="district" value="{{user.profile.district}}" id="id_kecamatan" class="form-control" required>
+                                    <option disable hidden selected>--Choose Sub-District--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3 d-flex justify-content-center">
+                            <div class="col-md-10">
+                                <label class="labels">Bio</label>
+                                <textarea class="form-control" name="bio" type="text" placeholder="Bio" required>{{user.profile.bio}}</textarea>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center buttons">
+                            <button class="btn px-4" type="submit" value="Update">Save Profile</button>
+                        </div>
+                    </form>
+                    <div class="card-block">
+                        <div class="mt-4 mb-5 text-center buttons">
+                            <form method="get" action="/authentication/profil/">
+                                <button class="btn px-4" type="submit" value="Cancel">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+       
+            </div>
+    
+            <!-- <div class="col-lg-6 mb-5 mb-lg-0">
+            <img src="" class="w-100 rounded-4 shadow-4"
+                alt="" />
+            </div> -->
+  
+        </div>
+        <!-- Jumbotron -->
+    </div>
+</main>
 <style>
     .cascading-right {
         margin-right: -50px;
@@ -102,138 +153,73 @@
         padding-bottom: 10px;
     }
 </style>
+<script>
+    $(document).ready(function(){
+        // Prepare the preview for profile picture
+        document.getElementById("profpic").addEventListener("change", function(){
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('profpicPreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+    });
+    $.ajax({
+        url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+            var provinsi = data.provinsi;
+            var provinsiSelect = document.getElementById('id_provinsi');
+            for (var i = 0; i < provinsi.length; i++) {
+                var option = document.createElement('option');
+                option.value = provinsi[i].id;
+                option.text = provinsi[i].nama;
+                provinsiSelect.appendChild(option);
+            }
+        }
+    });
+    function getCity(){
+        var provinsi = document.getElementById('id_provinsi').value;
+        $.ajax({
+            url: 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + provinsi,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                var kota = data.kota_kabupaten;
+                var kotaSelect = document.getElementById('id_kota');
+                kotaSelect.innerHTML = '';
+                for (var i = 0; i < kota.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = kota[i].id;
+                    option.text = kota[i].nama;
+                    kotaSelect.appendChild(option);
+                }
+            }
+        });
+    }
+    function getDistrict(){
+        var kota = document.getElementById('id_kota').value;
+        $.ajax({
+            url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' + kota,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                var kecamatan = data.kecamatan;
+                var kecamatanSelect = document.getElementById('id_kecamatan');
+                kecamatanSelect.innerHTML = '';
+                for (var i = 0; i < kecamatan.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = kecamatan[i].id;
+                    option.text = kecamatan[i].nama;
+                    kecamatanSelect.appendChild(option);
+                }
+            }
+        });
+    }
 
-<!-- Section: Design Block -->
-<body style="background-color:  #EFFBF9">
-    {% include 'base.html' %}
-    <section class="text-center text-lg-start">
-  
-    <!-- Jumbotron -->
-    <div class="container-fluid py-4">
-      <div class="row align-self-center">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <div class="card cascading-right" style="
-              background: white;
-              backdrop-filter: blur(30px);
-              ">
-            <div class="card-body p-5 shadow-5 text-center">
-                <div class="d-flex justify-content-center mb-3">
-                    <h3 class="text-center">Profile Settings</h3>
-                </div>
-                <form action="" method="POST" class="form" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <div class="card-block">
-                            <div class="picture-container">
-                                <div class="picture">
-                                    <img src="{{user.profile.image.url}}" width="100" height="100" class="rounded-circle" id="profpicPreview"> 
-                                    <input type="file" id="profpic" name="image">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4 d-flex justify-content-center">
-                        <div class="col-md-5">
-                            <label class="labels">First Name</label>
-                            <input type="text" value="{{user.profile.first_name}}" name= "first_name" class="form-control" placeholder="First Name" maxLength ="30" id="id_first_name" required>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="labels">Last Name</label>
-                            <input type="text" value="{{user.profile.last_name}}" name= "last_name" class="form-control" placeholder="Last Name" maxLength ="30" id="id_last_name" required>
-                        </div>
-                    </div>
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <div class="col-md-5">
-                            <label class="labels">Username</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">@</div>
-                                </div>
-                                <input type="text" value="{{request.user.username}}" name= "username" class="form-control" placeholder="Username" maxLength ="30" id="id_username" required>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="labels">Email</label>
-                            <input type="text" name="email" value="{{request.user.email}}" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <div class="col-md-5">
-                            <label class="labels">Gender</label>
-                            <select name="gender" value="" id="id_gender" class="form-control" required>
-                                <option disable hidden selected>--Choose Gender--</option>
-                                <option>Laki-laki</option>
-                                <option>Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="labels">Birthdate</label>
-                            <input type="date" value="{{user.profile.date_of_birth}}" name= "date_of_birth" class="form-control" placeholder="Date Of Birth" id="id_date_of_birth" required>
-                        </div>
-                    </div>
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <div class="col-md-5">
-                            <label class="labels">No.</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">+62</div>
-                                </div>
-                                <input type="tel" value="{{user.profile.number_phone}}" name= "number_phone" class="form-control" placeholder="812-3456-789" maxLength ="13" id="id_number_phone" required>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="labels">Province (pick this first!)</label>
-                            <select name="province" data-provid = "1" id="id_provinsi" class="form-control" onchange="getCity()" required>
-                                <option disable hidden selected>--Choose Province--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <div class="col-md-5">
-                            <label class="labels">City/District</label>
-                            <select name="city" value="{{user.profile.city}}" id="id_kota" class="form-control" onchange="getDistrict()" required>
-                                <option disable hidden selected>--Choose City/District--</option>
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="labels">Sub District</label>
-                            <select name="district" value="{{user.profile.district}}" id="id_kecamatan" class="form-control" required>
-                                <option disable hidden selected>--Choose Sub-District--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-3 d-flex justify-content-center">
-                        <div class="col-md-10">
-                            <label class="labels">Bio</label>
-                            <textarea class="form-control" name="bio" type="text" placeholder="Bio" required>{{user.profile.bio}}</textarea>
-                        </div>
-                    </div>
-                    <div class="mt-5 text-center buttons">
-                        <button class="btn px-4" type="submit" value="Update">Save Profile</button>
-                    </div>
-                </form>
-                <div class="card-block">
-                    <div class="mt-4 mb-5 text-center buttons">
-                        <form method="get" action="/authentication/profil/">
-                            <button class="btn px-4" type="submit" value="Cancel">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <img src="" class="w-100 rounded-4 shadow-4"
-            alt="" />
-        </div>
-      </div>
-    </div>
-    <!-- Jumbotron -->
-    </section>
-    {% include 'footer.html' %}
-</body>
-
+</script>
 
 {% endblock content %}
 

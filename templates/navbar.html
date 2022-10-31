@@ -1,0 +1,69 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light py-3"> 
+    <div class="container-fluid main">
+        <a class="navbar-brand me-2 mb-1 d-flex align-self-baseline" href="{% url 'homepage:show_homepage' %}" id="title-brand">
+            <div style="margin-top: 10px; margin-bottom:0px;">SE</div><img src="https://cdn.discordapp.com/attachments/814499566245249047/1035481656624160798/output-onlinepngtools.png" height="50" width="50" alt="test" loading="lazy"
+              style="margin-top: 2px" /><div style="margin-top: 10px; margin-bottom:0px;">AT TERUS</div>
+          </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            {% if user.is_authenticated and user.is_lurah %}
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_homepage' %}" class=" nav-link px-4 active">Lurah Page</a>
+                <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_page' %}" class=" nav-link px-4">Pasien</a></li>
+                <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
+                <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
+                <li class="nav-item dropdown px-4">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <div class="profile px-3 py-2">
+                      <div href="#">{{user.get_username}}</div>
+                      <div style="color:rgb(107 114 128);" >{{user.email}}</div>
+                    </div>
+                    
+                    <li><hr class="dropdown-divider"></li>
+                  
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Settings</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:logout' %}" id="btn-logout">Sign Out</a></li>
+                  </ul>
+                </li>
+              </li>
+            </ul>
+            {% elif user.is_authenticated and user.is_nakes %}
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a href="#" class=" nav-link px-4 active">Nakes Page</a>
+                <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
+                <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
+                <li class="nav-item dropdown px-4">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <div class="user-profile px-3">
+                      <div class="py-2">{{user.get_username}}</div>
+                      <div class="py-2" style="color:rgb(107 114 128);" >{{user.email}}</div>
+                    </div>
+                    
+                    <li><hr class="dropdown-divider"></li>
+                  
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Settings</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:logout' %}" id="btn-logout">Sign Out</a></li>
+                  </ul>
+                </li>
+              </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
+              <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
+            </ul>
+            <div class="navbar-nav ms-auto">
+                <a href="{% url 'authentication:login' %}" class="btn mx-3 px-3 py-1  align-self-center" id="btn-login">Login</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>

@@ -9,9 +9,8 @@ from django.http import HttpResponse, JsonResponse  # , HttpResponseRedirect
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
-import datetime
+from lurah_page.models import DataPasien
 
-from nakes_page.models import DataPasien
 
 # Create your views here.
 @login_required(login_url='authentication/login/')
@@ -24,16 +23,33 @@ def show_nakes_page(request):
 
 @login_required(login_url='authentication/login/')
 def show_json(request):
-    data_pasien = DataPasien.objects.filter.all()
+    data_pasien = DataPasien.objects.all()
     data = serializers.serialize('json', data_pasien)
     return HttpResponse(data, content_type='application/json')
 
 @login_required(login_url='authentication/login/')
-def update_status_pasien(request, id_pasien):
-    status_pasien = DataPasien.objects.get(id=id_pasien).status
-    if status_pasien == True:
-        status_pasien = False
-    else:
-        status_pasien = True
-    status_pasien.save()
-    return redirect('nakes_page:show_nakes_page')
+def update_status_pasien(request, id):
+    # if request.method == 'UPDATE':
+    #     status_pasien = DataPasien.objects.get(id=id_pasien).status
+    #     print(status_pasien)
+    #     if status_pasien == True:
+    #         status_pasien = False
+    #     else:
+    #         status_pasien = True
+    #     status_pasien.save()
+    # # return redirect('nakes_page:show_nakes_page')
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'UPDATE':
+        pasien = DataPasien.objects.filter(pk=id)
+        status_pasien = DataPasien.objects.get(pk=id).is_covid
+        print(DataPasien.objects.get(pk=id).is_covid)
+        if status_pasien == True:
+            pasien.update(is_covid = False)
+        else:
+            pasien.update(is_covid = True)
+        DataPasien.objects.get(pk=id).save()
+        print(DataPasien.objects.get(pk=id).is_covid)
+        result = DataPasien.objects.filter(pk=id)
+        data = serializers.serialize('json', result)
+        return HttpResponse(data, content_type='application/json') 
+
+    return JsonResponse({'error': "Not an ajax request"}, status=400)

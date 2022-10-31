@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Sehat Terus | Homepage</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    
-</head>
+{% extends 'base.html' %}
+{% load static %}
 
-<body>
-    {% include 'base.html' %}
+{% block meta %}
+<title>Sehat Terus | Homepage</title>
+{% endblock meta %}
+
+{% block content %}
+
+
+<main>
     <span class="p-0">
         <hr class="solid m-0">
     </span>
@@ -260,10 +252,7 @@
             </div>
         </div>
     </div>
-    {% include 'footer.html' %}
-   
-
-</body>
+</main>
 
 <style>
     h3 {
@@ -284,7 +273,7 @@
         height: 400px;
         max-height: 700px;
         width: 1430px;
-       
+        
     }
 
     .section-5m .row{
@@ -316,7 +305,7 @@
 </style>
 <script>
 
-   
+    
 function getDataFromForm($form) {
     var unindexed_items = $form.serializeArray();
     var result = {};
@@ -349,11 +338,13 @@ $("#entry_provinsi").submit(function (e) {
             }
 
         });
-     
+        
             
 
     
 
 });
 </script>
-</html>
+
+{% endblock content %}
+

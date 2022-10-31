@@ -1,76 +1,25 @@
-{% extends 'base.html' %}  {% block meta %}
+{% extends 'base.html' %}
+{% load static %}
 
-{% endblock meta %} {% block content %}
+{% block meta %}
+<title>Sehat Terus | Pasien</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+<script>
+  tailwind.config = {
+    important: true,
+  };
+</script>
 
-  <head>
-    <title>Lurah Page | Pasien</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+{% endblock meta %}
 
-    <script>
-      tailwind.config = {
-        important: true,
-      };
-    </script>
-  </head>
-   
-  <style>
-        table,
-    th,
-    td {
-      border-collapse: collapse;
-    }
-    h1{
-      color: #17a2b8;
-    }
+{% block content %}
 
-    th,
-    td {
-      padding: 15px;
-    }
-
-    .task-container {
-      background: whitesmoke;
-      border-radius: 24px;
-      padding: 32px;
-      gap: 20px;
-    }
-
-    .flex-parent {
-      display: flex;
-    }
-
-    .jc-center {
-      justify-content: center;
-    }
-
-    button.margin-right {
-      margin-right: 20px;
-    }
-    #button{
-      border-radius: 40px;
-      border-color: black;
-      border-width: 1px;
-      color: rgba(0, 0, 0, 0.55) !important; 
-      background-color: white;
-    }
-    #button:hover {
-      background-color: #17a2b8;
-      color: white !important; 
-      border-color: #17a2b8;
-    }
-  </style>
-
-  <body style="background-color: #EFFBF9">
-    {% include 'base.html' %}
+<main style="background-color: #EFFBF9">
 
     {% if user.is_authenticated %}
     <div class="container-fluid px-0 text-center">
-      <div class="mt-5" style="text-align: center">
+      <div class="pt-5" style="text-align: center">
         <h1 style="color: black">DAFTAR PASIEN</h1>
         <h3 style="color:#17a2b8">Covid-19</h3>
       </div>
@@ -79,12 +28,12 @@
       <div class="flex-parent jc-center">
         <div class="flex gap-2 lg:gap-5">
           <button
-            class="inline-flex justify-center px-3 py-2 btn-primary"
+            class="inline-flex justify-center px-3 py-2 my-3 btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             id="button"
           >
-            Tambah Pasien
+            + Tambah Pasien
           </button>
         </div>
       </div>
@@ -166,8 +115,8 @@
                         required
                       >
                         <option selected>-Pilih-</option>
-                        <option value="L">Laki-laki</option>
-                        <option value="P">Perempuan</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
                       </select>
                     </label>
 
@@ -232,17 +181,16 @@
         </div>
       </div>
       
+      <div class="container-fluid justify-content-center w-75 mt-5">
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="todo"></div>
+      </div>
       
-
-      <div class="container"></div>
-      <div class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5" id="todo"></div>
     </div>
     {% else %}
     <div></div>
     {% endif %}
   
-    {% include 'footer.html' %}
-  </body>
+  </main>
   <script>
     $(document).ready(function(e){
     const getTaskURL = `/lurah-page/json`;
@@ -321,23 +269,50 @@ function addTaskAsync($element, fields, task_id) {
     const gejala = fields["gejala"];
     const alamat = fields["alamat"];
     var html = 
-    `<div class="container" id="task-card-${task_id}">` +
+    `<div class="col px-3" id="task-card-${task_id}">` +
       `<div class="card" id="card" style="margin-bottom: 20px;">` +
-
-        `<div class="card-header align-middle mb-auto mt-auto">` +
+        `{% if is_covid == true %}` +
+          `<div class="card-header align-middle mb-auto mt-auto">` +
+                `<div class="d-flex align-middle pb-2 pt-2">` +
+                  `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-warning" id="positif">Positif</span></div>` +
+                `</div>` +
+          `</div>` +
+        `{% else %}` +
+          `<div class="card-header align-middle mb-auto mt-auto">` +
+                `<div class="d-flex align-middle pb-2 pt-2">` +
+                  `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-success" id="negatif">Negatif</span></div>` +
+                `</div>` +
+          `</div>` +
+        `{% endif %}`+
+        `<div class="card-body container-fluid p-4 pr-2 pl-4 justify-content-center" id="card-body">` +
+           ` <div class="row" id="desc">` +
+              `<h3>${nama}</h3>` +
+            `</div>` +
+            `<div class="row">` +
+              ` <div class="col" id="desc">` +
+                  `<p>Umur: ${umur}</p>` +
+                `</div>` +
+                `<div class="col" id="desc">` +
+                  `<p>Jenis Kelamin: ${gender}</p>` +
+                `</div>` +
+                `<div class="col" id="desc">` +
+                  `<p>Gejala: ${gejala}</p>` +
+                `</div>` +
+            `</div>` +
+      
+            `<div class="row">` +
+              ` <div class="col" id="desc">` +
+                  `<p>Alamat: ${alamat}</p>` +
+                `</div>` +
+            `</div>` +
+            `<div class="mt-3 align-items-end">` +
+              `<a class="delete-task-ajax btn btn-primary" id="${task_id}">Delete</a>` +
+            `</div>` +
+ 
         `</div>` +
-        `<div class="card-body d-flex p-4 pr-2 pl-4">` +
-            `<div class="mr-auto justify-content-between" id="desc">`+
-              `<h1>${nama}<h1><span style="font-size:14px">${gejala}</span>` +
-              `<h1>${umur}<h1><span style="font-size:14px">${gender}</span>` +
-              `<h1>${is_covid}<h1><span style="font-size:14px">${alamat}</span>` +
-            `</div>` +
-            `<div class="mt-auto align-items-end">` +
-              `<button><a href="d" class="delete-task-ajax" id="${task_id}">Delete</a></button>`+
-            `</div>` +
-        '</div>' +
-      '</div>' +
-    '</div>'
+      `</div>` ;
+
+
   
     $($element).append(html);
   }
@@ -356,4 +331,64 @@ function addTaskAsync($element, fields, task_id) {
 
 
   </script>
-  {% endblock content %}
+     
+  <style>
+    .card-header {
+      background-color: #fdfdfc;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      vertical-align: middle;
+      align-content: center;
+      align-items: middle
+    }
+    .card {
+      border-color: #fdfdfc;
+    }
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
+    p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #202121;
+      margin-bottom: 10px;
+    }
+    .btn {
+      font-size: 14px;
+    }
+    .badge-success {
+      background-color: #dbeddb ;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .badge-warning {
+      background-color: #ffe2dd;
+      font-size: 16px;
+    }
+
+    #positif {
+      color: #5d1615;
+    }
+    #negatif {
+      color: #1d3829;
+    }
+
+  button.margin-right {
+    margin-right: 20px;
+  }
+  #button{
+    border-radius: 40px;
+    border-color: black;
+    border-width: 1px;
+    color: rgba(0, 0, 0, 0.55) !important; 
+    background-color: white;
+  }
+  #button:hover {
+    background-color: #17a2b8;
+    color: white !important; 
+    border-color: #17a2b8;
+  }
+</style>
+
+{% endblock content %}
