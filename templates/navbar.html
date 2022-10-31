@@ -26,7 +26,7 @@
                     
                     <li><hr class="dropdown-divider"></li>
                   
-                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Settings</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Dashboard</a></li>
                     <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:logout' %}" id="btn-logout">Sign Out</a></li>
                   </ul>
                 </li>
@@ -34,7 +34,7 @@
             </ul>
             {% elif user.is_authenticated and user.is_nakes %}
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a href="#" class=" nav-link px-4 active">Nakes Page</a>
+              <li class="nav-item"><a href="{% url 'nakes_page:show_nakes_page' %}" class=" nav-link px-4 active">Nakes Page</a>
                 <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
                 <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
                 <li class="nav-item dropdown px-4">
@@ -49,7 +49,7 @@
                     
                     <li><hr class="dropdown-divider"></li>
                   
-                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Settings</a></li>
+                    <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:profil' %}">Dashboard</a></li>
                     <li class="py-1"><a class="dropdown-item" href="{% url 'authentication:logout' %}" id="btn-logout">Sign Out</a></li>
                   </ul>
                 </li>
@@ -59,7 +59,7 @@
             <ul class="navbar-nav ms-auto">
               <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
               <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
-              <li class="nav-item"><a href="{% url 'authentication:login' %}" class="btn mx-3 px-3 py-1  align-self-center" id="btn-login">Login</a></li>
+              <li class="nav-item"><a href="{% url 'authentication:login' %}" class="btn mx-4 my-1 px-4 align-self-center" id="btn-login">Login</a></li>
               
             </ul>
             {% endif %}
