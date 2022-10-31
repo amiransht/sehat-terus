@@ -18,8 +18,8 @@
 <main style="background-color: #EFFBF9">
 
     {% if user.is_authenticated %}
-    <div class="container-fluid px-0 text-center">
-      <div class="pt-5" style="text-align: center">
+    <div class="container-fluid px-0 pb-5 text-center">
+      <div class="pt-5 mb-3" style="text-align: center">
         <h1 style="color: black">DAFTAR PASIEN</h1>
         <h3 style="color:#17a2b8">Covid-19</h3>
       </div>
@@ -52,7 +52,7 @@
         >
           <div
             class="modal-content"
-            style="background-color: rgba(0, 0, 0, 0.5)"
+            style="background-color: white"
           >
             <div class="modal-header">
               <h1 class="modal-title fs-5 text-zinc-200" id="exampleModalLabel">
@@ -270,9 +270,9 @@ function addTaskAsync($element, fields, task_id) {
     const alamat = fields["alamat"];
     var html = 
     `<div class="col px-3" id="task-card-${task_id}">` +
-      `<div class="card" id="card" style="margin-bottom: 20px;">` +
+      `<div class="card px-3 pt-2" id="card">` +
         `{% if is_covid == true %}` +
-          `<div class="card-header align-middle mb-auto mt-auto">` +
+          `<div class="card-header px-0 align-middle mb-auto mt-auto">` +
                 `<div class="d-flex align-middle pb-2 pt-2">` +
                   `<div class="mr-auto p-0 mb-auto mt-auto"><span class="badge badge-pill badge-warning" id="positif">Positif</span></div>` +
                 `</div>` +
@@ -285,24 +285,28 @@ function addTaskAsync($element, fields, task_id) {
           `</div>` +
         `{% endif %}`+
         `<div class="card-body container-fluid p-4 pr-2 pl-4 justify-content-center" id="card-body">` +
-           ` <div class="row" id="desc">` +
+           ` <div class="row my-2" id="desc">` +
               `<h3>${nama}</h3>` +
             `</div>` +
             `<div class="row">` +
               ` <div class="col" id="desc">` +
-                  `<p>Umur: ${umur}</p>` +
+                  `<p>Umur:</p>` +
+                  `<h5>${umur}</h5>` +
                 `</div>` +
                 `<div class="col" id="desc">` +
-                  `<p>Jenis Kelamin: ${gender}</p>` +
+                  `<p>Jenis Kelamin:</p>` +
+                  `<h5>${gender}</h5>` +
                 `</div>` +
                 `<div class="col" id="desc">` +
-                  `<p>Gejala: ${gejala}</p>` +
+                  `<p>Gejala:</p>` +
+                  `<h5>${gejala}</h5>` +
                 `</div>` +
             `</div>` +
       
             `<div class="row">` +
               ` <div class="col" id="desc">` +
-                  `<p>Alamat: ${alamat}</p>` +
+                  `<p>Alamat:</p>` +
+                  `<h5>${alamat}</h5>` +
                 `</div>` +
             `</div>` +
             `<div class="mt-3 align-items-end">` +
@@ -343,6 +347,7 @@ function addTaskAsync($element, fields, task_id) {
     }
     .card {
       border-color: #fdfdfc;
+      background-color: #fdfdfc;
     }
     .card:hover {
       transform: scale(1.02);
@@ -374,21 +379,21 @@ function addTaskAsync($element, fields, task_id) {
       color: #1d3829;
     }
 
-  button.margin-right {
-    margin-right: 20px;
-  }
-  #button{
-    border-radius: 40px;
-    border-color: black;
-    border-width: 1px;
-    color: rgba(0, 0, 0, 0.55) !important; 
-    background-color: white;
-  }
-  #button:hover {
-    background-color: #17a2b8;
-    color: white !important; 
-    border-color: #17a2b8;
-  }
+    button.margin-right {
+      margin-right: 20px;
+    }
+    #button{
+      border-radius: 40px;
+      border-color: black;
+      border-width: 1px;
+      color: rgba(0, 0, 0, 0.55) !important; 
+      background-color: white;
+    }
+    #button:hover {
+      background-color: #17a2b8;
+      color: white !important; 
+      border-color: #17a2b8;
+    }
 </style>
 
 {% endblock content %}

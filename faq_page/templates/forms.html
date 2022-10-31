@@ -8,22 +8,30 @@
 
 {% block content %}
 
-<main>
-    <h3 class="mt-5 mb-2">Hi, {{user}}!</h3>
-    <h6 class="my-3">Mau buat blog baru apa hari ini?</h6>
-    <form method="POST">
-        {% csrf_token %}
-        <div>
-            <p>Title name:<br>
-            {{blog_form.title}}</p>
-        </div>
-        <div>
-            <p>Content:<br>
-            {{blog_form.content}}</p>
+<main style="background-color: #EFFBF9;">
+    <div class="container-fluid justify-content-center text-center py-5 w-50" >
+        <div class="card pt-5 pb-3 w-auto" style="
+                background: white;
+                backdrop-filter: blur(30px); min-width: auto;
+                ">
+            <h1 class="mb-3" style="color: #17a2b8;">Hi, {{user}}!</h1>
+            <h3 class="mb-3" style="color: black ;">Mau buat blog baru apa hari ini?</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <p class="my-2">Title name:</p>
+                    {{blog_form.title}}
+                </div>
+                <div>
+                    <p class="my-2">Content:</p>
+                    {{blog_form.content}}
+                </div>
+                <button id="add-blog" class="btn btn-primary mt-5">Share</button>
+            </form>
+            
         </div>
     </div>
-        <button id="add-blog" class="btn btn-primary btn-lg">Share</button>
-    </form>
+        
 </main>
 
 {% block script %}
