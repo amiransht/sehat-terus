@@ -17,23 +17,23 @@
       };
     </script>
   </head>
-  <script>
     $(document).ready(function (data) {
-      const card = (data) => `
-      <div id='${data.pk}-card' class="task-container mt-5">
+      const card = (data, id) => 
+     `
+      <div id='${id}-card' class="task-container mt-5">
         <div style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1">
           <div class="task-title">
               <div class="flex gap-4">
-                <div id=${data.pk} class="cursor-pointer remove-todo ${data.pk}">
-                  <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl" style="background-color:red;">Hapus</a></button>
+                <div class="cursor-pointer remove-todo ${id}">
+                  <button><a class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl delete-pasien" style="background-color:red;">Hapus</a></button>
                 </div>
                 <div class="inline-flex space-x-2 items-center justify-end px-6 py-3">
-                  ${data.fields.is_covid? `Status: &nbsp<b class="text-lg text-red-500"> Positif </b>`
+                  ${data.is_covid? `Status: &nbsp<b class="text-lg text-red-500"> Positif </b>`
                       : `<b class="text-lg text-green-500"> Negatif </b>`
                   }
                 </div>
               </div>
-              <div class="text-2xl font-bold mt-4" >${data.fields.nama}</div>
+              <div class="text-2xl font-bold mt-4" >${data.nama}</div>
               </a>
               <div class="task-checkbox-container">
               </div>
@@ -44,25 +44,25 @@
           <div class="flex flex-col">
             <dd class="font-light text-gray-500 dark:text-gray-400">Umur</dd>
                 <dt class="mb-2 text-2xl font-extrabold">${
-                  data.fields.umur
+                  data.umur
                 }</dt>
           </div>
           <div class="flex flex-col">
             <dd class="font-light text-gray-500 dark:text-gray-400">Jenis Kelamin</dd>
                 <dt class="mb-2 text-2xl font-extrabold">${
-                  data.fields.gender
+                  data.gender
                 }</dt>
           </div>
           <div class="flex flex-col">
             <dd class="font-light text-gray-500 dark:text-gray-400">Gejala</dd>
                 <dt class="mb-2 text-2xl font-extrabold">${
-                  data.fields.gejala
+                  data.gejala
                 }</dt>
           </div>
           <div class="flex flex-col">
             <dd class="font-light text-gray-500 dark:text-gray-400">Alamat</dd>
                 <dt class="mb-2 text-2xl font-extrabold">${
-                  data.fields.alamat
+                  data.alamat
                 }</dt>
           </div>
         </dl>
@@ -75,65 +75,55 @@
       const addCard = (data) => {
         return $("#todo").append(card(data));
       };
-      const removeCard = (task) => {
-        $(`#${task.pk}`).click(function () {
+      const removeCard = (task, id) => {
+        $(`.delete-pasien`).click(function () {
+          console.log("klik hapus");
           $.ajax({
-            url: `/lurah-page/delete-pasien/${task.pk}`,
+            url: `/lurah-page/pasien/delete-pasien/${id}`,
             type: "DELETE",
             success: function (response) {
-              $(`#${task.pk}-card`).remove();
+              
+              $(`#${id}-card`).remove();
             },
           });
         });
       };
 
       $.get("/lurah-page/json/", function (todo) {
-        console.log("add")
         todo.map((task) => {
           addCard(task);
           removeCard(task);
         });
       });
 
-      $("#add-todo").click(function () { //button save add pasien
-        if (
-          $("#nama").val() &&
-          $("#umur").val() &&
-          $("#gender").val() &&
-          $("#gejala").val() &&
-          $("#alamat").val()
-        ) {
-          console.log("passed")
-          $.post(
-            "/lurah-page/add/",
-            {
-              nama: $("#nama").val(),
-              umur: $("#umur").val(),
-              gender: $("#gender").val(),
-              gejala: $("#gejala").val(),
-              alamat: $("#alamat").val(),
-              
-            },
+      $("#add-todo").click(function (e) { //button save add pasien
+        e.preventDefault();
+        const serializedData = getFormData($('#add-pasien-form'));
+        const addPasienURL = 'add/';
+        $.ajax({
+        type: 'POST',
+        url: addPasienURL,
+        data: serializedData,
+        success: function (response) {
+            // on successfull creating object
+            $("#add-pasien-form").trigger('reset');
             
-            function (res, status) {
-              console.log(status)
-              if (status == "success") {
-                addCard(res);
-                $("#nama").val("");
-                $("#umur").val("");
-                $("#gender").val("");
-                $("#gejala").val("");
-                $("#alamat").val("");
-                removeCard(res);
-              } else {
-                
-              }
+     
+            // display the newly friend to table.
+            var instance = JSON.parse(response);
+            var fields = instance[0]["fields"];
+            var task_id = instance[0]["pk"];
+          
+            addCard(fields , task_id);
+            removeCard(fields, task_id);
+            
+            // removeCard(response);
             }
-          );
-        }
+          });
+          });
+  
       });
-      console.log("failed")
-    });
+
 
     var e = document.getElementById("gejala");
     var strUser = e.options[e.selectedIndex].value;
@@ -142,7 +132,18 @@
     } else {
       document.getElementById("gejala").style.color = "green";
     }
-  </script>
+
+    function getFormData($form){
+      var unindexed_array = $form.serializeArray();
+      var indexed_array = {};
+    
+      $.map(unindexed_array, function(n, i){
+          indexed_array[n['name']] = n['value'];
+      });
+    
+      return indexed_array;
+    }
+  </script> -->
   <style>
         table,
     th,
@@ -244,7 +245,7 @@
             <div class="modal-body">
               <div class="flex justify-center">
                 <div class="lg:w-64 mt-3">
-                  <form method="POST" action="">
+                  <form method="POST" action="" id="add-pasien-form">
                     {% csrf_token %}
                     <label class="block">
                       <span
@@ -368,5 +369,116 @@
   
     {% include 'footer.html' %}
   </body>
+  <script>
+    $(document).ready(function(e){
+    const getTaskURL = `/lurah-page/json`;
+    $.ajax({
+      type: 'GET',
+      url: getTaskURL,
+      success: function (response) {
+        if (!response.length){
+          $('#todo').prepend(`
+          <div class="d-flex justify-content-center" id="no-task-div">
+            <h1>No Task</h1>
+          </div>`)
+        }
+        else{
+          for (let i = 0; i < response.length; i++){
+            addTaskAsync($('#todo'), response[i]["fields"], response[i]["pk"]);
+          }
+        }
+      },
+      error: function (response) {
+          console.log(response)
+      }
+    })
+});
+
+$("#add-todo").click(function(e){
+    e.preventDefault();
+    const serializedData = getFormData($('#add-pasien-form'));
+    const addTaskURL = `/lurah-page/pasien/add/`;
+    $.ajax({
+      type: 'POST',
+      url: addTaskURL,
+      data: serializedData,
+      success: function (response) {
+          // on successfull creating object
+          $("#add-pasien-form").trigger('reset');
+       
+          // display the newly friend to table.
+          var instance = JSON.parse(response);
+          var fields = instance[0]["fields"];
+          var task_id = instance[0]["pk"];
+          if ($('#no-task-div').length){
+            $('#no-task-div').remove();
+          }
+          addTaskAsync($('#todo'), fields, task_id);
+      },
+      error: function (response) {
+          // alert the error if any error occured
+          alert(response["responseJSON"]["error"]);
+      }
+    })
+});
+
+$('#todo').ready ( function () {
+    $('#todo').on('click', '.delete-task-ajax', function(e) {
+      e.preventDefault()
+      const deleteTaskURL = "delete-pasien/" + this.id;
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      $.ajax({
+        type: 'DELETE',
+        url: deleteTaskURL,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      })
+      $(`#task-card-${this.id}`).remove();
+    });
+  });
+
+function addTaskAsync($element, fields, task_id) { 
+    const is_covid = fields["is_covid"];
+    const nama = fields["nama"];
+    const umur = fields["umur"];
+    const gender = fields["gender"];
+    const gejala = fields["gejala"];
+    const alamat = fields["alamat"];
+    var html = 
+    `<div class="container" id="task-card-${task_id}">` +
+      `<div class="card" id="card" style="margin-bottom: 20px;">` +
+
+        `<div class="card-header align-middle mb-auto mt-auto">` +
+        `</div>` +
+        `<div class="card-body d-flex p-4 pr-2 pl-4">` +
+            `<div class="mr-auto justify-content-between" id="desc">`+
+              `<h1>${nama}<h1><span style="font-size:14px">${gejala}</span>` +
+              `<h1>${umur}<h1><span style="font-size:14px">${gender}</span>` +
+              `<h1>${is_covid}<h1><span style="font-size:14px">${alamat}</span>` +
+            `</div>` +
+            `<div class="mt-auto align-items-end">` +
+              `<button><a href="d" class="delete-task-ajax" id="${task_id}">Delete</a></button>`+
+            `</div>` +
+        '</div>' +
+      '</div>' +
+    '</div>'
   
+    $($element).append(html);
+  }
+
+  function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+  
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+  
+    return indexed_array;
+  }
+
+
+
+  </script>
   {% endblock content %}

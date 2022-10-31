@@ -61,20 +61,22 @@ def add_pasien_ajax(request):
         alamat = request.POST.get('alamat')
         todo = DataPasien.objects.create(
             nama=nama, umur=umur, gender=gender, gejala=gejala, alamat=alamat, is_covid=True, user=request.user)
+        serialize_json = serializers.serialize('json', [todo])
+        print(serialize_json)
+        return HttpResponse(serialize_json)
+        # result = {
+        #     'fields': {
+        #         'nama': todo.nama,
+        #         'umur': todo.umur,
+        #         'gender': todo.gender,
+        #         'gejala': todo.gejala,
+        #         'alamat': todo.alamat,
+        #         'is_covid': todo.is_covid,
+        #     },
+        #     'pk': todo.pk
+        # }
 
-        result = {
-            'fields': {
-                'nama': todo.nama,
-                'umur': todo.umur,
-                'gender': todo.gender,
-                'gejala': todo.gejala,
-                'alamat': todo.alamat,
-                'is_covid': todo.is_covid,
-            },
-            'pk': todo.pk
-        }
-        print(result)
-        return JsonResponse(result)
+    return JsonResponse({'error': "Not an ajax request"}, status=404)
 
 
 @csrf_exempt
