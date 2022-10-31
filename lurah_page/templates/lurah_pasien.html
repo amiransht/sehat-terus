@@ -250,6 +250,7 @@
       type: 'GET',
       url: getTaskURL,
       success: function (response) {
+        console.log(response);
         if (!response.length){
           $('#todo').prepend(`
           <div class="d-flex justify-content-center" id="no-task-div">
