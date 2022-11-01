@@ -64,17 +64,6 @@ def add_pasien_ajax(request):
         serialize_json = serializers.serialize('json', [todo])
         print(serialize_json)
         return HttpResponse(serialize_json)
-        # result = {
-        #     'fields': {
-        #         'nama': todo.nama,
-        #         'umur': todo.umur,
-        #         'gender': todo.gender,
-        #         'gejala': todo.gejala,
-        #         'alamat': todo.alamat,
-        #         'is_covid': todo.is_covid,
-        #     },
-        #     'pk': todo.pk
-        # }
 
     return JsonResponse({'error': "Not an ajax request"}, status=404)
 
