@@ -16,6 +16,11 @@ from authentication.decorators import nakes_required
 
 
 # Create your views here.
+@login_required(login_url='authentication:login')
+@nakes_required
+def show_nakes_homepage(request):
+    return render(request, 'nakes_homepage.html')
+
 @login_required(login_url='authentication/login/')
 @nakes_required
 def show_nakes_page(request):
