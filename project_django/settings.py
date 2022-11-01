@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'faq_page',
     'nakes_page',
+    'about',
 ]
 
 MIDDLEWARE = [

@@ -145,7 +145,10 @@
                     <div class="d-flex justify-content-between m-3">
                         <div class="card-datacovid card p-2 m-3"  style="width: 550px;">
                             <div class="card-body text-center">
-                                <h5 class="card-text" id="provinsi">Provinsi</h5>
+                                <div class="mb-4">
+                                    <h5 class="card-text m-0" id="provinsi">Data Kasus Tiap Provinsi</h5>
+                                    <p>diambil dari covid19.go.id</p>
+                                </div>
                                 <div class="row">
                                     <div class="col">
                                         
@@ -167,8 +170,15 @@
                         </div>
                         <div class="card-datacovid card p-2 m-3" style="width: 550px;" >
                             <div class="card-body text-center">
-                                <h5 class="card-text">Kelurahan</h5>
+                                <div class="mb-4">
+                                    <h5 class="card-text m-0">Data Kasus Kelurahan</h5>
+                                    <p>TERUS-SEHAT</p>
+                                </div>
                                 <div class="row">
+                                    <div class="col">
+                                        <span class="card-text">Total Kasus</span>
+                                        <h6 class="card-text val" id="data-kasus-kelurahan">0</h6>
+                                    </div>
                                     <div class="col">
                                         <span class="card-text">Jumlah Positif</span>
                                         <h6 class="card-text val" id="data-positif-kelurahan">0</h6>
@@ -319,11 +329,11 @@ function getDataFromForm($form) {
 function loadData() {
     $.get(
         './json', function(data){
+            var data_total = data.length;
+            $("#data-kasus-kelurahan").text(data_total)
             var data_positif = data.filter((data) => data.fields.is_covid == true);
-            console.log(data_positif)
             $("#data-positif-kelurahan").text(data_positif.length)
             var data_sembuh = data.filter((data) => data.fields.is_covid == false);
-            console.log(data_sembuh)
             $("#data-sembuh-kelurahan").text(data_sembuh.length)
 
         });

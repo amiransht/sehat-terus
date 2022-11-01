@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Sehat Terus | About Us</title>
+{% endblock meta %}
+
+{% block content %}
+
+<main>
+    <span class="p-0">
+        <hr class="solid m-0">
+    </span>
+    <div class="container-fluid mb-5">
+        <!-- BANNER -->
+        <div class="section-5m mt-5">
+            <div class="container pt-5 px-5">
+                <div class="row">
+                    
+                        <div style="position: relative;font-size: 45px;">
+                            <h1>WUJUDKAN INDONESIA</h1>
+                            <h1><span class="title-blue px-2">SEHAT, AMAN, PRODUKTIF</span></h1>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="d-none d-lg-block">
+                                <img class="img-fluid mb-3" src="https://png.pngtree.com/png-clipart/20220303/original/pngtree-hand-drawn-cartoon-color-high-rise-building-png-material-png-image_7383996.png" style="width:80%;height:auto;">
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="align-self: center;">
+                            <h3>About Us</h3>
+                            <p> SehatTerus merupakan aplikasi yang dikembangkan untuk membantu warga dalam mengetahui perkembangan penyebaran virus COVID-19 di Indonesia.
+
+                                Masyarakat umum dapat menggunakan SehatTerus untuk melihat statistik pasien COVID-19 di Indonesia dan provinsi, membaca berita terkini, sekaligus melihat tanya jawab dan blog seputar COVID-19.</p>
+                                
+                            <p>Selain itu, aplikasi ini juga ditujukan untuk memungkinkan para tenaga kesehatan melakukan tracking secara digital terhadap pasien COVID-19 yang masih membutuhkan bantuan, 
+                                
+                                serta memungkinkan Lurah untuk dapat mendata setiap warga yang terinfeksi oleh virus Covid-19 di Kelurahan Terus Sehat.</p>
+                            <div class="d-lg-none">
+                                <img class="img-fluid mb-3" src="https://corona.jakarta.go.id/img/logo/img-waspada.svg" alt="" style="width:100%;height:auto;">
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="pt-5 mt-5">
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-md-1"></div>
+                <div class="col-md-5" style="align-self: center;">
+                   
+                    <h3>Ada Pertanyaan?</h3>
+                    <p>Cari tahu pertanyaan yang sering muncul mengenai COVID-19.</p>
+                    <div class="pb-5">
+                        <a href="{% url 'faq_page:show_faqpage' %}"class="btn button-lihat btn-primary" target="_blank" rel="noopener noreferrer">Lihat FAQ</a>
+                    </div>
+                   
+                    <div class="d-lg-none" style="padding-bottom:120px;"></div>
+                </div>
+                <div class="col-md-6 text-center" style="align-self: center;position: relative;">
+                    <div class="d-none d-lg-block" style="position: absolute;top:-150px;right:-10px;">
+                        <img src="https://corona.jakarta.go.id/img/logo/bg-dot-3.svg" alt="">
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <img class="img-fluid mb-3" src="https://corona.jakarta.go.id/img/logo/img-faq.svg" alt="" style="position: absolute;bottom:-200px;left:0px;">
+                    </div>
+                    <div class="d-lg-none">
+                        <img class="img-fluid mb-3" src="https://corona.jakarta.go.id/img/logo/img-faq.svg" alt="" style="position: absolute;width:80%;bottom:-60px;right:0px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="img-fluid" src="https://cdn.discordapp.com/attachments/814499566245249047/1035934473407176724/blue-wave.png" alt="" style="min-width:100%;height: auto;">
+      </section>
+</main>
+<style>
+    .title-blue {
+        color: #17a2b8;
+        background: #17a2b8;
+        -webkit-text-stroke: 1px #fff;
+        z-index: 1;
+    }
+</style>
+
+{% endblock content %}
