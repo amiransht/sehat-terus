@@ -12,8 +12,12 @@ from django.views.decorators.csrf import csrf_exempt
 from lurah_page.models import DataPasien
 
 
+from authentication.decorators import nakes_required
+
+
 # Create your views here.
 @login_required(login_url='authentication/login/')
+@nakes_required
 def show_nakes_page(request):
     data_pasien = DataPasien.objects.all()
     context = {'data_pasien': serializers.serialize('json', data_pasien),
@@ -28,6 +32,7 @@ def show_json(request):
     return HttpResponse(data, content_type='application/json')
 
 @login_required(login_url='authentication/login/')
+@nakes_required
 def update_status_pasien(request, id):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'UPDATE':
         pasien = DataPasien.objects.filter(pk=id)
