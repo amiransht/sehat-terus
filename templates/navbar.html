@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             {% if user.is_authenticated and user.is_lurah %}
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_homepage' %}" class=" nav-link px-4 active">Lurah Page</a>
+              <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_homepage' %}" class=" nav-link px-4">Lurah Page</a>
                 <li class="nav-item"><a href="{% url 'lurah_page:show_lurah_page' %}" class=" nav-link px-4">Pasien</a></li>
                 <li class="nav-item"><a href="{% url 'about:show_about' %}" class=" nav-link px-4">About Us</a></li>
                 <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
@@ -34,7 +34,7 @@
             </ul>
             {% elif user.is_authenticated and user.is_nakes %}
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a href="{% url 'nakes_page:show_nakes_homepage' %}" class=" nav-link px-4 active">Nakes Page</a>
+              <li class="nav-item"><a href="{% url 'nakes_page:show_nakes_homepage' %}" class=" nav-link px-4">Nakes Page</a>
                 <li class="nav-item"><a href="{% url 'nakes_page:show_nakes_page' %}" class=" nav-link px-4">Pasien</a></li>
                 <li class="nav-item"><a href="{% url 'about:show_about' %}" class=" nav-link px-4">About Us</a></li>
                 <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>

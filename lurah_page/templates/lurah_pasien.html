@@ -160,9 +160,9 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded-xl"
+                class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded"
                 data-bs-dismiss="modal"
-                style="background-color: red"
+                style="background-color: red; color: white; border-color: white;"
               >
                 Cancel
               </button>
@@ -170,9 +170,9 @@
               <button
                 id="add-todo"
                 type="button"
-                class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl"
+                class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded"
                 data-bs-dismiss="modal"
-                style="background-color: green"
+                style="background-color: green; color: white; border-color: white;"
               >
                 Tambah Pasien
               </button>
@@ -204,7 +204,7 @@
           if (!response.length){
             $('#todo').prepend(`
             <div class="d-flex justify-content-center" id="no-task-div">
-              <h1>No Task</h1>
+              <h1>Belum ada pasien, silahkan tambah dahulu</h1>
             </div>`)
           }
           else{
