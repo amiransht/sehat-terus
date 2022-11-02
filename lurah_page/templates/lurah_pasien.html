@@ -70,9 +70,9 @@
                 <div class="lg:w-64 mt-3">
                   <form method="POST" action="" id="add-pasien-form">
                     {% csrf_token %}
-                    <label class="block">
+                    <label class="block my-2">
                       <span
-                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200 px-2"
                       >
                         Nama
                       </span>
@@ -80,15 +80,15 @@
                         type="text"
                         name="nama"
                         id="nama"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500 px-2"
                         placeholder="Nama"
                         required
                       />
                     </label>
 
-                    <label class="block mt-2">
+                    <label class="block my-2">
                       <span
-                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200 px-2"
                       >
                         Umur
                       </span>
@@ -96,22 +96,22 @@
                         type="number"
                         name="umur"
                         id="umur"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500 px-2"
                         placeholder="Umur"
                         required
                       />
                     </label>
 
-                    <label class="block mt-2">
+                    <label class="block my-2">
                       <span
-                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200 px-2"
                       >
                         Jenis Kelamin
                       </span>
                       <select
                         name="gender"
                         id="gender"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-2"
                         required
                       >
                         <option selected>-Pilih-</option>
@@ -120,16 +120,16 @@
                       </select>
                     </label>
 
-                    <label class="block mt-2">
+                    <label class="block my-2">
                       <span
-                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200 px-2"
                       >
                         Gejala
                       </span>
                       <select
                         name="gejala"
                         id="gejala"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-2"
                         required
                       >
                         <option selected>-Pilih-</option>
@@ -138,9 +138,9 @@
                       </select>
                     </label>
 
-                    <label class="block mt-2">
+                    <label class="block my-2">
                       <span
-                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200 px-2"
                       >
                         Alamat
                       </span>
@@ -148,7 +148,7 @@
                         type="text"
                         name="alamat"
                         id="alamat"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                        class="bg-gray-200 appearance-none  border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500 px-2"
                         placeholder="Alamat"
                         required
                       />
@@ -160,9 +160,9 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="inline-flex space-x-2 items-center justify-center px-6 py-3 rounded-xl"
+                class="btn btn-primaryl"
                 data-bs-dismiss="modal"
-                style="background-color: red"
+  
               >
                 Cancel
               </button>
@@ -170,9 +170,9 @@
               <button
                 id="add-todo"
                 type="button"
-                class="inline-flex space-x-2 items-center justify-end px-6 py-3 rounded-xl"
+                class="btn btn-primary"
                 data-bs-dismiss="modal"
-                style="background-color: green"
+
               >
                 Tambah Pasien
               </button>

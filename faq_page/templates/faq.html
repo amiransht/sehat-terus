@@ -128,9 +128,9 @@
                   <h3>Masih Memiliki Pertanyaan?</h3>
                   <p>Cari tahu selengkapnya melalui blog kami!</p>
                   <div class="pb-5">
-                      <a href="{% url 'faq_page:blog' %}"class="btn button-lihat btn-primary" target="_blank" rel="noopener noreferrer">Lihat Blog</a>
+                      <a href="{% url 'faq_page:blog' %}"class="btn button-lihat btn-primary" rel="noopener noreferrer">Lihat Blog</a>
                       {% if user.is_nakes %}
-                      <a href="{% url 'faq_page:tulis_blog' %}"class="btn button-lihat btn-primary" target="_blank" rel="noopener noreferrer">Buat Blog</a>
+                      <a href="{% url 'faq_page:tulis_blog' %}"class="btn button-lihat btn-primary" rel="noopener noreferrer">Buat Blog</a>
                       {% endif %}
                   </div>
                  
