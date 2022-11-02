@@ -160,9 +160,8 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-primaryl"
+                class="btn btn-primary"
                 data-bs-dismiss="modal"
-  
               >
                 Cancel
               </button>
@@ -172,7 +171,6 @@
                 type="button"
                 class="btn btn-primary"
                 data-bs-dismiss="modal"
-
               >
                 Tambah Pasien
               </button>
@@ -204,7 +202,7 @@
           if (!response.length){
             $('#todo').prepend(`
             <div class="d-flex justify-content-center" id="no-task-div">
-              <h1>No Task</h1>
+              <h1>Belum ada pasien, silahkan tambah dahulu</h1>
             </div>`)
           }
           else{
