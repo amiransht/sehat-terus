@@ -16,16 +16,18 @@ SehatTerus merupakan aplikasi yang dikembangkan untuk membantu warga dalam menge
 Dengan mengunjungi laman utama website SehatTerus, para pengguna aplikasi awalnya akan ditujukan di halaman pertama yang berisikan rangkuman dan statistik data yang dimasukkan pada aplikasi tersebut dan data statistik perkembangan COVID-19 di INDONESIA APA JAKARTA. Selain itu, pada halaman tersebut terdapat card yang berisi link menuju berita-berita terkini mengenai COVID-19 di seluruh dunia. 
 
 ## Daftar Modul
-1. Login Page
-2. Register page
-3. Summary Page / Homepage
+1. Autentikasi - Refiany
+2. Summary Page / Homepage - Amira
 Menampilkan banner, infografis, rangkuman statistik data jumlah pasien Covid, dan berita-berita seputar Covid-19
-4. Create Data Pasien
+3. Create Data Pasien & Lurah - Amira 
 Menambahkan data identitas pasien covid dan menampilkannya dalam bentuk card
-5. Nakes Page
+4. Nakes Page - Raihan
 Menampilkan data pasien covid yang membutuhkan 
-6. Tentang Website
+5. Tentang Website - Amira
 Menampilkan beberapa informasi mengenai website kepada seluruh user
+6. FAQ - Shannon
+Menampilkan pertanyaan dan jawaban terkait website
+7. Base, Navbar, Footer - Amira
 
 
 ## Role
@@ -34,5 +36,5 @@ Lihat Summary Page, Lihat Tentang Website, Lihat FAQ
 2. Tenaga Kesehatan: 
 Lihat Summary Page, Lihat Tentang Website, Lihat FAQ, Lihat dan Edit Nakes Page
 3. Lurah: 
-Lihat Summary Page, Lihat Tentang Website, Lihat FAQ, Lihat dan Edit Create Data
+Lihat Summary Page, Lihat Tentang Website, Lihat FAQ, Lihat dan Edit Lurah Page
 Page
