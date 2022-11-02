@@ -69,7 +69,7 @@ def nakes(request):
 def logout_user(request):
     logout(request)
     # atau ke landing page pertama
-    response = HttpResponseRedirect(reverse('authentication:login'))
+    response = HttpResponseRedirect(reverse('homepage:show_homepage'))
     response.delete_cookie('last_login')
     return response
 
