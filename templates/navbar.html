@@ -58,7 +58,7 @@
             </ul>
             {% else %}
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a href="#" class=" nav-link px-4">About Us</a></li>
+              <li class="nav-item"><a href="{% url 'about:show_about' %}" class=" nav-link px-4">About Us</a></li>
               <li class="nav-item"><a href="{% url 'faq_page:show_faqpage' %}" class=" nav-link px-4" tabindex="-1">FAQ</a></li>
               <li class="nav-item"><a href="{% url 'authentication:login' %}" class="btn mx-4 my-1 px-4 align-self-center" id="btn-login">Login</a></li>
               
