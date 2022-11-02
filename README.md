@@ -31,7 +31,9 @@ Menampilkan data pasien covid yang membutuhkan
 Menampilkan beberapa informasi mengenai website kepada seluruh user
 8. FAQ - Shannon
 Menampilkan pertanyaan dan jawaban terkait website
-9. Base, Navbar, Footer - Amira
+9. Blog - Shannon
+Menampilkan blog yang dibuat Nakes terkait informasi kesehatan
+10. Base, Navbar, Footer - Amira
 
 
 ## Role
