@@ -52,7 +52,7 @@
                     <h3>Ada Pertanyaan?</h3>
                     <p>Cari tahu pertanyaan yang sering muncul mengenai COVID-19.</p>
                     <div class="pb-5">
-                        <a href="{% url 'faq_page:show_faqpage' %}"class="btn button-lihat btn-primary" target="_blank" rel="noopener noreferrer">Lihat FAQ</a>
+                        <a href="{% url 'faq_page:show_faqpage' %}"class="btn button-lihat btn-primary" rel="noopener noreferrer">Lihat FAQ</a>
                     </div>
                    
                     <div class="d-lg-none" style="padding-bottom:120px;"></div>
@@ -79,6 +79,15 @@
         background: #17a2b8;
         -webkit-text-stroke: 1px #fff;
         z-index: 1;
+    }
+    .btn-primary{
+        border-radius: 40px;
+        --bs-btn-bg: white !important;
+        --bs-btn-border-color: black;
+        --bs-btn-color: rgba(0, 0, 0, 0.55) !important;
+        --bs-btn-hover-color: white !important;
+        --bs-btn-hover-bg: #17a2b8 !important; 
+        --bs-btn-hover-border-color: #17a2b8 !important;
     }
 </style>
 
