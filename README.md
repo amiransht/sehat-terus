@@ -23,7 +23,7 @@ Menampilkan informasi tentang User yang sedang login
 Memungkinkan user untuk melakukan perubahan terhadap profil mereka.
 4. Summary Page / Homepage - Amira
 Menampilkan banner, infografis, rangkuman statistik data jumlah pasien Covid, dan berita-berita seputar Covid-19
-5. Create Data Pasien & Lurah - Amira 
+5. Create Data Pasien & Lurah - Dimitri 
 Menambahkan data identitas pasien covid dan menampilkannya dalam bentuk card
 6. Nakes Page - Raihan
 Menampilkan data pasien covid yang membutuhkan 
