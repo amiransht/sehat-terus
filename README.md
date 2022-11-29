@@ -17,17 +17,23 @@ Dengan mengunjungi laman utama website SehatTerus, para pengguna aplikasi awalny
 
 ## Daftar Modul
 1. Autentikasi - Refiany
-2. Summary Page / Homepage - Amira
+2. Profil - Refiany
+Menampilkan informasi tentang User yang sedang login
+3. Settings - Refiany
+Memungkinkan user untuk melakukan perubahan terhadap profil mereka.
+4. Summary Page / Homepage - Amira
 Menampilkan banner, infografis, rangkuman statistik data jumlah pasien Covid, dan berita-berita seputar Covid-19
-3. Create Data Pasien & Lurah - Amira 
+5. Create Data Pasien & Lurah - Dimitri 
 Menambahkan data identitas pasien covid dan menampilkannya dalam bentuk card
-4. Nakes Page - Raihan
+6. Nakes Page - Raihan
 Menampilkan data pasien covid yang membutuhkan 
-5. Tentang Website - Amira
+7. Tentang Website - Amira
 Menampilkan beberapa informasi mengenai website kepada seluruh user
-6. FAQ - Shannon
+8. FAQ - Shannon
 Menampilkan pertanyaan dan jawaban terkait website
-7. Base, Navbar, Footer - Amira
+9. Blog - Shannon
+Menampilkan blog yang dibuat Nakes terkait informasi kesehatan
+10. Base, Navbar, Footer - Amira
 
 
 ## Role
