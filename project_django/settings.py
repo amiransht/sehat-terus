@@ -36,7 +36,7 @@ else:
 
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = [f'https://{APP_NAME}.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [f'https://sehat-terus.up.railway.app']
 
 # Application definition
 
