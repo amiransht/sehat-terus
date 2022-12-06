@@ -2,12 +2,14 @@ from multiprocessing import context
 from django.shortcuts import redirect, render
 import requests
 from .forms import ProfileUpdateForm, SignUpForm, LoginForm, UserUpdateForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login_flutter
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .decorators import lurah_required, nakes_required
 from django.views.decorators.csrf import csrf_exempt
@@ -32,6 +34,34 @@ def register(request):
         form = SignUpForm()
         
     return render(request, 'register.html', {'form': form, 'msg': msg})
+
+@csrf_exempt
+def login_flutter(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            auth_login_flutter(request, user)
+            return JsonResponse({
+                'status': True,
+                'message': 'Login Success',
+                'username': request.user.username,
+                'is_lurah': request.user.is_lurah,
+                'is_nakes': request.user.is_nakes,
+            }, status=200)
+        else:
+            return JsonResponse({
+                'status': False,
+                'message': 'Account disabled',
+            }, status=401)
+    else:
+        return JsonResponse({
+            'status': False,
+            'message': 'Invalid login',
+        }, status=401)
+
+
 
 def login(request):
     if request.method == 'POST':

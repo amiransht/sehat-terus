@@ -11,4 +11,5 @@ urlpatterns = [
     path('register/', views.register, name= 'register'),
     path('profil/', views.profile, name='profil'),
     path('setting/', views.setting, name='setting'),
+    path('login_flutter/', views.login_flutter, name='login_flutter'),
 ]
