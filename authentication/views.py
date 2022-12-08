@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 import requests
 from .forms import ProfileUpdateForm, SignUpForm, LoginForm, UserUpdateForm
 from django.contrib.auth import authenticate, logout
+from django.contrib.auth import logout as auth_logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
@@ -49,6 +50,8 @@ def login_flutter(request):
                 'username': request.user.username,
                 'is_lurah': request.user.is_lurah,
                 'is_nakes': request.user.is_nakes,
+                'password': request.user.password,
+                'email': request.user.email,
             }, status=200)
         else:
             return JsonResponse({
@@ -137,3 +140,10 @@ def setting(request):
     context["u_form"] = u_form
     context["p_form"] = p_form
     return render(request, 'settings.html', context)
+
+@csrf_exempt
+def logout_flutter(request):
+  auth_logout(request)
+  return JsonResponse({
+    "status": True
+  }, status = 200)
