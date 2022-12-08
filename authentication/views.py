@@ -9,7 +9,7 @@ from django.urls import reverse
 import datetime
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import login as auth_login_flutter
+#from django.contrib.auth import login as auth_login_flutter
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .decorators import lurah_required, nakes_required
@@ -43,7 +43,7 @@ def login_flutter(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
-            auth_login_flutter(request, user)
+            auth_login(request, user)
             return JsonResponse({
                 'status': True,
                 'message': 'Login Success',

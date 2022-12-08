@@ -23,6 +23,7 @@ def tulis_blog(request):
     return render(request, "forms.html", context)
 
 @csrf_exempt
+@nakes_required(login_url='/authentication/login/')
 def submit_blog(request):
     if request.method == 'POST':
         blog = Blog.objects.create(
@@ -30,7 +31,6 @@ def submit_blog(request):
             content = request.POST.get('content'),
             author = request.user,
         )
-        # print(request.user)
         return JsonResponse({
                 'fields':{
                 'title':blog.title,
