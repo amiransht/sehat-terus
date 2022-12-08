@@ -49,11 +49,11 @@ INSTALLED_APPS = [
     'example_app',
     'homepage',
     'lurah_page',
-    # 'authentication.apps.AuthenticationConfig',
+    'authentication.apps.AuthenticationConfig',
     'faq_page',
     'nakes_page',
     'about',
-    "authentication",
+    # "authentication",
     "corsheaders",
 
 ]
