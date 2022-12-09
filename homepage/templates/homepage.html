@@ -344,7 +344,6 @@ $("#entry_provinsi").submit(function (e) {
     var $form = $(this);
     var serializedData = getDataFromForm($form);
     var provinsi = serializedData.nama_provinsi
-
     
     $.get(
         './api-indonesia', function(data){
