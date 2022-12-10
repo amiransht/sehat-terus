@@ -106,27 +106,15 @@ def register_flutter(request):
         if (User.objects.filter(username=username)):
             return JsonResponse({
                 'status': False,
-                'message': 'Username already exists',
+                'message': 'ERROR: Username tidak tersedia, mohon gunakan username lain',
             }, status=401)
         elif (password1 != password2):
             return JsonResponse({
                 'status': False,
-                'message': 'Password tidak sama',
+                'message': 'ERROR: Mohon masukkan konfirmasi password yang sama',
             }, status=401)
         # kalo udah valid semua: email bener, username ga ada yg sama, password confirm sama
         else :
-            obj = form.save()
-            obj.username = username
-            obj.email = email
-            obj.password1 = password1
-            obj.password2 = password2
-            obj.save()
-            if role_user == "lurah":
-                obj.is_lurah = True
-                obj.save()
-            elif role_user == "nakes":
-                obj.is_nakes = True
-                obj.save()
             if form.is_valid():
                 obj = form.save()
                 obj.username = username
@@ -134,10 +122,10 @@ def register_flutter(request):
                 obj.password1 = password1
                 obj.password2 = password2
                 obj.save()
-                if role_user == "lurah":
+                if role_user == "Lurah":
                     obj.is_lurah = True
                     obj.save()
-                elif role_user == "nakes":
+                elif role_user == "Nakes":
                     obj.is_nakes = True
                     obj.save()
                 return JsonResponse({
@@ -145,25 +133,10 @@ def register_flutter(request):
                     'message': 'Register Success',
                 }, status=200)
             else:
-                obj = form.save()
-                obj.username = username
-                obj.email = email
-                obj.password1 = password1
-                obj.password2 = password2
-                if role_user == "lurah":
-                    obj.is_lurah = True
-                    obj.save()
-                elif role_user == "nakes":
-                    obj.is_nakes = True
-                    obj.save()
                 return JsonResponse({
-                    'status': True,
-                    'message': 'Register Success',
-                }, status=200)
-                # return JsonResponse({
-                #     'status': False,
-                #     'message': 'Register Failed',
-                # }, status=401)
+                    'status': False,
+                    'message': 'Registrasi gagal! Password harus memuat 8 karakter dan minimal 1 angka / 1 huruf',
+                }, status=401)
         
     
 def login(request):
