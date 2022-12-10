@@ -31,6 +31,8 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email']
 
 
+
+
 class SignUpForm(UserCreationForm):
     username = forms.CharField(
         widget= forms.TextInput(
