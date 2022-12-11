@@ -1,12 +1,14 @@
 from multiprocessing import context
 from django.shortcuts import redirect, render
 import requests
+from django.http import HttpResponse
+from django.core import serializers
 from .forms import ProfileUpdateForm, SignUpForm, UserUpdateForm
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import logout as auth_logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import User
+from .models import Profile, User
 import datetime
 import json
 import secrets
@@ -56,6 +58,7 @@ def register(request):
             # print(obj.email)
             # print(obj.password1)
             # print(obj.is_lurah)
+            
             return redirect('authentication:login')
         else:
             msg = 'Oops, sorry, please check your input!'
@@ -69,9 +72,14 @@ def login_flutter(request):
     username = request.POST["username"]
     password = request.POST["password"]
     user = authenticate(username=username, password=password)
+    data_user = Profile.objects.filter(user=user)
+    notyet = "Belum tersedia"
     if user is not None:
         if user.is_active:
             auth_login(request, user)
+            print("ha")
+            print(data_user[0].bio)
+            print("ho")
             return JsonResponse({
                 'status': True,
                 'message': 'Login Success',
@@ -80,6 +88,15 @@ def login_flutter(request):
                 'is_nakes': request.user.is_nakes,
                 'password': request.user.password,
                 'email': request.user.email,
+                'first_name': data_user[0].first_name,
+                'last_name': data_user[0].last_name,
+                'province': data_user[0].province,
+                'city': data_user[0].city,
+                'bio': data_user[0].bio,
+                'number_phone': data_user[0].number_phone,
+                'gender': data_user[0].gender,
+                'date_of_birth': "Belum tersedia",
+                'district': data_user[0].district
             }, status=200)
         else:
             return JsonResponse({
@@ -128,16 +145,62 @@ def register_flutter(request):
                 elif role_user == "Nakes":
                     obj.is_nakes = True
                     obj.save()
+                user = authenticate(username=username, password=password1)
+                data_user = Profile.objects.filter(user=user)
                 return JsonResponse({
                     'status': True,
                     'message': 'Register Success',
+                    'username': obj.username,
+                    'is_lurah': obj.is_lurah,
+                    'is_nakes': obj.is_nakes,
+                    'password': obj.password,
+                    'email': obj.email,
+                    'first_name': "Belum tersedia",
+                    'last_name': "Belum tersedia",
+                    'province': "Belum tersedia",
+                    'city': "Belum tersedia",
+                    'bio': "Belum tersedia",
+                    'number_phone': "Belum tersedia",
+                    'date_of_birth': "Belum tersedia",
+                    'district': "Belum tersedia",
+                    'gender': "Belum tersedia", 
+
+
                 }, status=200)
             else:
                 return JsonResponse({
                     'status': False,
                     'message': 'Registrasi gagal! Password harus memuat 8 karakter dan minimal 1 angka / 1 huruf',
                 }, status=401)
-        
+
+def get_dataUser_flutter(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    user = authenticate(username=username, password=password)
+    if (user.is_authenticated):
+        data_user = Profile.objects.filter(user=user)
+        # return HttpResponse(serializers.serialize("json", data_user), content_type="application/json")
+        return JsonResponse({
+            'status': True,
+            'message': 'Data User',
+            'username': request.user.username,
+            'is_lurah': request.user.is_lurah,
+            'is_nakes': request.user.is_nakes,
+            'password': request.user.password,
+            'email': request.user.email,
+            'first_name': data_user[0].first_name,
+            'last_name': data_user[0].last_name,
+            'province': data_user[0].province,
+            'city': data_user[0].city,
+            'bio': data_user[0].bio,
+            'number_phone': data_user[0].number_phone,
+            'gender': data_user[0].gender,
+            'date_of_birth': data_user[0].date_of_birth,
+            'district': data_user[0].district
+
+        }, status=200)
+    # return HttpResponse(serializers.serialize("json", data_user), content_type="application/json")
+
     
 def login(request):
     if request.method == 'POST':
@@ -146,11 +209,13 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None :
             auth_login(request,user)
+            print(request.user.password)
             response = HttpResponseRedirect(reverse("homepage:show_homepage")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
         elif user is not None:
             auth_login(request,user)
+            print(request.user.password)
             response = HttpResponseRedirect(reverse("homepage:show_homepage")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
