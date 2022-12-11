@@ -33,4 +33,9 @@ def show_json_pasien(request):
     data = serializers.serialize('json', data_pasien)
     return HttpResponse(data, content_type='application/json')
 
+def show_json_pasien_id(request, id):
+    data_pasien = DataPasien.objects.filter(pk=id)
+    data = serializers.serialize('json', data_pasien)
+    return HttpResponse(data, content_type='application/json')
+
  
