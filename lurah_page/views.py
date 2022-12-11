@@ -9,6 +9,7 @@ from django.http import HttpResponse, JsonResponse  # , HttpResponseRedirect
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
+import json
 import datetime
 
 from lurah_page.models import DataPasien
@@ -84,6 +85,14 @@ def show_json(request):
     return HttpResponse(data, content_type='application/json')
 
 @csrf_exempt
+def show_json_flutter(request):
+    print("masuk")
+    data_pasien = DataPasien.objects.filter(user=request.user)
+    print(data_pasien)
+    data = serializers.serialize('json', data_pasien)
+    return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
 def add_flutter(request):
     if request.method == 'POST':
         
@@ -91,7 +100,7 @@ def add_flutter(request):
         
         nama = data['nama']
         umur = data['umur']
-        gender = data['gender']
+        gender = data['jenisKelamin']
         gejala = data['gejala']
         alamat = data['alamat']
         try:
@@ -99,6 +108,7 @@ def add_flutter(request):
             return JsonResponse({"status": "dup"}, status=401)
         except:
             addPasien = DataPasien.objects.create(
+            user = request.user,
             nama = nama,
             umur = umur,
             gender = gender,
