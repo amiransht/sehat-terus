@@ -104,6 +104,7 @@ def add_flutter(request):
             gender = gender,
             gejala = gejala,
             alamat = alamat,
+            is_covid = True,
             )
 
             addPasien.save()
