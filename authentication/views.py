@@ -29,7 +29,6 @@ def index(request):
 def register(request):
     msg = None
     form = SignUpForm()
-
     if request.method == 'POST':
         form = SignUpForm(request.POST)
 
