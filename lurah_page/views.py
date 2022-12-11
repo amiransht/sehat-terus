@@ -82,3 +82,33 @@ def show_json(request):
     data_pasien = DataPasien.objects.filter(user=request.user)
     data = serializers.serialize('json', data_pasien)
     return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
+def add_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+        
+        nama = data['nama']
+        umur = data['umur']
+        gender = data['gender']
+        gejala = data['gejala']
+        alamat = data['alamat']
+        try:
+            DataPasien.objects.get(nama=nama, alamat=alamat)
+            return JsonResponse({"status": "dup"}, status=401)
+        except:
+            addPasien = DataPasien.objects.create(
+            nama = nama,
+            umur = umur,
+            gender = gender,
+            gejala = gejala,
+            alamat = alamat,
+            is_covid = True,
+            )
+
+            addPasien.save()
+
+            return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
