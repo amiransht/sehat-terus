@@ -61,7 +61,7 @@ def register(request):
             msg = 'Oops, sorry, please check your input!'
     else:
         form = SignUpForm()
-        
+    
     return render(request, 'register.html', {'form': form, 'msg': msg})
 
 @csrf_exempt
