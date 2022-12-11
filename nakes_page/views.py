@@ -54,3 +54,4 @@ def update_status_pasien(request, id):
         return HttpResponse(data, content_type='application/json') 
 
     return JsonResponse({'error': "Not an ajax request"}, status=400)
+    
