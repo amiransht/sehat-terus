@@ -36,6 +36,25 @@ def show_json(request):
     data = serializers.serialize('json', data_pasien)
     return HttpResponse(data, content_type='application/json')
 
+@login_required(login_url='authentication/login/')
+@nakes_required
+def update_status_pasien(request, id):
+    if request.method == 'POST':
+        pasien = DataPasien.objects.filter(pk=id)
+        status_pasien = DataPasien.objects.get(pk=id).is_covid
+        print(DataPasien.objects.get(pk=id).is_covid)
+        if status_pasien == True:
+            pasien.update(is_covid = False)
+        else:
+            pasien.update(is_covid = True)
+        DataPasien.objects.get(pk=id).save()
+        print(DataPasien.objects.get(pk=id).is_covid)
+        result = DataPasien.objects.filter(pk=id)
+        data = serializers.serialize('json', result)
+        return HttpResponse(data, content_type='application/json') 
+
+    return JsonResponse({'error': "Not an ajax request"}, status=400)
+
 # @login_required(login_url='authentication/login/')
 # @nakes_required
 # def update_status_pasien(request, id):
@@ -49,32 +68,13 @@ def show_json(request):
 #             pasien.update(is_covid = True)
 #         DataPasien.objects.get(pk=id).save()
 #         print(DataPasien.objects.get(pk=id).is_covid)
-#         result = DataPasien.objects.filter(pk=id)
-#         data = serializers.serialize('json', result)
-#         return HttpResponse(data, content_type='application/json') 
+#         return JsonResponse({
+#             'error': False, 
+#             'is_covid': status_pasien,
+#         })
+#         # result = DataPasien.objects.filter(pk=id)
+#         # data = serializers.serialize('json', result)
+#         # return HttpResponse(data, content_type='application/json') 
 
 #     return JsonResponse({'error': "Not an ajax request"}, status=400)
-
-@login_required(login_url='authentication/login/')
-@nakes_required
-def update_status_pasien(request, id):
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'UPDATE':
-        pasien = DataPasien.objects.filter(pk=id)
-        status_pasien = DataPasien.objects.get(pk=id).is_covid
-        print(DataPasien.objects.get(pk=id).is_covid)
-        if status_pasien == True:
-            pasien.update(is_covid = False)
-        else:
-            pasien.update(is_covid = True)
-        DataPasien.objects.get(pk=id).save()
-        print(DataPasien.objects.get(pk=id).is_covid)
-        return JsonResponse({
-            'error': False, 
-            'is_covid': status_pasien,
-        })
-        # result = DataPasien.objects.filter(pk=id)
-        # data = serializers.serialize('json', result)
-        # return HttpResponse(data, content_type='application/json') 
-
-    return JsonResponse({'error': "Not an ajax request"}, status=400)
     
