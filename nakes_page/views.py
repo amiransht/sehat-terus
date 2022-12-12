@@ -37,7 +37,7 @@ def show_json(request):
     return HttpResponse(data, content_type='application/json')
 
 @login_required(login_url='authentication/login/')
-@nakes_required
+# @nakes_required
 def update_status_pasien(request, id):
     if request.method == 'POST':
         pasien = DataPasien.objects.filter(pk=id)
