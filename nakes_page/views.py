@@ -49,9 +49,10 @@ def update_status_pasien(request, id):
             pasien.update(is_covid = True)
         DataPasien.objects.get(pk=id).save()
         print(DataPasien.objects.get(pk=id).is_covid)
-        result = DataPasien.objects.filter(pk=id)
-        data = serializers.serialize('json', result)
-        return HttpResponse(data, content_type='application/json') 
+        return JsonResponse({
+            'error': False, 
+            'is_covid': DataPasien.objects.get(pk=id).is_covid,
+        })
 
     return JsonResponse({'error': "Not an ajax request"}, status=400)
 
