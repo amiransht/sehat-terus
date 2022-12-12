@@ -39,7 +39,7 @@ def show_json(request):
 @login_required(login_url='authentication/login/')
 # @nakes_required
 def update_status_pasien(request, id):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         pasien = DataPasien.objects.filter(pk=id)
         status_pasien = DataPasien.objects.get(pk=id).is_covid
         print(DataPasien.objects.get(pk=id).is_covid)
