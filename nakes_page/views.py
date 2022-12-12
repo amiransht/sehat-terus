@@ -39,7 +39,7 @@ def show_json(request):
 @login_required(login_url='authentication/login/')
 @nakes_required
 def update_status_pasien(request, id):
-    if request.method == 'POST':
+    if request.method == 'GET':
         pasien = DataPasien.objects.filter(pk=id)
         status_pasien = DataPasien.objects.get(pk=id).is_covid
         print(DataPasien.objects.get(pk=id).is_covid)
@@ -54,7 +54,7 @@ def update_status_pasien(request, id):
             'is_covid': DataPasien.objects.get(pk=id).is_covid,
         })
 
-    return JsonResponse({'error': "Not an ajax request"}, status=400)
+    return JsonResponse({'error': "Not an ajax request", 'method':request.method}, status=400)
 
 # @login_required(login_url='authentication/login/')
 # @nakes_required
